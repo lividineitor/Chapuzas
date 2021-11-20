@@ -9,12 +9,11 @@ import java.util.List ;
 
 /**
  * 
-  * Repositorio para citas
-   * 
-    * @author chapuzascompany
-     *
-      */
-      public interface CitaRepository extends CrudRepository <Cita, Long> {
-
-        public List <Cita> findAllByIdUsuario ( long idUsuairo ) ;
-        }
+ * Repositorio para citas
+ * 
+ * @author chapuzascompany
+ *
+ */
+	public interface CitaRepository extends CrudRepository <Cita, Long> {
+		public List <Cita> findAllByIdUsuario ( long idUsuairo ) ;
+	}

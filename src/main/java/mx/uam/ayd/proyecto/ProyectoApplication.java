@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto;
 
+import java.time.LocalTime;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,8 +9,16 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 
 import mx.uam.ayd.proyecto.datos.GrupoRepository;
+import mx.uam.ayd.proyecto.datos.UsuarioRepository;
+import mx.uam.ayd.proyecto.datos.PreferenciaRepository;
+
 import mx.uam.ayd.proyecto.negocio.modelo.Grupo;
+import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
+
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
+
+import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
+
 
 /**
  * 
@@ -29,6 +39,12 @@ public class ProyectoApplication {
 	
 	@Autowired
 	GrupoRepository grupoRepository;
+
+	@Autowired
+	UsuarioRepository usuarioRepository;
+	
+	@Autowired
+	PreferenciaRepository preferenciaRepository;
 	
 	/**
 	 * 
@@ -75,6 +91,27 @@ public class ProyectoApplication {
 		Grupo grupoOps = new Grupo();
 		grupoOps.setNombre("Operadores");
 		grupoRepository.save(grupoOps);
-				
+		
+		// Se crean temporalmente las preferencias de fechas
+
+		Usuario usuario = new Usuario () ;
+		usuario.setNombre( "a" ) ;
+		usuario.setApellido("a");
+		usuario.setContraseña("a");
+		usuario.setEmail("a");
+
+		usuarioRepository.save(usuario);
+		
+		String [] dias = {"Saturday" , "Sunday" } ;
+
+		
+		
+		Preferencia preferencias = new Preferencia () ;
+		
+		preferencias.setIdUsuario(0);
+		preferencias.setDiasDescanso(dias);
+		preferencias.setHoraDeApertura(LocalTime.of(10, 0));
+		preferencias.setHoraDeCierre(LocalTime.of(18, 0));
+		preferenciaRepository.save(preferencias) ;
 	}
 }

@@ -11,27 +11,22 @@ import lombok.Data;
 
 /**
  * Entidad de negocio Cita
-  * 
-   * @author chapuzascompany
-    *
-     */
-     @Entity
-     @Data
-     public class Cita {
-      @Id
-       @GeneratedValue(strategy = GenerationType.IDENTITY)
-        private long idCita;
+ * 
+ * @author chapuzascompany
+ *
+ */
 
-           private long idUsuario ;
+	@Entity
+	@Data
+	public class Cita {
 
-              private LocalDateTime fechaCreacion ;
+		@Id
+		@GeneratedValue(strategy = GenerationType.IDENTITY)
+		private long idCita;
 
-                private LocalDateTime fechaCita ;
-
-                    private String notas ;
-
-                        private String estado ;
-
-
-                            }
-                            
+		private long idUsuario ;
+		private LocalDateTime fechaCreacion ;
+		private LocalDateTime fechaCita ;
+		private String notas ;
+		private String estado ;
+	}

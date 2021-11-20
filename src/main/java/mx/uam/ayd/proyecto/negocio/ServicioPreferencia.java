@@ -78,4 +78,17 @@ public class ServicioPreferencia {
 		
 	}
 	
+	public boolean setHorarioLaboral (LocalTime horaApertura , LocalTime horaCierre , Long idUsuario )
+	{
+		Preferencia preferencia = obtenerPreferencia ( idUsuario ) ;
+
+		preferencia.setHoraDeApertura(horaApertura);
+		preferencia.setHoraDeCierre(horaCierre);
+
+		preferenciaRepository.save( preferencia ) ;
+		
+		return true ;
+	}
+	
+	
 }

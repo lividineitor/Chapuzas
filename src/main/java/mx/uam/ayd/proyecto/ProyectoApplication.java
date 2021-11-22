@@ -59,10 +59,15 @@ public class ProyectoApplication {
 	
 	
 	/**
+	 * 
 	 * Inicializa la BD con datos
+	 * 
+	 * 
 	 */
 	public void inicializaBD() {
+		
 		// Vamos a crear los dos grupos de usuarios
+		
 		Grupo grupoAdmin = new Grupo();
 		grupoAdmin.setNombre("Administradores");
 		grupoRepository.save(grupoAdmin);

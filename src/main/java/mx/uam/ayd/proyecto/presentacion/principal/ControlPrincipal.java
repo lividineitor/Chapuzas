@@ -10,6 +10,7 @@ import mx.uam.ayd.proyecto.ModificarCuenta.ControlModificarCuenta;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
+import mx.uam.ayd.proyecto.presentacion.ConectarRedSocial.ControlConectarRedSocial;
 import mx.uam.ayd.proyecto.presentacion.MostrarClientes.ControlMostrarClientes;
 import mx.uam.ayd.proyecto.presentacion.agenda.ControlAgenda;
 import mx.uam.ayd.proyecto.presentacion.agendaDeUsuario.ControlAgendaDeUsuario;
@@ -27,6 +28,9 @@ import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.ControlProgramarPu
  */
 @Component
 public class ControlPrincipal {
+
+	
+	
 	@Autowired
 	private ControlListarUsuarios controlListarUsuarios;
 	
@@ -56,6 +60,10 @@ public class ControlPrincipal {
 	
 	@Autowired
 	private ControlModificarCuenta controlmodificarCuenta;
+	
+	@Autowired
+	private ControlConectarRedSocial controlConectarRedSocial;
+	
 	@Autowired
 	private VentanaPrincipal ventana;
 	
@@ -138,7 +146,7 @@ public class ControlPrincipal {
 	}
 	
 	public void redSocial(String usuario, String password) {
-		if(servicioRedSocial.conectarRedSocial(usuario, password)) {
+		if(servicioRedSocial.conectar("Facebook",usuario, password,this.usuario.getIdUsuario())) {
 			ventanaSesionRedSocial.setVisible(false);
 			inicia();
 		}
@@ -193,4 +201,18 @@ public class ControlPrincipal {
 		this.usuario=usuario;
 	}
 	
+	
+	//cambios nuevos metodos
+	public void redSocialFacebook() {
+		if(servicioUsuario.regresaIdUsuario(usuario.getNombre())==usuario.getIdUsuario())
+			controlConectarRedSocial.inicia(usuario.getIdUsuario(),"Facebook");
+		else
+			System.out.println("Error redSocialFacebook");
+	}
+	public void redSocialInstagram() {
+		if(servicioUsuario.regresaIdUsuario(usuario.getNombre())==usuario.getIdUsuario())
+			controlConectarRedSocial.inicia(usuario.getIdUsuario(),"Instagram");
+		else
+			System.out.println("Error redSocialInstagram");
+	}
 }

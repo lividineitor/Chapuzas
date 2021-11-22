@@ -213,7 +213,7 @@ public class VentanaPrincipal extends JFrame {
 		btnFacebook = new JButton("Facebook");
 		btnFacebook.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				control.recarga();
+				control.redSocialFacebook();
 			}
 		});
 		btnFacebook.setForeground(Color.WHITE);
@@ -224,6 +224,15 @@ public class VentanaPrincipal extends JFrame {
 		lblConectado = new JLabel("Conecte:");
 		lblConectado.setBounds(10, 11, 101, 14);
 		panelConexiones.add(lblConectado);
+		
+		JButton btnInstagram = new JButton("Instagram");
+		btnInstagram.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.redSocialInstagram();
+			}
+		});
+		btnInstagram.setBounds(10, 66, 89, 23);
+		panelConexiones.add(btnInstagram);
 		
 		btnNuevoCliente = new JButton("Nuevo Cliente");
 		btnNuevoCliente.setForeground(Color.WHITE);

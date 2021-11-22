@@ -14,7 +14,7 @@ import java.util.List ;
     * @author chapuzascompany
      *
       */
-  public interface CitaRepository extends CrudRepository <Cita, Long> {
+      public interface CitaRepository extends CrudRepository <Cita, Long> {
 
-    public List <Cita> findAllByIdUsuario ( long idUsuairo ) ;
-  }
+        public List <Cita> findAllByIdUsuario ( long idUsuairo ) ;
+        }

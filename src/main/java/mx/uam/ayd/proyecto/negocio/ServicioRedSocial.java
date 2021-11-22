@@ -19,10 +19,7 @@ public class ServicioRedSocial {
 	@Autowired 
 	private RedSocialRepository redSocialRepository;
 	
-	//objetos file
-	ArrayList <File> imagenes = new ArrayList<>();
-	ArrayList <File> videos = new ArrayList<>();
-			
+	
 	//variables a usar
 	private long tamano;
 	private String extension;
@@ -243,4 +240,71 @@ public class ServicioRedSocial {
 		return us.getFormatoPesoImagen();
 	}
 	
+	//cambios
+	public boolean conectar(String nombreRedSocial,String usuario,String contrasenia,long id_user) {
+		if(usuario.isEmpty() || usuario==null )
+			throw new IllegalArgumentException("Ningun argumento puede ser vacio");
+		else if(conectarAPIs(usuario,contrasenia,nombreRedSocial)==false)
+			return false;
+		
+		//estructuras 
+		HashMap<String, Long> fImagen = new HashMap<String, Long>();
+		HashMap<String, Long> fVideo = new HashMap<String, Long>();
+		log.info("Estableciendo enlace");
+		RedSocial cuentaRed= new RedSocial();
+		cuentaRed.setIdUsuario(id_user);
+		cuentaRed.setNombreRed(nombreRedSocial);
+		cuentaRed.setUsuario(usuario);
+		cuentaRed.setContrasena(contrasenia);
+		
+		if (nombreRedSocial.equals("Facebook")) {
+			// conexion facebook
+			// banderaError =
+			// conectFecebook(enlaceCuenta.getUsuario(),enlaceCuenta.getContrasena())
+
+			// consultado: https://es-la.facebook.com/business/ads-guide/image
+			fImagen.put("jpg", (long) 30);
+			fImagen.put("png", (long) 30);
+
+			// consultado: https://es-la.facebook.com/business/ads-guide/video
+			fVideo.put("mp4", (long) 3000);
+			fVideo.put("mov", (long) 3000);
+			fVideo.put("gif", (long) 5);
+		} else if (nombreRedSocial.equals("Instagram")) {
+			// banderaError =
+			// conectInstagram(enlaceCuenta.getUsuario(),enlaceCuenta.getContrasena())
+			fImagen.put("jpg", (long) 30);
+			fImagen.put("png", (long) 30);
+			fVideo.put("mp4", (long) 3000);
+			fVideo.put("mov", (long) 3000);
+			fVideo.put("gif", (long) 5);
+		}
+		cuentaRed.setFormatoPesoImagen(fImagen);
+		cuentaRed.setFormatoPesoVideo(fVideo);
+		
+		System.out.println("Red social capturada="+cuentaRed);
+		redSocialRepository.save(cuentaRed);
+		
+		return true;
+	}
+	
+	/**
+	 * Este metodo se encarag de trabajar en conjunto con las apis
+	 * y iniciando sesion en la red social elegida
+	 * @param usuario
+	 * @param contrasenia
+	 * @param nombreRedSocial
+	 * @return
+	 */
+	public boolean conectarAPIs(String usuario,String contrasenia, String nombreRedSocial) {
+		
+		//bandera que nos ayuda determinar con la API si ocurrio un error
+		boolean banderaConexion = true;
+		
+		/*if(nombreRedSocial.equals("Facebook"))
+			banderaConexion=conectFacebook( usuario, contrasenia);
+		else if(nombreRedSocial.equals("Instagram"))
+			banderaConexion=conectInstagram( usuario, contrasenia);*/
+		return banderaConexion;
+	}
 }

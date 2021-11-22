@@ -5,12 +5,14 @@ import javax.swing.JFrame;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
+import mx.uam.ayd.proyecto.presentacion.crearCuenta.ControlCrearCuenta;
 
 import javax.swing.JButton;
 import java.awt.BorderLayout;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.SwingConstants;
+import javax.swing.JMenuBar;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import java.awt.Color;

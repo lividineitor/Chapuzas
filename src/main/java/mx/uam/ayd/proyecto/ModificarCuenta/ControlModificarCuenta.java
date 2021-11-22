@@ -6,6 +6,7 @@ import org.springframework.stereotype.Component;
 //import mx.uam.ayd.proyecto.negocio.ServicioGrupo;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
+import mx.uam.ayd.proyecto.presentacion.crearCuenta.VentanaFormularioCrearCuenta;
 
 /*
  * Modulo de control para la historia de usuario Modificar Cuenta

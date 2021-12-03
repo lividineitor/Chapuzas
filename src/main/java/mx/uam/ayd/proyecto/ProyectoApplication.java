@@ -29,7 +29,7 @@ import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
  * Ejemplo de cambio en Rama
  *
  * @author Chapuzas
- *
+ * hola a todo el mundo
  */
 @SpringBootApplication
 public class ProyectoApplication {

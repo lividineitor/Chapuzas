@@ -30,9 +30,8 @@ import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
  *
  * @author Chapuzas
  * 
- * 
  * Cesar es bueno
- *
+ * hola a todo el mundo
  */
 @SpringBootApplication
 public class ProyectoApplication {

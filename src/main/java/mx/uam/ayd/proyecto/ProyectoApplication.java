@@ -27,9 +27,8 @@ import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
  * inversión de control
  * 
  * Ejemplo de cambio en Rama
- * 
- * hola
- * @author humbertocervantes
+ *
+ * @author Chapuzas
  *
  */
 @SpringBootApplication

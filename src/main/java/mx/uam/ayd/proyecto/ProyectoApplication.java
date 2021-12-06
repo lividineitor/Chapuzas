@@ -119,7 +119,7 @@ public class ProyectoApplication {
 		{
 			if ( tema.getClassName().equals ( "com.sun.java.swing.plaf.windows.WindowsLookAndFeel" ) )
 			{
-				temaWindows = "com.sun.java.swing.plaf.WindowsLookAndFeel" ;
+				temaWindows = "com.sun.java.swing.plaf.windows.WindowsLookAndFeel" ;
 			}
 /*			
 			else if ()

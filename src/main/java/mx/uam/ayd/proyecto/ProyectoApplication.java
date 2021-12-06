@@ -117,7 +117,7 @@ public class ProyectoApplication {
 		
 		for (UIManager.LookAndFeelInfo tema : lf )
 		{
-			if ( tema.getClassName().equals ( "com.sun.java.swing.plaf.WindowsLookAndFeel" ) )
+			if ( tema.getClassName().equals ( "com.sun.java.swing.plaf.windows.WindowsLookAndFeel" ) )
 			{
 				temaWindows = "com.sun.java.swing.plaf.WindowsLookAndFeel" ;
 			}

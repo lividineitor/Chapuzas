@@ -3,6 +3,8 @@ package mx.uam.ayd.proyecto;
 import java.time.LocalTime;
 
 import javax.annotation.PostConstruct;
+import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException ;
 import javax.swing.plaf.* ;
@@ -51,6 +53,9 @@ public class ProyectoApplication {
 	 */
 	public static void main(String[] args) {
 		
+		seleccionarGUI () ;
+
+		
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(ProyectoApplication.class);
 
 		builder.headless(false);
@@ -66,7 +71,6 @@ public class ProyectoApplication {
 	@PostConstruct
 	public void inicia() {
 		
-		seleccionarGUI () ;
 		inicializaBD();
 		
 		controlPrincipal.inicia();
@@ -104,7 +108,7 @@ public class ProyectoApplication {
 		preferenciaRepository.save(preferencias) ;
 	}
 	
-	public void seleccionarGUI ()
+	public static void seleccionarGUI ()
 	{
 		String temaDelSistema = null ;
 		
@@ -149,6 +153,7 @@ public class ProyectoApplication {
 	
 		try
 		{
+
 			UIManager.setLookAndFeel( temaDelSistema );
 		}
 		

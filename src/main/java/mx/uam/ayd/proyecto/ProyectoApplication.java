@@ -108,7 +108,7 @@ public class ProyectoApplication {
 		preferenciaRepository.save(preferencias) ;
 	}
 	
-	public static void seleccionarGUI ()
+	private static void seleccionarGUI ()
 	{
 		String temaDelSistema = null ;
 		

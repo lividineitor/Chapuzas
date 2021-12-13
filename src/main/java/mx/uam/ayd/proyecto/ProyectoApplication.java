@@ -87,24 +87,14 @@ public class ProyectoApplication {
 		
 		// Se crean temporalmente las preferencias de fechas
 
-		Usuario usuario = new Usuario () ;
-		usuario.setNombre( "a" ) ;
-		usuario.setApellido("a");
-		usuario.setContraseña("a");
-		usuario.setEmail("a");
-
-		usuarioRepository.save(usuario);
-		
 		String [] dias = {"Saturday" , "Sunday" } ;
 
-		
-		
 		Preferencia preferencias = new Preferencia () ;
 		
-		preferencias.setIdUsuario(0);
 		preferencias.setDiasDescanso(dias);
 		preferencias.setHoraDeApertura(LocalTime.of(10, 0));
 		preferencias.setHoraDeCierre(LocalTime.of(18, 0));
+		preferencias.setPerdiodoParaCitas(3);
 		preferenciaRepository.save(preferencias) ;
 	}
 	

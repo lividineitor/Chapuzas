@@ -61,10 +61,10 @@ public class ControlAgendarCita {
     {
         List <LocalDate> citas = new ArrayList <> ();
         
-        preferencia = servicioPreferencia.obtenerPreferencia( Integer.toUnsignedLong(0) ) ;
+        preferencia = servicioPreferencia.obtenerPreferencia() ;
         
         LocalDate fechaActual = LocalDate.now () ;
-		LocalDate periodoParaCitas = fechaActual.plusMonths(3);
+		LocalDate periodoParaCitas = fechaActual.plusMonths( preferencia.getPerdiodoParaCitas() ) ;
 				
 		for (int i = 0 ; i < fechaActual.until(periodoParaCitas , ChronoUnit.DAYS) ; i ++ )
 		{
@@ -94,7 +94,7 @@ public class ControlAgendarCita {
 
     	List <LocalDateTime> horariosDisponibles = new ArrayList <> () ;
 
-    	preferencia = servicioPreferencia.obtenerPreferencia( Integer.toUnsignedLong ( 0 ) ) ;
+    	preferencia = servicioPreferencia.obtenerPreferencia() ;
     	
     	long aumento = 0 ;
     	

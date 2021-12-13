@@ -12,6 +12,5 @@ import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
  *
  */
 	public interface PreferenciaRepository extends CrudRepository <Preferencia, Long> {
-		boolean existsByIdUsuario ( Long idUsuario ) ;
-		Preferencia findByIdUsuario ( Long idUsuario ) ;
+
 	}

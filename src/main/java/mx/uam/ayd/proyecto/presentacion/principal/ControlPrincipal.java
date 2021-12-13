@@ -22,7 +22,7 @@ import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.ControlProgramarPu
 /**
  * Esta clase lleva el flujo de control de la ventana principal
  * 
- * @author humbertocervantes
+ * @author chapuzas
  *
  */
 @Component
@@ -70,7 +70,12 @@ public class ControlPrincipal {
 	private VentanaSesionRedSocial ventanaSesionRedSocial;
 	
 	private boolean loginConect=false;
+
+	// Campo de usuario que se envía a todos los controladores que lo requieran
+	
 	private Usuario usuario ;
+	
+	// Constructor
 	
 	public ControlPrincipal() {
 		usuario = new Usuario();
@@ -96,13 +101,19 @@ public class ControlPrincipal {
 		//ventana.muestra(this);
 	}
 
+	// HU
+	
 	public void agendarCita ( Usuario usuario ) {
 		controlAgendarCita.inicio( usuario );
 	}
 	
+	// HU
+	
 	public void agendaDeUsuario ( Usuario usuario ) {
 		controlAgendaDeUsuario.inicio ( usuario ) ;
 	}
+	
+	// HU
 	
 	public void agenda ( Usuario usuario ) {
 		controlAgenda.inicio(usuario);

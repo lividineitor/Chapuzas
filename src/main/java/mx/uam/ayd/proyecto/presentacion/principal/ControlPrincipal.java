@@ -17,6 +17,7 @@ import mx.uam.ayd.proyecto.presentacion.agendarCita.ControlAgendarCita;
 //import mx.uam.ayd.proyecto.presentacion.agregarUsuario.ControlAgregarUsuario;
 import mx.uam.ayd.proyecto.presentacion.crearCuenta.ControlCrearCuenta;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;
+import mx.uam.ayd.proyecto.presentacion.preferencia.ControlPreferencia;
 import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.ControlProgramarPublicacion;
 
 /**
@@ -59,6 +60,10 @@ public class ControlPrincipal {
 	
 	@Autowired
 	private ControlModificarCuenta controlmodificarCuenta;
+	
+	@Autowired
+	private ControlPreferencia controlPreferencia ;
+	
 	@Autowired
 	private VentanaPrincipal ventana;
 	
@@ -184,6 +189,10 @@ public class ControlPrincipal {
 			cont++;
 		}
 		
+	}
+
+	public void preferencias ( Usuario usuario ) {
+		controlPreferencia.inicio( usuario );
 	}
 	
 	public void logOut() {

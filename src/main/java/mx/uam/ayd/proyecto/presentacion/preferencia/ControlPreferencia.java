@@ -49,7 +49,7 @@ public class ControlPreferencia {
      */
     
     public boolean guardarPreferencia (Preferencia preferenciaTemporal) {
-//    	preferencia.setDiasFeriados(preferenciaTemporal.getDiasFeriados());
+    	preferencia.setDiasFeriados(preferenciaTemporal.getDiasFeriados());
     	preferencia.setDiasDescanso(preferenciaTemporal.getDiasDescanso());
     	preferencia.setHoraDeApertura(preferenciaTemporal.getHoraDeApertura());
     	preferencia.setHoraDeCierre(preferenciaTemporal.getHoraDeCierre());

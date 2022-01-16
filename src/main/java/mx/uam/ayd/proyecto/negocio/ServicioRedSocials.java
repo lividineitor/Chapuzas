@@ -1,12 +1,15 @@
 package mx.uam.ayd.proyecto.negocio;
 
+import java.io.File;
 import java.util.HashMap;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.extern.slf4j.Slf4j;
+import mx.uam.ayd.proyecto.conexion.SecurityConfig;
 import mx.uam.ayd.proyecto.datos.RedSocialRepository;
+import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
 import mx.uam.ayd.proyecto.negocio.modelo.RedSocial;
 
 @Slf4j
@@ -14,6 +17,8 @@ import mx.uam.ayd.proyecto.negocio.modelo.RedSocial;
 public class ServicioRedSocials {
 	@Autowired 
 	private RedSocialRepository redSocialRepository;
+	@Autowired 
+	private SecurityConfig configuracionAPI;
 	
 	/**
 	 * Este metodo nos ayuda en el caso en que no hay una cuenta de facebook
@@ -118,11 +123,12 @@ public class ServicioRedSocials {
 		//bandera que nos ayuda determinar con la API si ocurrio un error
 		boolean banderaConexion = true;
 		
+		configuracionAPI.creaScripConexion(usuario, contrasenia, nombreRedSocial);
 		/*if(nombreRedSocial.equals("Facebook"))
 			banderaConexion=conectFacebook( usuario, contrasenia);
 		else if(nombreRedSocial.equals("Instagram"))
 			banderaConexion=conectInstagram( usuario, contrasenia);*/
-		return banderaConexion;
+		return configuracionAPI.ejecucionScripConexion();
 	}
 	
 	/**
@@ -166,4 +172,96 @@ public class ServicioRedSocials {
 		
 		return conectarAPIs(usuario1.getUsuario(),usuario1.getContrasena(),usuario1.getNombreRed());
 	}
+	
+	/**
+	 * Este metodo se encarga de validar si el peso y formato para la imagen seleciconada desde el file chooser
+	 * cumple con lo permitido segun la red social
+	 * @param nombreRedSocial
+	 * @param imagen
+	 * @return
+	 */
+	public boolean validaPesoFormatoImagen(String nombreRedSocial,File imagen) {
+		//variables auxiliares
+		int i=0;
+		String extension ="";
+		long tamanio=0;
+		
+		//objeto redsocial 
+		RedSocial miRed=redSocialRepository.findByNombreRed(nombreRedSocial);
+		
+		//validacion de imagen existente localmente
+		if (!imagen.exists())
+			return false;
+		
+		//validacion para el formato y peso de la imagen
+		i= imagen.getName().lastIndexOf('.');
+		extension= imagen.getName().substring(i+1).toLowerCase();
+		tamanio=imagen.length()/1048576;
+		
+		if(miRed.getFormatoPesoImagen().containsKey(extension) && tamanio<miRed.getFormatoPesoImagen().get(extension))
+			return true;
+		
+		return false;
+	}
+	
+	/**
+	 * Este metodo se encarga de validar si el peso y formato para el video seleciconada desde el file chooser
+	 * cumple con lo permitido segun la red social
+	 * @param nombreRedSocial
+	 * @param video
+	 * @return
+	 */
+	public boolean validaPesoFormatoVideo(String nombreRedSocial,File video) {
+		//variables auxiliares
+		int i=0;
+		String extension ="";
+		long tamanio=0;
+		
+		//objeto redsocial 
+		RedSocial miRed=redSocialRepository.findByNombreRed(nombreRedSocial);
+		
+		//validacion de imagen existente localmente
+		if (!video.exists())
+			return false;
+		
+		//validacion para el formato y peso de la imagen
+		i= video.getName().lastIndexOf('.');
+		extension= video.getName().substring(i+1).toLowerCase();
+		tamanio=video.length()/1048576;
+		
+		if(miRed.getFormatoPesoVideo().containsKey(extension) && tamanio<miRed.getFormatoPesoVideo().get(extension))
+			return true;
+		
+		return false;
+	}
+	
+	/**
+	 * Este metodo se encarga de retomar la publicacion creada localmente y subirla a la red social mediante la api de facebook
+	 * @param publicacion
+	 * @return
+	 */
+	public boolean subePublicacionFacebook(Publicacion publicacion) {
+		return true;	
+	}
+	
+	/**
+	 * Este metodo se encarga de retomar la publicacion creada localmente y subirla a la red social mediante la api de instagram
+	 * @param publicacion
+	 * @return
+	 */
+	public boolean subePublicacionInstagram(Publicacion publicacion) {
+		return true;	
+	}
+	
+	/*
+	public boolean publica(Publicacion publicacion) {
+		//variable  enlace
+		
+		if(publicacion.getNombreRedSocial().equals("Facebook"))
+			log.info("Llamado a la api para la publicacion en facebook");
+		else if(publicacion.getNombreRedSocial().equals("Instagram"))
+			log.info("Llamado a la api para la publicacion en instagram");
+		
+		return true;
+	}*/
 }

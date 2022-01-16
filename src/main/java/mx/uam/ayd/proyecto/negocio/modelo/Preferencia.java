@@ -37,6 +37,20 @@ import lombok.Data;
         
         // Aquí se definen los valores de RN-11, que se mide en meses
         
-        private int perdiodoParaCitas ; 
+        private int periodoParaCitas ;
+        
+        // Ruta de la imagen del logotipo
+        
+        private String rutaLogotipo ;
+        
+        // Usuario y contraseña para facebook
+        
+        private String usuarioFacebook ;
+        private String passFacebook ;
+        
+        // Usuario y contraseña de instagram
+        
+        private String usuarioInstagram ;
+        private String passInstagram ;
         
      }

@@ -19,7 +19,7 @@ import mx.uam.ayd.proyecto.datos.PreferenciaRepository;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
-
+import mx.uam.ayd.proyecto.negocio.ServicioPreferencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
 
 
@@ -45,6 +45,9 @@ public class ProyectoApplication {
 	
 	@Autowired
 	PreferenciaRepository preferenciaRepository;
+	
+	@Autowired
+	ServicioPreferencia servicioPreferencia ;
 	
 	/**
 	 * 
@@ -94,8 +97,10 @@ public class ProyectoApplication {
 		preferencias.setDiasDescanso(dias);
 		preferencias.setHoraDeApertura(LocalTime.of(10, 0));
 		preferencias.setHoraDeCierre(LocalTime.of(18, 0));
-		preferencias.setPerdiodoParaCitas(3);
+		preferencias.setPeriodoParaCitas(3);
 		preferenciaRepository.save(preferencias) ;
+
+//		servicioPreferencia.crearPreferencia() ;
 	}
 	
 	private static void seleccionarGUI ()

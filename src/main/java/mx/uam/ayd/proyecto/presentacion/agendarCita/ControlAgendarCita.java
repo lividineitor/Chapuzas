@@ -64,7 +64,7 @@ public class ControlAgendarCita {
         preferencia = servicioPreferencia.obtenerPreferencia() ;
         
         LocalDate fechaActual = LocalDate.now () ;
-		LocalDate periodoParaCitas = fechaActual.plusMonths( preferencia.getPerdiodoParaCitas() ) ;
+		LocalDate periodoParaCitas = fechaActual.plusMonths( preferencia.getPeriodoParaCitas() ) ;
 				
 		for (int i = 0 ; i < fechaActual.until(periodoParaCitas , ChronoUnit.DAYS) ; i ++ )
 		{

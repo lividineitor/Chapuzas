@@ -35,8 +35,32 @@ public class ControlPreferencia {
     public void inicio ( Usuario usuario ) {
 
     	this.usuarioLogueado = usuario ;
+    	
+    	this.preferencia = servicioPreferencia.obtenerPreferencia();
+    	
         vistaPreferencia.inicio ( this ) ;
        
+    }
+
+    /**
+     * Almacena la preferencia en el sistema
+     * @param Preferencia
+     * @return
+     */
+    
+    public boolean guardarPreferencia (Preferencia preferenciaTemporal) {
+//    	preferencia.setDiasFeriados(preferenciaTemporal.getDiasFeriados());
+    	preferencia.setDiasDescanso(preferenciaTemporal.getDiasDescanso());
+    	preferencia.setHoraDeApertura(preferenciaTemporal.getHoraDeApertura());
+    	preferencia.setHoraDeCierre(preferenciaTemporal.getHoraDeCierre());
+    	preferencia.setPeriodoParaCitas(preferenciaTemporal.getPeriodoParaCitas());
+
+    	preferencia.setRutaLogotipo(preferenciaTemporal.getRutaLogotipo());
+
+    	servicioPreferencia.actualizarPreferencia(preferencia) ;
+    	
+    	return true ;
+    	
     }
     
     /**

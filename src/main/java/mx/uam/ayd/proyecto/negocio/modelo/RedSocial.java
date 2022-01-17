@@ -22,7 +22,8 @@ public class RedSocial {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idRedSocial;
-
+	
+	private long idUsuario ;
 	private String nombreRed;
 	private String usuario;
 	

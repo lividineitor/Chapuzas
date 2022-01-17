@@ -183,4 +183,12 @@ public class ServicioUsuario {
 		return usuarios;
 	}
 
+	
+	//cambios
+	public long regresaIdUsuario(String nombre) {
+		
+		Usuario usuario = usuarioRepository.findByNombre(nombre);
+		return usuario.getIdUsuario();
+	}
+
 }

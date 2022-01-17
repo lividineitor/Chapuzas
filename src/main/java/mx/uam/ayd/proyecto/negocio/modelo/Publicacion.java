@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
+
 
 import lombok.Data;
 
@@ -28,13 +30,16 @@ public class Publicacion {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long idPublicacion;
 	
- 	private String fechaCreacion ;
+	
+	private long idUsuario;
+ 	private LocalDate fechaCreacion ;
 
- 	private String fechaModificacion ;
+ 	private LocalDate fechaModificacion ;
 
- 	private String fechaProgramada ;
-
-	private String redSocial;
+ 	private LocalDate fechaProgramada ;
+ 	
+	private String  nombreRedSocial;
+	
 	
 	private String titulo;
 	
@@ -43,5 +48,4 @@ public class Publicacion {
 	private ArrayList <File> videos; 
 
 	private ArrayList <File> imagenes; 
-	
 }

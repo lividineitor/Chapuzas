@@ -58,10 +58,12 @@ public class VistaPreferencia extends JFrame {
 	private int minutosCierre = 0 ;
 	
 	private JTextField textFieldRuta;
-	private JTextField textFieldUsuarioF;
-	private JPasswordField passwordFieldF;
-	private JTextField textFieldI;
-	private JPasswordField passwordFieldI;
+
+	JTextField textFieldUsuarioF;
+	JPasswordField passwordFieldF;
+	JTextField textFieldI;
+	JPasswordField passwordFieldI;
+
 	private final JFileChooser fc = new JFileChooser () ;
 	private DefaultListModel listaFechas = new DefaultListModel ();
 	private DefaultListModel listaFechasRegistradas = new DefaultListModel ();
@@ -455,6 +457,8 @@ public class VistaPreferencia extends JFrame {
 		panelFacebook.add(lblUsuarioF);
 		
 		textFieldUsuarioF = new JTextField();
+
+		textFieldUsuarioF.setEnabled(false);
 		panelFacebook.add(textFieldUsuarioF);
 		textFieldUsuarioF.setColumns(10);
 		
@@ -462,23 +466,20 @@ public class VistaPreferencia extends JFrame {
 		panelFacebook.add(lblPassF);
 		
 		passwordFieldF = new JPasswordField(20);
+
+		passwordFieldF.setEnabled(false);
 		passwordFieldF.setText("");
 		panelFacebook.add(passwordFieldF);
 		
-		JButton btnGuardar = new JButton("Guardar");
-		panelFacebook.add(btnGuardar);
+		JButton btnConectarFacebook = new JButton("Conectar con Facebook");
+		panelFacebook.add(btnConectarFacebook);
 		
-		btnGuardar.addActionListener(new ActionListener () {
+		btnConectarFacebook.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				if (textFieldUsuarioF.getText() == null )
-					mostrarMensajeError("El campo de usuario está vacío");
-				else if (passwordFieldF.getText() == null )
-					mostrarMensajeError("El campo de contraseña está vacío") ;
-				
-				else {
+				//control.guardarPreferencia(preferencia);
+				control.redSocialFacebook();
 				preferencia.setUsuarioFacebook(textFieldUsuarioF.getText());
 				preferencia.setPassFacebook(passwordFieldF.getText());
-				}
 			}
 		});
 
@@ -494,6 +495,9 @@ public class VistaPreferencia extends JFrame {
 		panelInstagram.add(lblUsuarioI);
 		
 		textFieldI = new JTextField();
+
+		textFieldI.setEnabled(false);
+
 		panelInstagram.add(textFieldI);
 		textFieldI.setColumns(10);
 		
@@ -501,23 +505,20 @@ public class VistaPreferencia extends JFrame {
 		panelInstagram.add(lblPassI);
 		
 		passwordFieldI = new JPasswordField(20);
+
+		passwordFieldI.setEnabled(false);
 		passwordFieldI.setText("");
 		panelInstagram.add(passwordFieldI);
 		
-		JButton btnGuardar = new JButton("Guardar");
-		panelInstagram.add(btnGuardar);
+		JButton btnConectarInstagram = new JButton("Conectar con Instagram");
+		panelInstagram.add(btnConectarInstagram);
 
-		btnGuardar.addActionListener(new ActionListener () {
+		btnConectarInstagram.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				if (textFieldI.getText() == null )
-					mostrarMensajeError("El campo de usuario está vacío");
-				else if (passwordFieldI.getText() == null )
-					mostrarMensajeError("El campo de contraseña está vacío") ;
-				
-				else {
+				//control.guardarPreferencia(preferencia);
+				control.redSocialInstagram();
 				preferencia.setUsuarioFacebook(textFieldI.getText());
 				preferencia.setPassFacebook(passwordFieldI.getText());
-				}
 			}
 		});
 		

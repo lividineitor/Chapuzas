@@ -7,6 +7,9 @@ import mx.uam.ayd.proyecto.negocio.ServicioPreferencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario ;
 
+import mx.uam.ayd.proyecto.presentacion.ConectarRedSocial.ControlConectarRedSocial;
+
+
 /**
  *
  * Módulo de control para la historia de usuario Preferencia
@@ -23,6 +26,10 @@ public class ControlPreferencia {
     
     @Autowired
     private VistaPreferencia vistaPreferencia ;
+    
+
+    @Autowired
+	private ControlConectarRedSocial controlConectarRedSocial;
     
     private Usuario usuarioLogueado ;
     private Preferencia preferencia ;
@@ -81,4 +88,26 @@ public class ControlPreferencia {
         vistaPreferencia.setVisible ( false ) ;
     }
     
+
+    public void datosObtenidosLoginSocial(String usuario, String contrasenia, String redSocial) {
+    	if (redSocial=="Facebook") {
+    		vistaPreferencia.passwordFieldF.setText(contrasenia);
+    		vistaPreferencia.textFieldUsuarioF.setText(usuario);
+    	}else if(redSocial=="Instagram") {
+    		vistaPreferencia.passwordFieldI.setText(contrasenia);
+    		
+    		vistaPreferencia.textFieldI.setText(usuario);
+    	}
+    }
+    
+    public void redSocialFacebook() {
+		
+		controlConectarRedSocial.inicia(usuarioLogueado.getIdUsuario(),"Facebook");
+	}
+	public void redSocialInstagram() {
+		controlConectarRedSocial.inicia(usuarioLogueado.getIdUsuario(),"Instagram");
+	}
+    
 }
+
+

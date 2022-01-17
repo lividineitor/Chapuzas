@@ -51,7 +51,7 @@ public class ControlCrearCuenta {
 	
 	public void dCuenta(String nombres, String apellidos,String correo,String telefono,String contrasena) {
 		if(servicioUsuario.VerificaExistencia(correo)) {
-			ventanaFormulario.muestraDialogoConMensaje("Ventana prev");
+			//ventanaFormulario.muestraDialogoConMensaje("Ventana prev");
 			ventanaFormulario.setVisible(false);
 			this.nombres=nombres;
 			this.apellidos=apellidos;

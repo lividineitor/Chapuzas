@@ -1,43 +1,43 @@
-package mx.uam.ayd.proyecto.presentacion.principal;
+package mx.uam.ayd.proyecto.presentacion.ConectarRedSocial;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.Window.Type;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import org.springframework.stereotype.Component;
-import java.awt.Toolkit;
-import java.awt.Color;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
-import javax.swing.JTextField;
-import javax.swing.JButton;
-import javax.swing.JPasswordField;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
 
 @SuppressWarnings("serial")
 @Component
-public class VentanaSesionRedSocial extends JFrame {
+public class VentanaSesionInstagram extends JFrame {
 
 	private JPanel contentPane;
-	private ControlPrincipal control;
+	private ControlConectarRedSocial controlConectarRedSocial;
 	private JTextField textUser;
 	private JPasswordField passwordField;
-
 	/**
 	 * Launch the application.
-	 */
+	 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaSesionRedSocial frame = new VentanaSesionRedSocial();
+					VentanaSesionInstagram frame = new VentanaSesionInstagram();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -46,13 +46,13 @@ public class VentanaSesionRedSocial extends JFrame {
 		});
 	}
 
-	/**
 	 * Create the frame.
 	 */
-	public VentanaSesionRedSocial() {
-		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\leonh\\Downloads\\AnalysisYDiseno-master\\AnalysisYDiseno-master\\imagenes\\facebook.png"));
+	public VentanaSesionInstagram() {
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setType(Type.POPUP);
+		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\leonh\\Downloads\\AnalysisYDiseno-master\\AnalysisYDiseno-master\\imagenes\\instagram.png"));
+		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 279, 354);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -67,7 +67,7 @@ public class VentanaSesionRedSocial extends JFrame {
 		
 		JLabel lblLogoFace = new JLabel("");
 		lblLogoFace.setBounds(94, 24, 50, 50);
-		ImageIcon imgLogo=new ImageIcon("imagenes/facebook.png");
+		ImageIcon imgLogo=new ImageIcon("imagenes/instagram.png");
 		Icon icono = new ImageIcon(imgLogo.getImage().getScaledInstance( lblLogoFace.getWidth(),lblLogoFace.getHeight(),Image.SCALE_DEFAULT));
 		lblLogoFace.setIcon(icono);
 		
@@ -90,8 +90,8 @@ public class VentanaSesionRedSocial extends JFrame {
 		btnContinuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textUser.getText().equals("") || passwordField.getText().equals("")) {
-					muestraDialogoConMensaje("No puede enviar campos vacios");
-					}else {control.redSocial(textUser.getText(), passwordField.getText());}
+					muestraDialogoStatus("No puede enviar campos vacios");
+					}else {controlConectarRedSocial.conectarRedSocial("Instagram",textUser.getText(), passwordField.getText());}
 			}
 		});
 		btnContinuar.setForeground(Color.WHITE);
@@ -103,13 +103,15 @@ public class VentanaSesionRedSocial extends JFrame {
 		passwordField.setBounds(24, 189, 209, 20);
 		panel.add(passwordField);
 	}
-	public void sWsesionReds(ControlPrincipal control) {
-		
-		this.control = control;
-		
+	
+	public void muestraVentanaSesionInstagram(ControlConectarRedSocial controlConectarRedSocial) {
+		this.controlConectarRedSocial=controlConectarRedSocial;
+		textUser.setText("");
+		passwordField.setText("");
 		setVisible(true);
 	}
-	public void muestraDialogoConMensaje(String mensaje ) {
+	public void muestraDialogoStatus(String mensaje ) {
 		JOptionPane.showMessageDialog(this , mensaje);
 	}
+
 }

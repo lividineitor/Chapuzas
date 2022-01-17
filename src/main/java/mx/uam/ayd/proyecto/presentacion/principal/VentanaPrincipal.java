@@ -25,8 +25,12 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel contentPane;
 	
 	private ControlPrincipal control;
-	JButton btnPublicacion,btnAgregarUsuario,btnListarUsuarios,btnInicioDeSesion,btnCrearCuenta,btnFacebook,btnMostrarClientes,btnModifica,btnAgendarCita,btnAgenda,btnAgendaAdmin;
 	private JLabel lblConectado;
+
+	
+
+	JButton btnPublicacion,btnAgregarUsuario,btnListarUsuarios,btnInicioDeSesion,btnCrearCuenta,btnMostrarClientes,btnModifica,btnAgendarCita,btnAgenda,btnAgendaAdmin;
+
 	private JButton btnLogOut;
 	private JLabel lblNewLabel;
 	private JButton btnNuevoCliente;
@@ -217,26 +221,7 @@ public class VentanaPrincipal extends JFrame {
 		btnCrearCuenta.setBounds(491, 11, 123, 23);
 		panelVista.add(btnCrearCuenta);
 		
-		JPanel panelConexiones = new JPanel();
-		panelConexiones.setBounds(453, 294, 145, 100);
-		panelVista.add(panelConexiones);
-		panelConexiones.setLayout(null);
-		
-		btnFacebook = new JButton("Facebook");
-		btnFacebook.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				control.recarga();
-			}
-		});
-//		btnFacebook.setForeground(Color.WHITE);
-//		btnFacebook.setBackground(new Color(51, 102, 204));
-		btnFacebook.setBounds(10, 31, 89, 23);
-		panelConexiones.add(btnFacebook);
-		
-		lblConectado = new JLabel("Conecte:");
-		lblConectado.setBounds(10, 11, 101, 14);
-		panelConexiones.add(lblConectado);
-		
+
 		btnNuevoCliente = new JButton("Nuevo Cliente");
 //		btnNuevoCliente.setForeground(Color.WHITE);
 //		btnNuevoCliente.setBackground(new Color(102, 102, 102));
@@ -286,7 +271,8 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		if(permiso.equals("Administrador")) {
-			btnFacebook.setEnabled(statusConect);
+
+
 			btnPublicacion.setEnabled(statusConect);
 			btnListarUsuarios.setEnabled(statusConect);
 			btnAgregarUsuario.setEnabled(statusConect);

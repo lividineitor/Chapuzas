@@ -31,7 +31,24 @@ public interface RedSocialRepository extends CrudRepository <RedSocial, Long> {
 	 * @return
 	 */
 	public HashMap<String, Long> findByFormatoPesoVideo(String nombreRed);
+	
+	/**
+	 * Se encarga de revisar si existe un objeto de redsocial con el idUsuario dado
+	 * esta limitado a una sola red social
+	 * @param idUsuario
+	 * @return
+	 */
+	public RedSocial findByIdUsuario(long idUsuario);
+	
+	
+	/**
+	 * Se encarga de revisar si existe un objeto de redsocial con el idUsuario dado y el nombre de red
+	 * este no es util para multiples redes sociales
+	 * @param idUsuario
+	 * @param nombreRed
+	 * @return
+	 */
+	public RedSocial findByIdUsuarioAndNombreRed(long idUsuario,String nombreRed);
+	
 
-	
-	
 }

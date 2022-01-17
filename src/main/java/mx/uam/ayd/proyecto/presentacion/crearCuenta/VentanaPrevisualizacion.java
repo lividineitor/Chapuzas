@@ -114,3 +114,4 @@ public class VentanaPrevisualizacion extends JFrame {
 		setVisible(true);
 	}
 }
+

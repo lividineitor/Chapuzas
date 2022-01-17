@@ -10,6 +10,10 @@ import mx.uam.ayd.proyecto.ModificarCuenta.ControlModificarCuenta;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
+
+import mx.uam.ayd.proyecto.presentacion.ConectarRedSocial.ControlConectarRedSocial;
+import mx.uam.ayd.proyecto.presentacion.CreaPublicacion.ControlCrearPublicacion;
+
 import mx.uam.ayd.proyecto.presentacion.MostrarClientes.ControlMostrarClientes;
 import mx.uam.ayd.proyecto.presentacion.agenda.ControlAgenda;
 import mx.uam.ayd.proyecto.presentacion.agendaDeUsuario.ControlAgendaDeUsuario;
@@ -18,7 +22,7 @@ import mx.uam.ayd.proyecto.presentacion.agendarCita.ControlAgendarCita;
 import mx.uam.ayd.proyecto.presentacion.crearCuenta.ControlCrearCuenta;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;
 import mx.uam.ayd.proyecto.presentacion.preferencia.ControlPreferencia;
-import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.ControlProgramarPublicacion;
+
 
 /**
  * Esta clase lleva el flujo de control de la ventana principal
@@ -37,9 +41,10 @@ public class ControlPrincipal {
 	@Autowired
 	private ControlCrearCuenta controlCrearCuenta;
 	
+
 	@Autowired
-	private ControlProgramarPublicacion controlProgramarPublicacion;
-	
+	private ControlCrearPublicacion crearPublicacion;
+
 	@Autowired
 	private ControlAgendarCita controlAgendarCita ;
 	
@@ -62,6 +67,9 @@ public class ControlPrincipal {
 	private ControlModificarCuenta controlmodificarCuenta;
 	
 	@Autowired
+	private ControlConectarRedSocial controlConectarRedSocial;
+	
+	@Autowired
 	private ControlPreferencia controlPreferencia ;
 	
 	@Autowired
@@ -76,12 +84,13 @@ public class ControlPrincipal {
 	
 	private boolean loginConect=false;
 
+
 	// Campo de usuario que se envía a todos los controladores que lo requieran
 	
 	private Usuario usuario ;
 	
 	// Constructor
-	
+
 	public ControlPrincipal() {
 		usuario = new Usuario();
 		usuario.setPermisos("Administrador");
@@ -106,20 +115,19 @@ public class ControlPrincipal {
 		//ventana.muestra(this);
 	}
 
-	// HU
-	
+
+
 	public void agendarCita ( Usuario usuario ) {
 		controlAgendarCita.inicio( usuario );
 	}
 	
-	// HU
-	
+
+
 	public void agendaDeUsuario ( Usuario usuario ) {
 		controlAgendaDeUsuario.inicio ( usuario ) ;
 	}
 	
-	// HU
-	
+
 	public void agenda ( Usuario usuario ) {
 		controlAgenda.inicio(usuario);
 	}
@@ -149,7 +157,9 @@ public class ControlPrincipal {
 	}
 	
 	public void publicacion() {
-		controlProgramarPublicacion.inicia();
+
+		crearPublicacion.inicia(usuario.getIdUsuario());
+
 	}
 	
 	public void recarga() {
@@ -157,7 +167,9 @@ public class ControlPrincipal {
 	}
 	
 	public void redSocial(String usuario, String password) {
-		if(servicioRedSocial.conectarRedSocial(usuario, password)) {
+
+		if(servicioRedSocial.conectar("Facebook",usuario, password,this.usuario.getIdUsuario())) {
+
 			ventanaSesionRedSocial.setVisible(false);
 			inicia();
 		}
@@ -191,14 +203,17 @@ public class ControlPrincipal {
 		
 	}
 
+
 	public void preferencias ( Usuario usuario ) {
 		controlPreferencia.inicio( usuario );
 	}
-	
+
 	public void logOut() {
 		loginConect=false;
 		inicia();
 	}
+
+
 	
 	public void ModificarCuenta() {
 		Usuario usuario = servicioUsuario.agregaUsuario("hola", "jummm", "ya casi", "me toooas?","kwdnaoidwa","si");
@@ -216,4 +231,18 @@ public class ControlPrincipal {
 		this.usuario=usuario;
 	}
 	
+
+	//cambios nuevos metodos
+	public void redSocialFacebook() {
+		if(servicioUsuario.regresaIdUsuario(usuario.getNombre())==usuario.getIdUsuario())
+			controlConectarRedSocial.inicia(usuario.getIdUsuario(),"Facebook");
+		else
+			System.out.println("Error redSocialFacebook");
+	}
+	public void redSocialInstagram() {
+		if(servicioUsuario.regresaIdUsuario(usuario.getNombre())==usuario.getIdUsuario())
+			controlConectarRedSocial.inicia(usuario.getIdUsuario(),"Instagram");
+		else
+			System.out.println("Error redSocialInstagram");
+	}
 }

@@ -1,9 +1,6 @@
 package mx.uam.ayd.proyecto.datos;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
+
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -28,7 +25,9 @@ public interface UsuarioRepository extends CrudRepository <Usuario, Long> {
 	public List <Usuario> findByMesAndAnnio(int mes, int annio);
 	
 	public List <Usuario> findByAnnio(int annio);
-	
 
+	//cambios version
+	
+	public Usuario findByNombre(String nombre);
 
 }

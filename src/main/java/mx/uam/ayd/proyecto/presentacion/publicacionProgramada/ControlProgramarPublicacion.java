@@ -10,7 +10,9 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.ServicioPublicacion;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
+import mx.uam.ayd.proyecto.presentacion.cancelarPublicacion.ControlCancelarPublicacion;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
+import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.*;
 
 @Component
 public class ControlProgramarPublicacion {
@@ -32,6 +34,8 @@ public class ControlProgramarPublicacion {
 	
 	@Autowired
 	private VentanaListaPublicaciones ventanaListPublicaciones;
+	@Autowired
+	private ControlCancelarPublicacion controlcancelar;
 	
 	/*variables auxiliares*/
 	private String nombreRed="", titulo="",contenido="";
@@ -43,6 +47,10 @@ public class ControlProgramarPublicacion {
 	/* Mis ventanas de la historia de usuario*/
 	public void inicia() {
 		ventanaListPublicaciones.sWlistPub(this,servicioPublicacion.recuperaPublicaciones());
+	}
+	
+	public void iniciacancelar() {
+		controlcancelar.inicia();
 	}
 	
 	public void nuevaPub() {

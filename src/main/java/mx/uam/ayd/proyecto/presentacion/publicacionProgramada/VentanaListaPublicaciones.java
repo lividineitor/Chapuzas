@@ -8,6 +8,7 @@ import java.awt.Image;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
@@ -15,6 +16,8 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
+import mx.uam.ayd.proyecto.presentacion.cancelarPublicacion.ControlCancelarPublicacion;
+
 import java.awt.Color;
 import java.awt.Toolkit;
 import javax.swing.JList;
@@ -40,6 +43,7 @@ public class VentanaListaPublicaciones extends JFrame {
 	private JPanel contentPane;
 	
 	private ControlProgramarPublicacion controlPub;
+	//private ControlCancelarPublicacion controlcancela;
 	JTextPane textPanelPubs ;
 
 	/**
@@ -100,6 +104,17 @@ public class VentanaListaPublicaciones extends JFrame {
 		textPanelPubs.setEditable(false);
 		textPanelPubs.setBounds(21, 40, 575, 267);
 		panelVista.add(textPanelPubs);
+		
+		JButton btnCancelar = new JButton("Cancelar una publicacion programada");
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlPub.iniciacancelar();
+				setVisible(false);
+			}
+		});
+		btnCancelar.setBounds(76, 318, 217, 23);
+		panelVista.add(btnCancelar);
 	}
 	
 	public void sWlistPub(ControlProgramarPublicacion controlPub,List<Publicacion> pubs) {

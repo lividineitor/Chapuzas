@@ -169,6 +169,13 @@ public class ServicioPublicacion {
 				
 		return publicaciones;
 	}
+	
+	public void eliminaPublicacion(long id)
+	{
+		//int identera = Integer.parseInt(id);
+	    //long idlong = identera;
+		publicacionRepository.deleteById(id);
+	}
 
 	
 }

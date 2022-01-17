@@ -9,5 +9,4 @@ import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
 public interface PublicacionRepository extends CrudRepository <Publicacion, Long> {
 	
 	public List <Publicacion> findByFechaCreacion(String fechaCreacion);
-	
 }

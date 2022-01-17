@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.ServicioPublicacion;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
-//import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
 
 @Component
 public class ControlCancelarPublicacion {
@@ -20,25 +19,22 @@ public class ControlCancelarPublicacion {
 	@Autowired
 	private ServicioRedSocial servicioRedSocial;
 	
-	//@Autowired
-	//private ControlPrincipal controlPrincipal;
-	
 	@Autowired
 	public VistaCancelarPublicacion ventana;
 	
 	@Autowired
 	public VentanaConfirmar ventana1;
 
-	//ControlCancelarPublicacion control;
-	public void inicia() {
+	
+	public void inicia() { //Inicia la ventana para comenzar el proceso de cancelacion
 		ventana.MostrarPublicaciones(this, servicioPublicacion.recuperaPublicaciones());
 	}
 	
-	public void eliminaprev(String id)
+	public void eliminaprev(String id) //abre la ventana para confirmar la cancelacion
 	{
 		ventana1.muestra(this,id);
 	}
-	public void elimina(String id)
+	public void elimina(String id) //elimina la publicacion (id)
 	{
 		int idr = Integer.parseInt(id);
 		Long idreal = new Long (idr);

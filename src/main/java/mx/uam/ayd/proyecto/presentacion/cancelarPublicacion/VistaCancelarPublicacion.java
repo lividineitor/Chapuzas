@@ -40,27 +40,13 @@ public class VistaCancelarPublicacion extends JFrame {
 	
 	public VistaCancelarPublicacion() {
 		setSize(new Dimension(1366, 768));
-		/*setBackground(Color.WHITE);
-		setForeground(Color.BLACK);
-		setType(Type.UTILITY);
-		setResizable(false);
-		setTitle("Cancelar Publicacion");
-		getContentPane().setLayout(null);
-		
-		JLabel lblNewLabel = new JLabel("New label");
-		lblNewLabel.setBounds(57, 41, 200, 50);
-		getContentPane().add(lblNewLabel);
-		*/
 		setType(Type.UTILITY);
 		setTitle("Cancelar Publicacion");
-		//setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\leonh\\OneDrive\\Imágenes\\Screenshots\\logo.png"));
-		//setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 638, 402);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		//ImageIcon imgLogo=new ImageIcon("imagenes/sisgief.png");
 		
 		JPanel panelVista = new JPanel();
 		panelVista.setAutoscrolls(true);
@@ -73,10 +59,8 @@ public class VistaCancelarPublicacion extends JFrame {
 		txtPub.setDropMode(DropMode.INSERT);
 		txtPub.setDragEnabled(true);
 		
-		//JTextArea txtPub = new JTextArea();
 		txtPub.setToolTipText("Pubs");
 		txtPub.setEditable(false);
-		//txtPub.setText("hola");
 		txtPub.setBounds(47, 58, 487, 225);
 		panelVista.add(txtPub);
 		

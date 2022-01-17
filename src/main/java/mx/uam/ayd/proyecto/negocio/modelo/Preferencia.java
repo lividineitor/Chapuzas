@@ -23,7 +23,6 @@ import lombok.Data;
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long idPreferencia;
 
-        private long idUsuario ;
         private LocalDateTime fechaCreacion ;
 
         // Aquí se definen los valores de RN-01
@@ -35,5 +34,23 @@ import lombok.Data;
         
         private LocalTime horaDeApertura ;
         private LocalTime horaDeCierre ;
+        
+        // Aquí se definen los valores de RN-11, que se mide en meses
+        
+        private int periodoParaCitas ;
+        
+        // Ruta de la imagen del logotipo
+        
+        private String rutaLogotipo ;
+        
+        // Usuario y contraseña para facebook
+        
+        private String usuarioFacebook ;
+        private String passFacebook ;
+        
+        // Usuario y contraseña de instagram
+        
+        private String usuarioInstagram ;
+        private String passInstagram ;
         
      }

@@ -5,6 +5,8 @@ import org.springframework.stereotype.Component;
 
 //import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocials;
+import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
+import mx.uam.ayd.proyecto.presentacion.preferencia.ControlPreferencia;
 
 @Component
 public class ControlConectarRedSocial {
@@ -16,6 +18,9 @@ public class ControlConectarRedSocial {
 	
 	@Autowired
 	private VentanaSesionInstagram sesionInstagram;
+	
+	@Autowired
+	private ControlPreferencia controlPreferencia ;
 	
 	//atributo de clase que nos permite almacenar el id del usuario actual en el sistema 
 	private long idUsuario;
@@ -51,6 +56,7 @@ public class ControlConectarRedSocial {
 			case "Facebook":
 				if(servicioRedSocial.conectar(nombreRedSocial, usuario, contrasenia, idUsuario)) {
 					sesionFacebook.muestraDialogoStatus("Conexion exitosa con Facebook");
+					controlPreferencia.datosObtenidosLoginSocial(usuario, contrasenia, nombreRedSocial);
 					sesionFacebook.setVisible(false);
 				}else
 					sesionFacebook.muestraDialogoStatus("Error usuario o contrasenia no validos");
@@ -58,6 +64,7 @@ public class ControlConectarRedSocial {
 			case "Instagram":
 				if(servicioRedSocial.conectar(nombreRedSocial, usuario, contrasenia, idUsuario)) {
 					sesionInstagram.muestraDialogoStatus("Conexion exitosa con instagram");
+					controlPreferencia.datosObtenidosLoginSocial(usuario, contrasenia, nombreRedSocial);
 					sesionInstagram.setVisible(false);
 				}else
 					sesionInstagram.muestraDialogoStatus("Error usuario o contrasenia no validos");
@@ -72,6 +79,7 @@ public class ControlConectarRedSocial {
 	public void conectarRedSocialAuto() {
 		if(servicioRedSocial.autoConectar(idUsuario))
 			sesionFacebook.muestraDialogoStatus("Conexion exitosa");
+			//controlPreferencia.datosObtenidosLoginSocial(usuario, contrasenia, nombreRedSocial);
 		else
 			sesionFacebook.muestraDialogoStatus(" Error usuario o contrasenia no validos");
 	}
@@ -90,5 +98,19 @@ public class ControlConectarRedSocial {
 			sesionFacebook.muestraDialogoStatus("Conexion exitosa instagram");
 		else
 			sesionFacebook.muestraDialogoStatus(" Error usuario o contrasenia no validos");
+	}
+	
+	public void subePublicacionFacebook(Publicacion publicacion) {
+		if (servicioRedSocial.subePublicacionFacebook(publicacion)) 
+			sesionFacebook.muestraDialogoStatus("Publicado");
+		else
+			sesionFacebook.muestraDialogoStatus("Error en la publicacion");
+	}
+	
+	public void subePublicacionInstagram(Publicacion publicacion) {
+		if (servicioRedSocial.subePublicacionInstagram(publicacion)) 
+			sesionInstagram.muestraDialogoStatus("Publicado");
+		else
+			sesionInstagram.muestraDialogoStatus("Error en la publicacion");
 	}
 }

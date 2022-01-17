@@ -1,6 +1,7 @@
 package mx.uam.ayd.proyecto.negocio.modelo;
 
 import java.io.File;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,13 +30,13 @@ public class Publicacion {
 	private long idPublicacion;
 	
 	private long idUsuario;
- 	private String fechaCreacion ;
+ 	private LocalDate fechaCreacion ;
 
- 	private String fechaModificacion ;
+ 	private LocalDate fechaModificacion ;
 
- 	private String fechaProgramada ;
+ 	private LocalDate fechaProgramada ;
 
-	private String redSocial;
+	private String nombreRedSocial;
 	
 	private String titulo;
 	

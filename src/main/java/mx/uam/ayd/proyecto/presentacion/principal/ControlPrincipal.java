@@ -11,6 +11,7 @@ import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 import mx.uam.ayd.proyecto.presentacion.ConectarRedSocial.ControlConectarRedSocial;
+import mx.uam.ayd.proyecto.presentacion.CreaPublicacion.ControlCrearPublicacion;
 import mx.uam.ayd.proyecto.presentacion.MostrarClientes.ControlMostrarClientes;
 import mx.uam.ayd.proyecto.presentacion.agenda.ControlAgenda;
 import mx.uam.ayd.proyecto.presentacion.agendaDeUsuario.ControlAgendaDeUsuario;
@@ -18,7 +19,8 @@ import mx.uam.ayd.proyecto.presentacion.agendarCita.ControlAgendarCita;
 //import mx.uam.ayd.proyecto.presentacion.agregarUsuario.ControlAgregarUsuario;
 import mx.uam.ayd.proyecto.presentacion.crearCuenta.ControlCrearCuenta;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;
-import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.ControlProgramarPublicacion;
+import mx.uam.ayd.proyecto.presentacion.preferencia.ControlPreferencia;
+
 
 /**
  * Esta clase lleva el flujo de control de la ventana principal
@@ -38,7 +40,7 @@ public class ControlPrincipal {
 	private ControlCrearCuenta controlCrearCuenta;
 	
 	@Autowired
-	private ControlProgramarPublicacion controlProgramarPublicacion;
+	private ControlCrearPublicacion crearPublicacion;
 	
 	@Autowired
 	private ControlAgendarCita controlAgendarCita ;
@@ -63,6 +65,9 @@ public class ControlPrincipal {
 	
 	@Autowired
 	private ControlConectarRedSocial controlConectarRedSocial;
+	
+	@Autowired
+	private ControlPreferencia controlPreferencia ;
 	
 	@Autowired
 	private VentanaPrincipal ventana;
@@ -138,7 +143,7 @@ public class ControlPrincipal {
 	}
 	
 	public void publicacion() {
-		controlProgramarPublicacion.inicia();
+		crearPublicacion.inicia(usuario.getIdUsuario());
 	}
 	
 	public void recarga() {
@@ -183,6 +188,9 @@ public class ControlPrincipal {
 	public void logOut() {
 		loginConect=false;
 		inicia();
+	}
+	public void preferencias ( Usuario usuario ) {
+		controlPreferencia.inicio( usuario );
 	}
 	
 	public void ModificarCuenta() {

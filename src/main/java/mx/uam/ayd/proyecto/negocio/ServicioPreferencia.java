@@ -2,6 +2,7 @@ package mx.uam.ayd.proyecto.negocio;
 
 import java.util.ArrayList;
 import java.time.* ;
+import java.util.Optional ;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -21,30 +22,46 @@ public class ServicioPreferencia {
 	PreferenciaRepository preferenciaRepository;
 	
 	/**
-	 * crearPreferencia: Permite la creación de una única preferencia por usuario, si es true se pudo crear, si es false ya existe
-	 * @param Preferencia
+	 * crearPreferencia: Permite la creación de una única preferencia, si es true se pudo crear, si es false ya existe
+	 * @param
 	 * @return boolean
 	 * */
 	
-	public boolean crearPreferencia ( Long idUsuario )
+	public boolean crearPreferencia ()
 	{
-		if ( preferenciaRepository.existsByIdUsuario( idUsuario ) )
+		if ( preferenciaRepository.count () == 0 )
 			
 			return false ;
 		
 		else
 		{
 			Preferencia preferencia = new Preferencia () ;
-			preferencia.setIdUsuario ( idUsuario ) ;
 			preferenciaRepository.save(preferencia) ;
 			return true ;
 		}
 	}
 	
-	public Preferencia obtenerPreferencia ( Long idUsuario )
+	/**
+	 * obtenerPreferencia: Obtiene las preferencias del sistema
+	 * @param
+	 * @return Preferencia de existir o null de no existir
+	 */
+	
+	public Preferencia obtenerPreferencia ()
 	{
-		return preferenciaRepository.findByIdUsuario( idUsuario ) ;
+		Optional <Preferencia> temporal = preferenciaRepository.findById( ( long ) 1 ) ;
+		
+		if ( temporal.isPresent() )
+			return temporal.get() ;
+		else
+			return null ;
 	}
+	
+	/**
+	 * actualizarPreferencia: Actualiza los cambios en preferencia
+	 * @param preferencia
+	 * @return Preferencia ya actualizada
+	 */
 	
 	public Preferencia actualizarPreferencia ( Preferencia preferencia )
 	{
@@ -53,9 +70,9 @@ public class ServicioPreferencia {
 
 	// Controla los valores de RN-01
 	
-	public boolean agregarDiasDescanso ( String [] dias , Long idUsuario ) {
+	public boolean agregarDiasDescanso ( String [] dias ) {
 		
-		Preferencia preferencia = obtenerPreferencia ( idUsuario ) ;
+		Preferencia preferencia = obtenerPreferencia () ;
 				
 		preferencia.setDiasDescanso ( dias ) ;
 
@@ -66,9 +83,9 @@ public class ServicioPreferencia {
 
 	// Controla los valores de RN-02
 	
-	public boolean agregarDiasFeriados ( ArrayList <LocalDate> dias , Long idUsuario ) {
+	public boolean agregarDiasFeriados ( ArrayList <LocalDate> dias ) {
 
-		Preferencia preferencia = obtenerPreferencia ( idUsuario ) ;
+		Preferencia preferencia = obtenerPreferencia () ;
 		
 		preferencia.setDiasFeriados ( dias ) ;
 
@@ -77,5 +94,18 @@ public class ServicioPreferencia {
 		return true ;
 		
 	}
+	
+	public boolean setHorarioLaboral (LocalTime horaApertura , LocalTime horaCierre )
+	{
+		Preferencia preferencia = obtenerPreferencia () ;
+
+		preferencia.setHoraDeApertura(horaApertura);
+		preferencia.setHoraDeCierre(horaCierre);
+
+		preferenciaRepository.save( preferencia ) ;
+		
+		return true ;
+	}
+	
 	
 }

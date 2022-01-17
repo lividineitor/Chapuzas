@@ -458,17 +458,29 @@ public class VistaPreferencia extends JFrame {
 		panelFacebook.add(textFieldUsuarioF);
 		textFieldUsuarioF.setColumns(10);
 		
-		
-		
 		JLabel lblPassF = new JLabel("Contraseña");
 		panelFacebook.add(lblPassF);
 		
-		passwordFieldF = new JPasswordField();
+		passwordFieldF = new JPasswordField(20);
 		passwordFieldF.setText("");
 		panelFacebook.add(passwordFieldF);
 		
-		JList list_1 = new JList();
-		panelFacebook.add(list_1);
+		JButton btnGuardar = new JButton("Guardar");
+		panelFacebook.add(btnGuardar);
+		
+		btnGuardar.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				if (textFieldUsuarioF.getText() == null )
+					mostrarMensajeError("El campo de usuario está vacío");
+				else if (passwordFieldF.getText() == null )
+					mostrarMensajeError("El campo de contraseña está vacío") ;
+				
+				else {
+				preferencia.setUsuarioFacebook(textFieldUsuarioF.getText());
+				preferencia.setPassFacebook(passwordFieldF.getText());
+				}
+			}
+		});
 
 	}
 	
@@ -488,13 +500,27 @@ public class VistaPreferencia extends JFrame {
 		JLabel lblPassI = new JLabel("Contraseña");
 		panelInstagram.add(lblPassI);
 		
-		passwordFieldI = new JPasswordField();
+		passwordFieldI = new JPasswordField(20);
 		passwordFieldI.setText("");
 		panelInstagram.add(passwordFieldI);
 		
-		JList list_1_1 = new JList();
-		panelInstagram.add(list_1_1);
+		JButton btnGuardar = new JButton("Guardar");
+		panelInstagram.add(btnGuardar);
 
+		btnGuardar.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				if (textFieldI.getText() == null )
+					mostrarMensajeError("El campo de usuario está vacío");
+				else if (passwordFieldI.getText() == null )
+					mostrarMensajeError("El campo de contraseña está vacío") ;
+				
+				else {
+				preferencia.setUsuarioFacebook(textFieldI.getText());
+				preferencia.setPassFacebook(passwordFieldI.getText());
+				}
+			}
+		});
+		
 	}
 	
 	// TEMPORAL: Sección que define los diálogos de éxito o error al momento de guardar las configuraciones
@@ -512,9 +538,9 @@ public class VistaPreferencia extends JFrame {
 		JOptionPane.showMessageDialog ( null , mensaje ) ;
 	}
 
-	public void mostrarMensajeErrorDeEstado ()
+	public void mostrarMensajeError ( String mensaje )
 	{
-		JOptionPane.showMessageDialog ( null , "Sólo se pueden confirmar citas PENDIENTES." ) ;
+		JOptionPane.showMessageDialog ( null , "ERROR: " + mensaje ) ;
 	}
 	
 	private String [] actualizarSemana ()
@@ -561,5 +587,4 @@ public class VistaPreferencia extends JFrame {
 		for (LocalDate fecha : fechas )
 			listaFechasRegistradas.addElement(fecha);
 	}
-	
 }

@@ -56,6 +56,13 @@ public class ControlPreferencia {
     	preferencia.setPeriodoParaCitas(preferenciaTemporal.getPeriodoParaCitas());
 
     	preferencia.setRutaLogotipo(preferenciaTemporal.getRutaLogotipo());
+    	
+    	preferencia.setUsuarioFacebook(preferenciaTemporal.getUsuarioFacebook());
+    	preferencia.setPassFacebook(preferenciaTemporal.getPassFacebook());
+    	
+    	preferencia.setUsuarioInstagram(preferenciaTemporal.getUsuarioInstagram());
+    	preferencia.setPassInstagram(preferenciaTemporal.getPassInstagram());
+    	
 
     	servicioPreferencia.actualizarPreferencia(preferencia) ;
     	

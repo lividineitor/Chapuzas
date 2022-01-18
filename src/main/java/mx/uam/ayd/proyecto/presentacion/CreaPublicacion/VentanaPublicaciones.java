@@ -19,21 +19,29 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
+
+import javax.swing.JTable;
+import javax.swing.JTextArea;
+import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
 
-import javax.swing.JTable;
 import javax.swing.border.CompoundBorder;
+
+import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
+import mx.uam.ayd.proyecto.presentacion.publicacionProgramada.ControlProgramarPublicacion;
+import mx.uam.ayd.proyecto.presentacion.cancelarPublicacion.ControlCancelarPublicacion;
+
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 
 @SuppressWarnings("serial")
 @Component
 public class VentanaPublicaciones extends JFrame {
 	
-	//encabezados de la tabla
 	private String [] encabezados= {"Titulo","Red social","Estado","Fecha Publicacion", "Accciones"};
 	
 	//datos para la tabla
@@ -46,6 +54,9 @@ public class VentanaPublicaciones extends JFrame {
 	JPanel panelVista;
 	private JPanel contentPane;
 	private JTable tablePublicaciones;
+	private ControlProgramarPublicacion controlPub;
+	//private ControlCancelarPublicacion controlcancela;
+	JTextPane textPanelPubs ;
 
 	/**
 	 * Launch the application.
@@ -105,11 +116,25 @@ public class VentanaPublicaciones extends JFrame {
 		tablePublicaciones.setBounds(26, 29, 554, 273);
 		panelVista.add(tablePublicaciones);
 		
+
+		textPanelPubs = new JTextPane();
+		textPanelPubs.setEditable(false);
+		textPanelPubs.setBounds(21, 40, 575, 267);
+		panelVista.add(textPanelPubs);
 		
-		
-		
+		JButton btnCancelar = new JButton("Cancelar una publicacion programada");
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				controlPub.iniciacancelar();
+				setVisible(false);
+			}
+		});
+		btnCancelar.setBounds(76, 318, 217, 23);
+		panelVista.add(btnCancelar);
 	}
-	//metodo de lanzamiento de interfaz
+	
+	
 	public void muestraPublicaciones(ControlCrearPublicacion controlPublicacion, ArrayList<Publicacion> misPublicaciones) {
 		this.controlPublicacion=controlPublicacion;
 		this.misPublicaciones=misPublicaciones;

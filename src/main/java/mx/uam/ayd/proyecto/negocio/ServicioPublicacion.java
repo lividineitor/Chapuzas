@@ -3,7 +3,6 @@ package mx.uam.ayd.proyecto.negocio;
 import java.io.File;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,33 +79,5 @@ public class ServicioPublicacion {
 		publicacionRepository.save(miPublicacion);
 
 		return miPublicacion;
-	}
-	/**
-	 * Nos perimte recuperar todas las publicaciones, para posteriormente mostrar un listado de las mismas
-	 * @return
-	 */
-	public List <Publicacion> recuperaPublicaciones() {
-		System.out.println("publicacionRepository = "+publicacionRepository);
-		
-		List <Publicacion> publicaciones = new ArrayList<>();
-		
-		for(Publicacion pubCreadas:publicacionRepository.findAll()) {
-			publicaciones.add(pubCreadas);
-		}
-				
-		return publicaciones;
-	}
-
-	
-	/**
-	 * Nos perimte recuperar todas las publicaciones, para posteriormente mostrar un listado de las mismas
-	 * @return
-	 */
-	
-	public void eliminaPublicacion(long id)
-	{
-		//int identera = Integer.parseInt(id);
-	    //long idlong = identera;
-		publicacionRepository.deleteById(id);
 	}
 }

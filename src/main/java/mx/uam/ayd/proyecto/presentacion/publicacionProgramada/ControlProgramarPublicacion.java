@@ -125,6 +125,7 @@ public class ControlProgramarPublicacion {
 	}
 	
 	public void pPublicacion(LocalDate cuando, LocalTime hora) {
+		/*
 		if((videos==null&&imagenes==null)||(videos.isEmpty() && imagenes.isEmpty())) {
 			servicioPublicacion.cPublicacion(titulo, contenido, nombreRed, cuando, hora);
 			}else if(imagenes==null || imagenes.isEmpty()) {
@@ -138,5 +139,6 @@ public class ControlProgramarPublicacion {
 		ventanaForm.muestraDialogoConMensaje("Publicacion creada");
 		cierra();
 		inicia();
+		*/
 	}
 }

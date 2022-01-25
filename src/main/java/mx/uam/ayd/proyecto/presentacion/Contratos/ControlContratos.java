@@ -6,10 +6,12 @@ import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 
 @Component
 public class ControlContratos {
-
+	VentanaContratos Ventana; 
+	public ControlContratos() {
+		Ventana= new VentanaContratos();
+	}
 	public void inicio(Usuario usuario) {
-		VentanaContratos Ventana = new VentanaContratos();
-		
+		Ventana.setVisible(true); 
 		
 	}
 

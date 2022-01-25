@@ -52,7 +52,7 @@ public class VentanaSesionRedSocial extends JFrame {
 	public VentanaSesionRedSocial() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\leonh\\Downloads\\AnalysisYDiseno-master\\AnalysisYDiseno-master\\imagenes\\facebook.png"));
 		setResizable(false);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 279, 354);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

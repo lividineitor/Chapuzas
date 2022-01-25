@@ -60,7 +60,7 @@ public class VentanaPrincipal extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\leonh\\OneDrive\\Imágenes\\Screenshots\\logo.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 497);
+		setBounds(100, 100, 839, 539);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -79,7 +79,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		JPanel panelNav = new JPanel();
 //		panelNav.setBackground(new Color(102, 102, 153));
-		panelNav.setBounds(0, 0, 141, 458);
+		panelNav.setBounds(-1, 11, 141, 478);
 		contentPane.add(panelNav);
 		panelNav.setLayout(null);
 		
@@ -103,7 +103,7 @@ public class VentanaPrincipal extends JFrame {
 				control.publicacion();
 			}
 		});
-		btnPublicacion.setForeground(Color.WHITE);
+		btnPublicacion.setForeground(Color.BLACK);
 //		btnPublicacion.setBackground(new Color(102, 102, 153));
 		btnPublicacion.setBounds(10, 195, 121, 23);
 		panelNav.add(btnPublicacion);
@@ -128,14 +128,14 @@ public class VentanaPrincipal extends JFrame {
 		});
 		btnLogOut.setBackground(new Color(102, 102, 153));
 //		btnLogOut.setForeground(Color.WHITE);
-		btnLogOut.setBounds(23, 395, 89, 23);
+		btnLogOut.setBounds(27, 428, 89, 23);
 		panelNav.add(btnLogOut);
 		
 		lblNewLabel = new JLabel("Chapuzas Company");
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 //		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(0, 433, 141, 14);
+		lblNewLabel.setBounds(0, 453, 141, 14);
 		panelNav.add(lblNewLabel);
 		
 		btnAgendarCita = new JButton("Agendar Cita");
@@ -157,8 +157,17 @@ public class VentanaPrincipal extends JFrame {
 		panelNav.add(btnAgendaAdmin);
 
 		btnPreferencia = new JButton("Preferencias");
-		btnPreferencia.setBounds(10, 366, 121, 23);
+		btnPreferencia.setBounds(10, 394, 121, 23);
 		panelNav.add(btnPreferencia);
+		
+		JButton btnContratos = new JButton("Contratos");
+		btnContratos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.contratos(control.getUsuario ());
+			}
+		});
+		btnContratos.setBounds(10, 365, 121, 23);
+		panelNav.add(btnContratos);
 
 		btnPreferencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -195,7 +204,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		JPanel panelVista = new JPanel();
 //		panelVista.setBackground(Color.WHITE);
-		panelVista.setBounds(150, 42, 624, 405);
+		panelVista.setBounds(150, 42, 645, 427);
 		contentPane.add(panelVista);
 		panelVista.setLayout(null);
 		

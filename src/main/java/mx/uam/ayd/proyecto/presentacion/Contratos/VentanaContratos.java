@@ -15,8 +15,6 @@ public class VentanaContratos extends JFrame {
 	
 	public VentanaContratos() {
 		
-		
-		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		getContentPane().setLayout(null);
@@ -33,6 +31,7 @@ public class VentanaContratos extends JFrame {
 			}
 			
 		});
+		this.setVisible(true);		
 	}
 	public void termina() {
 		this.setVisible(false);		

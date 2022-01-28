@@ -78,6 +78,19 @@ public class ServicioUsuario {
 		return true;
 	}
 
+	public boolean ModificarCuenta ( Usuario usuario ) {
+		
+		Usuario usuarioModificado ;
+		
+		usuarioModificado = usuarioRepository.save(usuario) ;
+		
+		if (usuario.equals(usuarioModificado))
+			return true ;
+		
+		else
+			return false ;
+	}
+	
 	public boolean ModificaCuenta(String Nombre, String Apellido,String email, String Telefono,String Contraseña)//Actualiza informacion de la cuenta
 	{
 		//usuario.setNombre(usuario.getNombre());

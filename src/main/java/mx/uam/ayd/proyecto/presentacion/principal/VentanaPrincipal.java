@@ -34,6 +34,7 @@ public class VentanaPrincipal extends JFrame {
 	private JButton btnLogOut;
 	private JLabel lblNewLabel;
 	private JButton btnNuevoCliente;
+	private JButton btnGestionarClientes ;
 	private JButton btnPreferencia;
 
 	/**
@@ -67,7 +68,6 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.setLayout(null);
 		
 		JPanel panelHeader = new JPanel();
-//		panelHeader.setBackground(Color.WHITE);
 		panelHeader.setBounds(140, 0, 634, 31);
 		contentPane.add(panelHeader);
 		panelHeader.setLayout(null);
@@ -78,7 +78,6 @@ public class VentanaPrincipal extends JFrame {
 		panelHeader.add(lblEstudio);
 		
 		JPanel panelNav = new JPanel();
-//		panelNav.setBackground(new Color(102, 102, 153));
 		panelNav.setBounds(0, 0, 141, 458);
 		contentPane.add(panelNav);
 		panelNav.setLayout(null);
@@ -90,32 +89,21 @@ public class VentanaPrincipal extends JFrame {
 		logo.setIcon(icono);
 		panelNav.add(logo);
 		
-		JButton btnPrincipal = new JButton("Principal");
-		btnPrincipal.setEnabled(false);
-//		btnPrincipal.setForeground(Color.WHITE);
-	//	btnPrincipal.setBackground(new Color(102, 102, 153));
-		btnPrincipal.setBounds(10, 127, 121, 23);
-		panelNav.add(btnPrincipal);
-		
 		btnPublicacion = new JButton("Publicacion");
 		btnPublicacion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.publicacion();
 			}
 		});
-		btnPublicacion.setForeground(Color.WHITE);
-//		btnPublicacion.setBackground(new Color(102, 102, 153));
 		btnPublicacion.setBounds(10, 195, 121, 23);
 		panelNav.add(btnPublicacion);
 		
 		btnAgregarUsuario = new JButton("Agregar usuario");
 		btnAgregarUsuario.setBackground(new Color(102, 102, 153));
-//		btnAgregarUsuario.setForeground(Color.WHITE);
 		btnAgregarUsuario.setBounds(10, 161, 121, 23);
 		panelNav.add(btnAgregarUsuario);
 		
 		btnListarUsuarios = new JButton("Listar usuarios");
-//		btnListarUsuarios.setForeground(Color.WHITE);
 		btnListarUsuarios.setBackground(new Color(102, 102, 153));
 		btnListarUsuarios.setBounds(10, 229, 121, 23);
 		panelNav.add(btnListarUsuarios);
@@ -127,42 +115,44 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		btnLogOut.setBackground(new Color(102, 102, 153));
-//		btnLogOut.setForeground(Color.WHITE);
 		btnLogOut.setBounds(23, 395, 89, 23);
 		panelNav.add(btnLogOut);
 		
 		lblNewLabel = new JLabel("Chapuzas Company");
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//		lblNewLabel.setForeground(Color.WHITE);
 		lblNewLabel.setBounds(0, 433, 141, 14);
 		panelNav.add(lblNewLabel);
 		
 		btnAgendarCita = new JButton("Agendar Cita");
-//		btnAgendarCita.setBackground(new Color(102, 102, 153));
-//		btnAgendarCita.setForeground(Color.WHITE);
 		btnAgendarCita.setBounds(10, 263, 121, 23);
 		panelNav.add(btnAgendarCita);
 		
 		btnAgenda = new JButton("Agenda");
-//		btnAgenda.setBackground(new Color(102, 102, 153));
-//		btnAgenda.setForeground(Color.WHITE);
 		btnAgenda.setBounds(10, 297, 121, 23);
 		panelNav.add(btnAgenda);
 		
 		btnAgendaAdmin = new JButton("Agenda Admin");
-//		btnAgendaAdmin.setForeground(Color.WHITE);
-//		btnAgendaAdmin.setBackground(new Color(102, 102, 153));
 		btnAgendaAdmin.setBounds(10, 331, 121, 23);
 		panelNav.add(btnAgendaAdmin);
 
+		btnGestionarClientes = new JButton("Gestionar Clientes");
+		btnGestionarClientes.setBounds(10, 127, 121, 23);
+		panelNav.add(btnGestionarClientes);
+		
 		btnPreferencia = new JButton("Preferencias");
-		btnPreferencia.setBounds(10, 366, 121, 23);
+		btnPreferencia.setBounds(10, 365, 121, 23);
 		panelNav.add(btnPreferencia);
 
 		btnPreferencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.preferencias( control.getUsuario () );
+				}
+		});
+		
+		btnGestionarClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.gestionarClientes();
 				}
 		});
 		
@@ -194,14 +184,11 @@ public class VentanaPrincipal extends JFrame {
 		});
 		
 		JPanel panelVista = new JPanel();
-//		panelVista.setBackground(Color.WHITE);
 		panelVista.setBounds(150, 42, 624, 405);
 		contentPane.add(panelVista);
 		panelVista.setLayout(null);
 		
 		btnInicioDeSesion = new JButton("IniciaSesion");
-		btnInicioDeSesion.setForeground(Color.WHITE);
-		btnInicioDeSesion.setBackground(new Color(102, 102, 153));
 		btnInicioDeSesion.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.sesionSistema();
@@ -211,8 +198,6 @@ public class VentanaPrincipal extends JFrame {
 		panelVista.add(btnInicioDeSesion);
 		
 		btnCrearCuenta = new JButton("Crear Cuenta");
-//		btnCrearCuenta.setForeground(Color.WHITE);
-//		btnCrearCuenta.setBackground(new Color(102, 102, 153));
 		btnCrearCuenta.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.addUser();
@@ -223,8 +208,6 @@ public class VentanaPrincipal extends JFrame {
 		
 
 		btnNuevoCliente = new JButton("Nuevo Cliente");
-//		btnNuevoCliente.setForeground(Color.WHITE);
-//		btnNuevoCliente.setBackground(new Color(102, 102, 102));
 		btnNuevoCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.addUser();
@@ -235,14 +218,10 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		btnModifica = new JButton("Modifica Cuenta");
-//		btnModifica.setForeground(Color.WHITE);
-//		btnModifica.setBackground(new Color(102, 102, 153));
 		btnModifica.setBounds(153, 11, 109, 23);
 		panelVista.add(btnModifica);
 		
 		btnMostrarClientes = new JButton("Muestra Clientes");
-//		btnMostrarClientes.setForeground(Color.WHITE);
-//		btnMostrarClientes.setBackground(new Color(102, 102, 153));
 		btnMostrarClientes.setBounds(10, 11, 133, 23);
 		panelVista.add(btnMostrarClientes);
 		
@@ -281,6 +260,7 @@ public class VentanaPrincipal extends JFrame {
 			btnAgendarCita.setVisible(!statusConect);
 			btnAgenda.setVisible(!statusConect);
 			btnMostrarClientes.setVisible(statusConect);
+			btnGestionarClientes.setVisible(statusConect);
 			btnPreferencia.setVisible(statusConect);
 		}else if(permiso.equals("Cliente")) {
 			btnAgendarCita.setVisible(statusConect);
@@ -289,6 +269,10 @@ public class VentanaPrincipal extends JFrame {
 			
 		}
 		
+		btnPublicacion.setVisible(statusConect);
+		btnAgregarUsuario.setVisible(statusConect);
+		btnListarUsuarios.setVisible(statusConect);
+
 		btnAgendarCita.setVisible(statusConect);
 		btnAgenda.setVisible(statusConect);
 		btnCrearCuenta.setVisible(!statusConect);

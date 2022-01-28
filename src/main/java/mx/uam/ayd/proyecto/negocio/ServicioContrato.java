@@ -21,12 +21,12 @@ public class ServicioContrato {
 	 * Recupera todos los contratos
 	 *
 	 * @param Usuario
-	 * @return List <Contrato>
+	 * @return ArrayList <Contrato>
 	 *
 	 * */
-	public List <Contrato> obtenerContrato ( Usuario usuario ) {
+	public ArrayList <Contrato> obtenerContrato ( Usuario usuario ) {
 		
-		List <Contrato> contratos = new ArrayList<>() ;
+		ArrayList <Contrato> contratos = new ArrayList<>() ;
 		
 		for ( Contrato contrato : contratoRepository.findAllByIdUsuario ( usuario.getIdUsuario() ) ) {
 			contratos.add(contrato);
@@ -48,7 +48,10 @@ public class ServicioContrato {
 	public boolean eliminarContrato ( Contrato contrato ) {
 		contratoRepository.delete(contrato);
 		
-		return true ;
+		if ( contratoRepository.existsById(contrato.getIdContrato()))
+			return true ;
+		else
+			return false ;
 	}
 	
 	/**
@@ -59,7 +62,7 @@ public class ServicioContrato {
 	 * @return boolean
 	 */
 	
-	public boolean addContrato ( Contrato contrato ) {
+	public boolean guardarContrato ( Contrato contrato ) {
 		Contrato temporal ;
 		
 		temporal = contratoRepository.save( contrato ) ;

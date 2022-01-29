@@ -195,9 +195,24 @@ public class ServicioUsuario {
 				
 		return usuarios;
 	}
+	
+	public ArrayList <Usuario> recuperaPorRol (String rol) {
+		ArrayList <Usuario> clientes = new ArrayList <>();
+		
+		for ( Usuario usuario : usuarioRepository.findByPermisos(rol))
+			clientes.add(usuario);
+		
+		return clientes ;
+	}
 
 	
-	//cambios
+	public boolean eliminarUsuario (Usuario usuario ) {
+		usuarioRepository.delete(usuario);
+		
+		return !usuarioRepository.existsById(usuario.getIdUsuario()) ;
+
+	}
+	
 	public long regresaIdUsuario(String nombre) {
 		
 		Usuario usuario = usuarioRepository.findByNombre(nombre);

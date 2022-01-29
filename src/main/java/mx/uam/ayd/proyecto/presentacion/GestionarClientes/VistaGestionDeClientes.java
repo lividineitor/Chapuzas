@@ -1,15 +1,22 @@
 package mx.uam.ayd.proyecto.presentacion.GestionarClientes;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.TitledBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+
 import java.awt.Color ;
 
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.negocio.ServicioContrato;
 import mx.uam.ayd.proyecto.negocio.modelo.Contrato;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 import java.awt.BorderLayout;
@@ -17,8 +24,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JLabel;
 
 @SuppressWarnings("serial")
@@ -28,9 +37,24 @@ public class VistaGestionDeClientes extends JFrame {
 	private JPanel contentPane ;
 	
 	private ControlGestionarClientes control ;
+
+	// Campos necesarios para los datos solicitados
 	
 	private ArrayList <Usuario> clientes ;
 	private ArrayList <Contrato> contratos ;
+	
+	// Campos necesarios para el funcionamiento de los elementos gráficos
+	
+	private DefaultListModel listaDeClientes = new DefaultListModel () ;
+	private DefaultListModel listaDeContratos = new DefaultListModel () ;
+	
+	private JLabel lblINombre = new JLabel ();
+	private JLabel lblIApellido = new JLabel ();
+	private JLabel lblITelefono = new JLabel ();
+	private JLabel lblIMail = new JLabel ();
+	private JLabel lblIFechaDeRegistro = new JLabel ();
+	
+	// Dimensiones de los elementos gráficos
 	
 	private int ancho = 650 ;
 	private int alto = 550 ;
@@ -62,10 +86,28 @@ public class VistaGestionDeClientes extends JFrame {
 		
 			int anchuraClientes = 200 ;
 		
-			JList listaClientes = new JList();
-			listaClientes.setBounds (margen,margen,anchuraClientes,alturaMarco-margen*2) ;
-			panelClientes.add(listaClientes);
+			JList listaClientes = new JList( listaDeClientes );
+			listaClientes.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+			
+			JScrollPane clientesScrollPane = new JScrollPane ( listaClientes );
+			clientesScrollPane.setBounds (margen,margen,anchuraClientes,alturaMarco-margen*2) ;
+			panelClientes.add(clientesScrollPane);
 
+			listaClientes.addListSelectionListener(new ListSelectionListener () {
+				public void valueChanged (ListSelectionEvent e) {
+					if (!e.getValueIsAdjusting()) {
+						if (listaClientes.getSelectedIndex() != -1) {
+							Usuario usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
+
+							setEtiquetas(usuarioSeleccionado);
+							listaDeContratos.clear();
+
+							obtenerContrato( usuarioSeleccionado ) ;
+						}
+					}
+				}
+			});
+			
 			// Etiquetas
 			
 			int margenEtiqueta = anchuraClientes + margen * 2 ;
@@ -95,6 +137,25 @@ public class VistaGestionDeClientes extends JFrame {
 			lblFechaDeRegistro.setBounds(margenEtiqueta, alturaEtiqueta*4+margen+margenInterior*4, anchuraEtiqueta, alturaEtiqueta);
 			panelClientes.add(lblFechaDeRegistro);
 
+			// Etiquetas interactivas
+			
+			int margenInteractivo = margenEtiqueta + anchuraEtiqueta + margen ;
+			
+			lblINombre.setBounds(margenInteractivo, margen, anchuraEtiqueta, alturaEtiqueta);
+			panelClientes.add(lblINombre);
+
+			lblIApellido.setBounds(margenInteractivo, alturaEtiqueta + margen + margenInterior, anchuraEtiqueta, alturaEtiqueta);
+			panelClientes.add(lblIApellido);
+
+			lblITelefono.setBounds(margenInteractivo, alturaEtiqueta*2+margen+margenInterior*2, anchuraEtiqueta, alturaEtiqueta);
+			panelClientes.add(lblITelefono);
+
+			lblIMail.setBounds(margenInteractivo, alturaEtiqueta*3+margen+margenInterior*3, anchuraEtiqueta, alturaEtiqueta);
+			panelClientes.add(lblIMail);
+			
+			lblIFechaDeRegistro.setBounds(margenInteractivo, alturaEtiqueta*4+margen+margenInterior*4, anchuraEtiqueta, alturaEtiqueta);
+			panelClientes.add(lblIFechaDeRegistro);
+			
 			// Botones
 			
 			JButton btnEliminarCliente = new JButton("Eliminar");
@@ -103,6 +164,18 @@ public class VistaGestionDeClientes extends JFrame {
 			
 			btnEliminarCliente.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
+					if (listaClientes.getSelectedIndex() != -1 ) {
+						Usuario usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
+
+						if ( control.eliminarCliente(usuarioSeleccionado) ) {
+							control.confirmacion ( 1 , "Se eliminó el cliente" ) ;
+							setEtiquetas (null) ;
+							obtenerClientes () ;
+						}
+						else
+							control.confirmacion ( 0 , "No se pudo eliminar el cliente" ) ;
+					
+					}
 				}
 			});
 		
@@ -125,7 +198,8 @@ public class VistaGestionDeClientes extends JFrame {
 		panelContratos.setLayout(null) ;
 		contentPane.add(panelContratos);
 		
-			JList listaContratos = new JList();
+			JList listaContratos = new JList( listaDeContratos );
+			listaContratos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			listaContratos.setBounds (margen,margen,anchuraMarco-margen*2,alturaMarco-margen*3-alturaBtn);
 			panelContratos.add(listaContratos);
 		
@@ -157,6 +231,8 @@ public class VistaGestionDeClientes extends JFrame {
 		
 		btnCancelar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+//				listaDeClientes.clear();
+//				listaDeContratos.clear();
 				control.terminaGestionClientes () ;
 			}
 		});
@@ -172,9 +248,77 @@ public class VistaGestionDeClientes extends JFrame {
 		
 	}
 	
-	public void inicio ( ControlGestionarClientes control , ArrayList <Usuario> usuarios ) {
+	/**
+	 * Define los valores iniciales de la vista
+	 * @param ControlGestionarClientes , ArrayList <Usiario>
+	 *
+	 */
+	
+	public void inicio ( ControlGestionarClientes control ) {
+		
 		this.control = control ;
-		this.clientes = usuarios ;
+
+		obtenerClientes () ;
+		
 		setVisible ( true ) ;
 	}
+	
+	/**
+	 * Método accesorio para solicitar los clientes existentes
+	 * 
+	 */
+
+	public void obtenerClientes () {
+		
+		String nombreCliente ;
+		
+		this.clientes = control.obtenerClientes() ;
+		
+		if (!listaDeClientes.isEmpty())
+			listaDeClientes.clear();
+		
+		for (Usuario usuario: clientes ) {
+			nombreCliente = usuario.getApellido() + " " + usuario.getNombre() ;
+			listaDeClientes.addElement(nombreCliente);
+		}
+	}
+	
+	/**
+	 * Método accesorio para solicitar los contratos de un cliente, si los tiene
+	 * @param Usuario
+	 * 
+	 */
+	
+	public void obtenerContrato (Usuario usuario) {
+		for (Contrato contrato : control.obtenerContrato(usuario) )
+			listaDeContratos.addElement(usuario);
+		
+	}
+	
+	/**
+	 * Fija los valores de las etiquedas interactivas
+	 * @param Usuario o null
+	 * 
+	 */
+
+	public void setEtiquetas (Usuario usuario ) {
+		if (usuario != null ) {
+			lblINombre.setText(usuario.getNombre());
+			lblIApellido.setText(usuario.getApellido());
+			lblITelefono.setText(usuario.getTelefono());
+			lblIMail.setText(usuario.getEmail());
+			lblIFechaDeRegistro.setText(usuario.getFechaderegistro().toString() );
+		}
+		
+		else {
+			lblINombre.setText("");
+			lblIApellido.setText("");
+			lblITelefono.setText("");
+			lblIMail.setText("");
+			lblIFechaDeRegistro.setText("");
+
+		}
+
+	}
+
 }

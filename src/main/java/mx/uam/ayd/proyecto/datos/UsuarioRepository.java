@@ -29,5 +29,7 @@ public interface UsuarioRepository extends CrudRepository <Usuario, Long> {
 	//cambios version
 	
 	public Usuario findByNombre(String nombre);
+	
+	public List <Usuario> findByPermisos ( String permisos ) ;
 
 }

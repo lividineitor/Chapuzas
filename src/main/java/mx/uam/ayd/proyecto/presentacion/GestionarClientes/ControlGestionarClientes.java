@@ -3,6 +3,8 @@ package mx.uam.ayd.proyecto.presentacion.GestionarClientes;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JOptionPane;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -36,8 +38,7 @@ public class ControlGestionarClientes {
 	 */
 	
 	public void inicio () {
-		ArrayList <Usuario> clientes = servicioUsuario.recuperaUsuarios();
-		vistaGestionDeClientes.inicio ( this , clientes ) ;
+		vistaGestionDeClientes.inicio ( this ) ;
 	}
 	
 	/**
@@ -55,7 +56,7 @@ public class ControlGestionarClientes {
 	public ArrayList <Usuario> obtenerClientes () {
 		ArrayList <Usuario> clientes = new ArrayList <>() ; 
 		
-		clientes = servicioUsuario.recuperaUsuarios() ;
+		clientes = servicioUsuario.recuperaPorRol("Cliente") ;
 		
 		return clientes ;
 	}
@@ -69,6 +70,16 @@ public class ControlGestionarClientes {
 	
 	public boolean actualizarDatos ( Usuario usuario ) {
 		return servicioUsuario.ModificarCuenta(usuario);
+	}
+	
+	/**
+	 * Elimina al cliente dado y toda su información
+	 * @param Usuario
+	 * @return Boolean
+	 */
+	
+	public boolean eliminarCliente (Usuario usuario) {
+		return servicioUsuario.eliminarUsuario(usuario);
 	}
 	
 	// Métodos relacionados con los Contratos
@@ -109,6 +120,24 @@ public class ControlGestionarClientes {
 	
 	public boolean eliminarContrato ( Contrato contrato ) {
 		return servicioContrato.eliminarContrato(contrato);
+	}
+
+	/**
+	 * Método para mostrar diálogos de estado
+	 * @param Int (valor del estado 0: error, 1: éxito) , String (Mensaje a desplegar)
+	 */
+	
+	public void confirmacion ( int estado , String mensaje ) {
+		
+		String tipoDeEstado = null ;
+		
+		if ( estado == 0 )
+			tipoDeEstado = "ERROR" ;
+		else if ( estado == 1 )
+			tipoDeEstado = "ÉXITO" ;
+		
+		JOptionPane.showMessageDialog(null, tipoDeEstado + "\n" + mensaje );
+			
 	}
 	
 	/**

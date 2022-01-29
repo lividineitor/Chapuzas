@@ -12,6 +12,7 @@ import javax.swing.JTextArea;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
@@ -43,7 +44,7 @@ public class VentanaListaPublicaciones extends JFrame {
 	private JPanel contentPane;
 	
 	private ControlProgramarPublicacion controlPub;
-	//private ControlCancelarPublicacion controlcancela;
+	private ControlCancelarPublicacion controlcancela;
 	JTextPane textPanelPubs ;
 
 	/**
@@ -108,7 +109,7 @@ public class VentanaListaPublicaciones extends JFrame {
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlPub.iniciacancelar();
+				controlcancela.inicia();
 				setVisible(false);
 			}
 		});

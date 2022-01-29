@@ -18,6 +18,7 @@ import mx.uam.ayd.proyecto.presentacion.MostrarClientes.ControlMostrarClientes;
 import mx.uam.ayd.proyecto.presentacion.agenda.ControlAgenda;
 import mx.uam.ayd.proyecto.presentacion.agendaDeUsuario.ControlAgendaDeUsuario;
 import mx.uam.ayd.proyecto.presentacion.agendarCita.ControlAgendarCita;
+import mx.uam.ayd.proyecto.presentacion.cancelarPublicacion.ControlCancelarPublicacion;
 //import mx.uam.ayd.proyecto.presentacion.agregarUsuario.ControlAgregarUsuario;
 import mx.uam.ayd.proyecto.presentacion.crearCuenta.ControlCrearCuenta;
 import mx.uam.ayd.proyecto.presentacion.listarUsuarios.ControlListarUsuarios;

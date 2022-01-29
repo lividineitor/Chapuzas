@@ -6,6 +6,8 @@ import java.awt.Window.Type;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Array;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import javax.swing.ImageIcon;
@@ -61,7 +63,7 @@ public class VistaCancelarPublicacion extends JFrame {
 		
 		txtPub.setToolTipText("Pubs");
 		txtPub.setEditable(false);
-		txtPub.setBounds(47, 58, 487, 225);
+		txtPub.setBounds(10, 58, 555, 225);
 		panelVista.add(txtPub);
 		
 		JLabel lblNewLabel = new JLabel("Publicaciones posibles de cancelar:");
@@ -98,15 +100,23 @@ public class VistaCancelarPublicacion extends JFrame {
 		panelVista.add(btnsalir);
 				
 	}
-	public void MostrarPublicaciones(ControlCancelarPublicacion control, List<Publicacion> Pubs)
+	public void MostrarPublicaciones(ControlCancelarPublicacion control , List<Publicacion> Pubs)
 	{
 		this.controlcanc = control;
 		Integer numpublicaciones = Pubs.size();
 		txtPub.setText("");
 		txtPub.append("Total: " + numpublicaciones.toString() + "\n");
-		for(Publicacion hecha: Pubs)
-		txtPub.append(hecha.toString() + "\n");
-		
+		long idn; //Me ayuda a obtener la id de cada publicacion
+		for (int i = 0; i<Pubs.size();i++) { // Incluyo las publicaciones en la ventana
+			idn = Pubs.get(i).getIdUsuario();
+			String idcadena = String.valueOf(idn);
+			String titulopub = Pubs.get(i).getTitulo();
+			LocalDate localDate = Pubs.get(i).getFechaProgramada();		//Convierto la fecha programada a publicar en un String
+			DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy"); //dia (numero), mes (letras) año (numero)
+			String fechacadena = localDate.format(formatter); 
+			String red = Pubs.get(i).getNombreRedSocial();
+			txtPub.append("id: " + idcadena + " / Titulo: " + titulopub + " / Fecha: " + fechacadena + " / Red: " + red + "\n");
+		}
 		setVisible(true);
 	}
 	

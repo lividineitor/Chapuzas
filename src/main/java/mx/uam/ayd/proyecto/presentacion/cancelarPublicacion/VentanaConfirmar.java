@@ -59,11 +59,12 @@ public class VentanaConfirmar extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					control.elimina(Id);
-					setVisible(false);
+					String mensaje = ("Eliminada correctamente");
+					muestraDialogoConMensajeExito(mensaje);
 				}
 				catch (Exception r){//Error mandado por el reposotory al tratar de realizar un delete
 					String mensaje = ("Algo debe estar mal! Probablemente el id es incorrecto");
-					muestraDialogoConMensaje(mensaje);
+					muestraDialogoConMensajeError(mensaje);
 				}
 				
 			}
@@ -77,8 +78,14 @@ public class VentanaConfirmar extends JFrame {
 		setVisible(true);
 		
 	}
-	public void muestraDialogoConMensaje(String mensaje ) {
+	public void muestraDialogoConMensajeError(String mensaje ) { //se muestra si no se pudo borrar la publicacion
 		JOptionPane.showMessageDialog(this , mensaje);
+		setVisible(false);
+	}
+	
+	public void muestraDialogoConMensajeExito(String mensaje) //si se borro la publicacion con exito
+	{
+		JOptionPane.showMessageDialog(this, mensaje);
 		setVisible(false);
 	}
 

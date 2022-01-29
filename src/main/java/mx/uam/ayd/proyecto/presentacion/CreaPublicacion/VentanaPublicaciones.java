@@ -55,7 +55,8 @@ public class VentanaPublicaciones extends JFrame {
 	private JPanel contentPane;
 	private JTable tablePublicaciones;
 	private ControlProgramarPublicacion controlPub;
-	//private ControlCancelarPublicacion controlcancela;
+	private ControlCancelarPublicacion controlcancela;
+	
 	JTextPane textPanelPubs ;
 
 	/**
@@ -123,10 +124,10 @@ public class VentanaPublicaciones extends JFrame {
 		panelVista.add(textPanelPubs);
 		
 		JButton btnCancelar = new JButton("Cancelar una publicacion programada");
-		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setForeground(Color.BLACK);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlPub.iniciacancelar();
+				controlPublicacion.iniciaCancelar();
 				setVisible(false);
 			}
 		});

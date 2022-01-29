@@ -24,14 +24,18 @@ public class ControlCancelarPublicacion {
 	
 	@Autowired
 	public VentanaConfirmar ventana1;
+	
+	private long id_usuario = 0;
 
 	
 	public void inicia() { //Inicia la ventana para comenzar el proceso de cancelacion
+		//this.id_usuario = id_usuario;
 		ventana.MostrarPublicaciones(this, servicioPublicacion.recuperaPublicaciones());
 	}
 	
 	public void eliminaprev(String id) //abre la ventana para confirmar la cancelacion
 	{
+		this.id_usuario = id_usuario;
 		ventana1.muestra(this,id);
 	}
 	public void elimina(String id) //elimina la publicacion (id)
@@ -43,6 +47,7 @@ public class ControlCancelarPublicacion {
 	
 	public void salir()
 	{
+		this.id_usuario = id_usuario;
 		ventana.termina();
 	}
 	

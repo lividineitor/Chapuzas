@@ -49,9 +49,9 @@ public class ControlProgramarPublicacion {
 		ventanaListPublicaciones.sWlistPub(this,servicioPublicacion.recuperaPublicaciones());
 	}
 	
-	public void iniciacancelar() {
+	/*public void iniciacancelar() {
 		controlcancelar.inicia();
-	}
+	}*/
 	
 	public void nuevaPub() {
 		ventanaEleccion.sWselectRedS(this);

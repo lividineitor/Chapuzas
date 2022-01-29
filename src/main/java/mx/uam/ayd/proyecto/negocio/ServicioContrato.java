@@ -46,9 +46,12 @@ public class ServicioContrato {
 	 * */
 	
 	public boolean eliminarContrato ( Contrato contrato ) {
+		
+		long idContrato = contrato.getIdContrato() ;
+		
 		contratoRepository.delete(contrato);
 		
-		if ( contratoRepository.existsById(contrato.getIdContrato()))
+		if ( !contratoRepository.existsById(idContrato))
 			return true ;
 		else
 			return false ;

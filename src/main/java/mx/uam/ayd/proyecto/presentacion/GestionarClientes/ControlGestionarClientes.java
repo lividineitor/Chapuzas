@@ -123,12 +123,26 @@ public class ControlGestionarClientes {
 	}
 
 	/**
-	 * Método para mostrar diálogos de estado
-	 * @param Int (valor del estado 0: error, 1: éxito) , String (Mensaje a desplegar)
+	 * Método para mostrar diálogos de confirmación
+	 * @param String (Mensaje a desplegar)
+	 * @return int, dependiendo de la opción elegida
 	 */
 	
-	public void confirmacion ( int estado , String mensaje ) {
+	public int confirmacion ( String mensaje ) {
 		
+		String tipoDeEstado = "ATENCIÓN" ;
+		
+		return JOptionPane.showConfirmDialog(null, tipoDeEstado + "\n" + mensaje );
+		
+	}
+	
+	/**
+	 * Muestra mensajes de éxito o fallo en operaciones
+	 * @param int (valor del estado 0: error, 1:éxito) , String (Mensaje a desplegar) ;
+	 */
+	
+	public void resultadoDeOperacion ( int estado , String mensaje ) {
+
 		String tipoDeEstado = null ;
 		
 		if ( estado == 0 )
@@ -137,7 +151,7 @@ public class ControlGestionarClientes {
 			tipoDeEstado = "ÉXITO" ;
 		
 		JOptionPane.showMessageDialog(null, tipoDeEstado + "\n" + mensaje );
-			
+		
 	}
 	
 	/**

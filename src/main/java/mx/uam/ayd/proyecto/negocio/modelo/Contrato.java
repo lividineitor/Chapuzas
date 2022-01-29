@@ -27,6 +27,5 @@ import java.time.* ;
 		
 		private String rutaContrato ;
 		private LocalDateTime fechaDeCreacion ;
-		private LocalDateTime fechaDeModificacion ;
 	}
 

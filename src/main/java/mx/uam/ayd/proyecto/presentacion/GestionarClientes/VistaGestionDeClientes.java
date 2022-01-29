@@ -22,10 +22,13 @@ import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.time.LocalDateTime;
 
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JLabel;
@@ -47,6 +50,10 @@ public class VistaGestionDeClientes extends JFrame {
 	
 	private DefaultListModel listaDeClientes = new DefaultListModel () ;
 	private DefaultListModel listaDeContratos = new DefaultListModel () ;
+	
+	private Usuario usuarioSeleccionado ;
+	
+	private final JFileChooser fc = new JFileChooser ();
 	
 	private JLabel lblINombre = new JLabel ();
 	private JLabel lblIApellido = new JLabel ();
@@ -97,7 +104,7 @@ public class VistaGestionDeClientes extends JFrame {
 				public void valueChanged (ListSelectionEvent e) {
 					if (!e.getValueIsAdjusting()) {
 						if (listaClientes.getSelectedIndex() != -1) {
-							Usuario usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
+							usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
 
 							setEtiquetas(usuarioSeleccionado);
 							listaDeContratos.clear();
@@ -164,17 +171,28 @@ public class VistaGestionDeClientes extends JFrame {
 			
 			btnEliminarCliente.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
-					if (listaClientes.getSelectedIndex() != -1 ) {
-						Usuario usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
-
-						if ( control.eliminarCliente(usuarioSeleccionado) ) {
-							control.confirmacion ( 1 , "Se eliminó el cliente" ) ;
-							setEtiquetas (null) ;
-							obtenerClientes () ;
-						}
-						else
-							control.confirmacion ( 0 , "No se pudo eliminar el cliente" ) ;
 					
+					int respuesta ;
+					
+					if (listaClientes.getSelectedIndex() != -1 ) {
+						usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
+
+						respuesta = control.confirmacion ( "¿Quiere eliminar al cliente?" ) ;
+
+						if ( respuesta == JOptionPane.YES_OPTION) {
+							respuesta = control.confirmacion ("¿Realmente quiere eliminar al cliente?") ;
+							if (respuesta == JOptionPane.YES_OPTION) {
+								if ( control.eliminarCliente(usuarioSeleccionado) ) {
+									control.resultadoDeOperacion(1, "Se eliminó al cliente");
+									setEtiquetas (null) ;
+									obtenerClientes () ;
+								}
+								else
+									control.resultadoDeOperacion ( 0 , "No se pudo eliminar el cliente" ) ;
+							
+							}
+						}
+						
 					}
 				}
 			});
@@ -202,13 +220,30 @@ public class VistaGestionDeClientes extends JFrame {
 			listaContratos.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 			listaContratos.setBounds (margen,margen,anchuraMarco-margen*2,alturaMarco-margen*3-alturaBtn);
 			panelContratos.add(listaContratos);
-		
+						
 			JButton btnEliminarContrato = new JButton("Eliminar");
 			btnEliminarContrato.setBounds (anchuraMarco - anchuraBtn*2 - margen*2, alturaMarco - alturaBtn - margen ,anchuraBtn, alturaBtn);
 			panelContratos.add(btnEliminarContrato);
 
 			btnEliminarContrato.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
+					Contrato contratoSeleccionado ;
+					
+					if (listaContratos.getSelectedIndex() != -1 ) {
+						contratoSeleccionado = contratos.get(listaContratos.getSelectedIndex());
+						
+						if (control.confirmacion("¿Quire eliminar el contrato?") == JOptionPane.YES_OPTION) {
+							if (control.eliminarContrato(contratoSeleccionado) ) {
+								obtenerContrato(usuarioSeleccionado);
+								control.resultadoDeOperacion( 1 , "Se eliminó el contrato" );
+							}
+							else {
+								control.resultadoDeOperacion(0, "No se pudo eliminar el contrato");
+							}
+							
+						}
+						
+					}
 				}
 			});
 			
@@ -218,6 +253,22 @@ public class VistaGestionDeClientes extends JFrame {
 			
 			btnAniadir.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
+					int rVal = fc.showOpenDialog ( btnAniadir );
+					File archivo = fc.getSelectedFile() ;
+					
+					Contrato contratoTemporal = new Contrato () ;
+					
+					contratoTemporal.setFechaDeCreacion(LocalDateTime.now());
+					contratoTemporal.setIdUsuario(usuarioSeleccionado.getIdUsuario());
+					contratoTemporal.setRutaContrato(archivo.getAbsolutePath());
+					
+					if (control.guardarContrato(contratoTemporal) ) {
+						control.resultadoDeOperacion(1, "El contrato se guardó con éxtio") ;
+						obtenerContrato(usuarioSeleccionado);
+					}
+					
+					else
+						control.resultadoDeOperacion(0, "El contrato no se guardó") ;
 				}
 			});
 		
@@ -290,8 +341,20 @@ public class VistaGestionDeClientes extends JFrame {
 	 */
 	
 	public void obtenerContrato (Usuario usuario) {
-		for (Contrato contrato : control.obtenerContrato(usuario) )
-			listaDeContratos.addElement(usuario);
+
+		String mensajeLista ;
+		
+		this.contratos = control.obtenerContrato(usuario) ;
+		
+		if (!listaDeContratos.isEmpty())
+			listaDeContratos.clear();
+		
+		for (Contrato contrato : contratos ) {
+			
+			mensajeLista = contrato.getFechaDeCreacion().toString();
+			
+			listaDeContratos.addElement(mensajeLista);
+		}
 		
 	}
 	

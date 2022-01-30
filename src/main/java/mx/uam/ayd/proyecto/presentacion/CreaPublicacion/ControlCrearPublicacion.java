@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.ManejoDeMensajes.ControlManejoDeMensajes;
 import mx.uam.ayd.proyecto.negocio.ServicioPublicacion;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocials;
 import mx.uam.ayd.proyecto.negocio.modelo.Publicacion;
@@ -35,6 +36,9 @@ public class ControlCrearPublicacion {
 
 	@Autowired
 	private ControlConectarRedSocial controlConectarRedSocial;
+	
+	@Autowired
+	private ControlManejoDeMensajes mensajes;
 
 	/**
 	 * atributo de clase para posteriormente enlazar la publicacion con el usuario
@@ -165,6 +169,16 @@ public class ControlCrearPublicacion {
 			VentanaFormularioPubFacebook.setVisible(false);
 		else if (nombreRed.equals("Instagram"))
 			ventanaFormularioInstagram.setVisible(false);
+	}
+	
+	public void MuestraMensajeErrorVacio(String mensaje) 
+	{
+		mensajes.MuestraMensajeErrorVacio(mensaje);
+	}
+	
+	public void MuestraMensajeInformativo(String mensaje)
+	{
+		mensajes.MuestraMensajeInformativo(mensaje);
 	}
 
 }

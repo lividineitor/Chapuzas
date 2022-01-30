@@ -146,10 +146,6 @@ public class VentanaPublicaciones extends JFrame {
 		setVisible(true);
 	}
 	
-	//Dialogo para el estatus de la cancelacion de la publicacion
-	public void muestraDialogoStatus(String mensaje ) {
-		JOptionPane.showMessageDialog(this , mensaje);
-	}
 	
 	//llenar tabla
 	public void llenarTabla() {

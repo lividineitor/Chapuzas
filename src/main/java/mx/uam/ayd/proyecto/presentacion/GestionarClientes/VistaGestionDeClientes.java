@@ -203,6 +203,10 @@ public class VistaGestionDeClientes extends JFrame {
 			
 			btnEditar.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
+					if ( listaClientes.getSelectedIndex() != -1 ) {
+						usuarioSeleccionado = clientes.get(listaClientes.getSelectedIndex()) ;
+						control.modificarCliente(usuarioSeleccionado , control);
+					}
 				}
 			});
 		
@@ -276,8 +280,8 @@ public class VistaGestionDeClientes extends JFrame {
 		//Botones de la ventana
 		
 		
-		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds (ancho - anchuraBtn*2 - margen*2, alto - alturaBtn - margen ,anchuraBtn, alturaBtn);
+		JButton btnCancelar = new JButton("Cerrar");
+		btnCancelar.setBounds (ancho - anchuraBtn - margen, alto - alturaBtn - margen ,anchuraBtn, alturaBtn);
 		contentPane.add(btnCancelar);
 		
 		btnCancelar.addActionListener(new ActionListener () {
@@ -285,15 +289,6 @@ public class VistaGestionDeClientes extends JFrame {
 //				listaDeClientes.clear();
 //				listaDeContratos.clear();
 				control.terminaGestionClientes () ;
-			}
-		});
-		
-		JButton btnGuardar = new JButton("Guardar");
-		btnGuardar.setBounds (ancho - anchuraBtn - margen, alto - alturaBtn - margen ,anchuraBtn, alturaBtn);
-		contentPane.add(btnGuardar);
-		
-		btnGuardar.addActionListener(new ActionListener () {
-			public void actionPerformed (ActionEvent e) {
 			}
 		});
 		

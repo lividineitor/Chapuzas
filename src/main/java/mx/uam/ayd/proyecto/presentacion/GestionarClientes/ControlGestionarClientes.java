@@ -33,12 +33,24 @@ public class ControlGestionarClientes {
 	@Autowired
 	private VistaGestionDeClientes vistaGestionDeClientes ;
 	
+	@Autowired
+	private VistaModificarCliente vistaModificarCliente ;
+	
 	/**
 	 * Inicia la historia de usuario
 	 */
 	
 	public void inicio () {
 		vistaGestionDeClientes.inicio ( this ) ;
+	}
+	
+	/**
+	 * Invoca la vista para editar los datos del cliente
+	 * @param Usuario
+	 */
+	
+	public void modificarCliente (Usuario usuario , ControlGestionarClientes control ) {
+		vistaModificarCliente.inicio (usuario , control ) ;
 	}
 	
 	/**
@@ -161,6 +173,10 @@ public class ControlGestionarClientes {
 	
 	public void terminaGestionClientes () {
 		vistaGestionDeClientes.setVisible (false) ;
+	}
+	
+	public void terminarModificarCliente () {
+		vistaModificarCliente.setVisible (false) ;
 	}
 	
 }

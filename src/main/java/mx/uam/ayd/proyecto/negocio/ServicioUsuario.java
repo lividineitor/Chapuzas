@@ -78,6 +78,19 @@ public class ServicioUsuario {
 		return true;
 	}
 
+	public boolean ModificarCuenta ( Usuario usuario ) {
+		
+		Usuario usuarioModificado ;
+		
+		usuarioModificado = usuarioRepository.save(usuario) ;
+		
+		if (usuario.equals(usuarioModificado))
+			return true ;
+		
+		else
+			return false ;
+	}
+	
 	public boolean ModificaCuenta(String Nombre, String Apellido,String email, String Telefono,String Contraseña)//Actualiza informacion de la cuenta
 	{
 		//usuario.setNombre(usuario.getNombre());
@@ -182,9 +195,24 @@ public class ServicioUsuario {
 				
 		return usuarios;
 	}
+	
+	public ArrayList <Usuario> recuperaPorRol (String rol) {
+		ArrayList <Usuario> clientes = new ArrayList <>();
+		
+		for ( Usuario usuario : usuarioRepository.findByPermisos(rol))
+			clientes.add(usuario);
+		
+		return clientes ;
+	}
 
 	
-	//cambios
+	public boolean eliminarUsuario (Usuario usuario ) {
+		usuarioRepository.delete(usuario);
+		
+		return !usuarioRepository.existsById(usuario.getIdUsuario()) ;
+
+	}
+	
 	public long regresaIdUsuario(String nombre) {
 		
 		Usuario usuario = usuarioRepository.findByNombre(nombre);

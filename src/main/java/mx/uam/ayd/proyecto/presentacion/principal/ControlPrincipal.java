@@ -14,7 +14,7 @@ import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
 import mx.uam.ayd.proyecto.presentacion.ConectarRedSocial.ControlConectarRedSocial;
 import mx.uam.ayd.proyecto.presentacion.Contratos.ControlContratos;
 import mx.uam.ayd.proyecto.presentacion.CreaPublicacion.ControlCrearPublicacion;
-
+import mx.uam.ayd.proyecto.presentacion.GestionarClientes.ControlGestionarClientes;
 import mx.uam.ayd.proyecto.presentacion.MostrarClientes.ControlMostrarClientes;
 import mx.uam.ayd.proyecto.presentacion.agenda.ControlAgenda;
 import mx.uam.ayd.proyecto.presentacion.agendaDeUsuario.ControlAgendaDeUsuario;
@@ -72,6 +72,9 @@ public class ControlPrincipal {
 	
 	@Autowired
 	private ControlPreferencia controlPreferencia ;
+	
+	@Autowired
+	private ControlGestionarClientes controlGestionarClientes ;
 	
 	@Autowired
 	private VentanaPrincipal ventana;
@@ -213,6 +216,10 @@ public class ControlPrincipal {
 
 	public void preferencias ( Usuario usuario ) {
 		controlPreferencia.inicio( usuario );
+	}
+	
+	public void gestionarClientes () {
+		controlGestionarClientes.inicio () ;
 	}
 
 	public void logOut() {

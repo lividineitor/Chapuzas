@@ -36,11 +36,11 @@ public class VentanaContratos extends JFrame {
 	JButton btonModificar;
 	JButton botonsubir;
 	JScrollPane panelPane;
-	public static void main(String[] args) {
+/*	public static void main(String[] args) {
 		VentanaContratos x = new VentanaContratos();
 		x.setVisible(true);
 		
-	}
+	}*/
 	/**
 	 * 
 	 */
@@ -144,10 +144,6 @@ public class VentanaContratos extends JFrame {
 		        } finally {
 		         
 		        }
-				
-				
-				
-				
 			}
 		});
 		

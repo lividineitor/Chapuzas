@@ -29,4 +29,5 @@ import lombok.Data;
 		private LocalDateTime fechaCita ;
 		private String notas ;
 		private String estado ;
+		
 	}

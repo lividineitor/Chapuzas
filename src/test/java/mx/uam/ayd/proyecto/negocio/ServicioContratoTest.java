@@ -2,8 +2,8 @@ package mx.uam.ayd.proyecto.negocio;
 
 import mx.uam.ayd.proyecto.negocio.ServicioCita;
 import mx.uam.ayd.proyecto.negocio.modelo.Cita;
+import mx.uam.ayd.proyecto.negocio.modelo.ContratosOnline;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
-import mx.uam.ayd.proyecto.presentacion.Contratos.ContratosOnline;
 import mx.uam.ayd.proyecto.datos.CitaRepository;
 
 import static org.junit.jupiter.api.Assertions.*;

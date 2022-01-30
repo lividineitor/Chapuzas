@@ -28,8 +28,7 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblConectado;
 
 	
-
-	JButton btnPublicacion,btnListarUsuarios,btnInicioDeSesion,btnCrearCuenta,btnMostrarClientes,btnModifica,btnAgendarCita,btnAgenda,btnAgendaAdmin;
+	JButton btnPublicacion,btnContratos,btnListarUsuarios,btnInicioDeSesion,btnCrearCuenta,btnMostrarClientes,btnModifica,btnAgendarCita,btnAgenda,btnAgendaAdmin;
 
 	private JButton btnLogOut;
 	private JLabel lblNewLabel;
@@ -106,7 +105,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 
-		JButton btnContratos = new JButton("Contratos");
+	    btnContratos = new JButton("Contratos");
 		btnContratos.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.contratos(control.getUsuario ());
@@ -266,7 +265,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		if(permiso.equals("Administrador")) {
-
+			btnContratos.setVisible(statusConect);
 
 			btnPublicacion.setEnabled(statusConect);
 			btnListarUsuarios.setEnabled(statusConect);
@@ -283,10 +282,9 @@ public class VentanaPrincipal extends JFrame {
 			
 			
 		}
-		
+		btnContratos.setVisible(statusConect);		
 		btnPublicacion.setVisible(statusConect);
 		btnListarUsuarios.setVisible(statusConect);
-
 		btnAgendarCita.setVisible(statusConect);
 		btnAgenda.setVisible(statusConect);
 		btnCrearCuenta.setVisible(!statusConect);

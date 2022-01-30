@@ -1,4 +1,8 @@
-package mx.uam.ayd.proyecto.presentacion.Contratos;
+package mx.uam.ayd.proyecto.negocio.modelo;
+
+import javax.persistence.Entity;
+
+
 
 public class ContratosOnline {
 	public String nombreDelArchivo;
@@ -14,5 +18,6 @@ public class ContratosOnline {
 			return "";
 			return "Cliente: "+nombreDelCliente;
 	}
+	
 	
 }

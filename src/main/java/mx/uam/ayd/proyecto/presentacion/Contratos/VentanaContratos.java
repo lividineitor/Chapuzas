@@ -8,7 +8,9 @@ import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.springframework.stereotype.Component;
 
- 
+import mx.uam.ayd.proyecto.negocio.modelo.ContratosOnline;
+import mx.uam.ayd.proyecto.negocio.modelo.PetcionesOnline;
+
 import java.awt.Graphics;
 
 import javax.swing.JButton;
@@ -175,9 +177,9 @@ public class VentanaContratos extends JFrame {
 		panelPane.setVisible(false);
 		if(listarContratos == null)
 			return;
-		ContratosOnline s= listarContratos.getItemAt(listarContratos.getSelectedIndex());
-		if(s.nombreDelArchivo!="") {
-			MostrarContrato(s.nombreDelArchivo);
+		ContratosOnline contrato= listarContratos.getItemAt(listarContratos.getSelectedIndex());
+		if(contrato.nombreDelArchivo!="") {
+			MostrarContrato(contrato.nombreDelArchivo);
 			btonModificar.setEnabled(true);
 			panelPane.setVisible(true);
 			
@@ -192,7 +194,7 @@ public class VentanaContratos extends JFrame {
 		PetcionesOnline s= ListarPeticiones.getItemAt(ListarPeticiones.getSelectedIndex());
 		
 		if(s== null)return;
-		if(s.NombreDelCliente!="") {
+		if(s.nombreDelCliente!="") {
 			botonsubir.setEnabled(true);
 			panelPane = new JScrollPane(
 					new PanelPeticion(s),

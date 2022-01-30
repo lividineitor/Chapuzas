@@ -7,6 +7,8 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.SwingConstants;
 
+import mx.uam.ayd.proyecto.negocio.modelo.PetcionesOnline;
+
 public class PanelPeticion extends JPanel {
 	private JTextField Nombre;
 	private JTextField Apellido;
@@ -49,7 +51,7 @@ public class PanelPeticion extends JPanel {
 		Nombre.setEditable(false);
 		Nombre.setBackground(Color.LIGHT_GRAY);
 		Nombre.setBounds(190, 49, 86, 20);
-		Nombre.setText(peticion.NombreDelCliente);
+		Nombre.setText(peticion.nombreDelCliente);
 		add(Nombre);
 		Nombre.setColumns(10);
 		

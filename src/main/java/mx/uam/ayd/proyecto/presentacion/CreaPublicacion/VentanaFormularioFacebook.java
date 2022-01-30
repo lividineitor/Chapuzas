@@ -95,7 +95,8 @@ public class VentanaFormularioFacebook extends JFrame {
 					controlPublicacion.MuestraMensajeInformativo("Fecha de publicacion la actual");
 					controlPublicacion.creaPublicacionNoProgramadaFacebook(campoTitulo.getText(), CampoContenido.getText());
 				}else {
-					muestraDialogoStatus("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
+					//muestraDialogoStatus("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
+					controlPublicacion.MuestraMensajeInformativo("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
 					controlPublicacion.creaPublicacionProgramadaFacebook(campoTitulo.getText(), CampoContenido.getText(),LocalDate.parse(campoAnio.getText()+"-"+campoMes.getText()+"-"+campoDia.getText()));
 				}
 			}

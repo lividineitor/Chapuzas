@@ -8,12 +8,12 @@ import org.springframework.stereotype.Component;
 public class ControlManejoDeMensajes {
 	
 	public void MuestraMensajeExito(String mensaje){
-    	JOptionPane.showMessageDialog(null , mensaje);
+    	JOptionPane.showMessageDialog(null , mensaje, "Exito!", JOptionPane.DEFAULT_OPTION);
     }
     
 	public void MuestraMensajeInformativo(String mensaje)
 	{
-		JOptionPane.showMessageDialog(null, mensaje);
+		JOptionPane.showMessageDialog(null, mensaje, "Info" , JOptionPane.INFORMATION_MESSAGE);
 	}
 	public void MuestraMensajeErrorBorrar(String mensaje) {
     	JOptionPane.showMessageDialog(null , mensaje, "Error 1", JOptionPane.ERROR_MESSAGE);

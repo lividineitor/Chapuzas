@@ -126,7 +126,7 @@ public class VentanaPublicaciones extends JFrame {
 		btnCancelar.setForeground(Color.WHITE);
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlPub.iniciacancelar();
+				controlPublicacion.iniciacancelar();
 				setVisible(false);
 			}
 		});

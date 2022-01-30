@@ -19,7 +19,6 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.awt.FlowLayout;
@@ -48,24 +47,24 @@ public class VentanaContratos extends JFrame {
 	public VentanaContratos() {
 		setTitle("Contratos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 912, 673);
+		setBounds(100, 100, 883, 638);
 		getContentPane().setLayout(null);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(750, 567, 89, 23);
+		btnCancelar.setBounds(779, 575, 89, 23);
 		getContentPane().add(btnCancelar);
 		botonVerPeticiones = new JButton("Ver Peticiones");
 
-		botonVerPeticiones.setBounds(27, 30, 135, 23);
+		botonVerPeticiones.setBounds(10, 30, 135, 23);
 		getContentPane().add(botonVerPeticiones);
 		JButton botonverContratos = new JButton("Ver Contratos");
 	
-		botonverContratos.setBounds(27, 225, 135, 23);
+		botonverContratos.setBounds(10, 83, 135, 23);
 		getContentPane().add(botonverContratos);
 		
 		btonModificar = new JButton("Modificar contrato");
 	
-		btonModificar.setBounds(544, 30, 153, 23);
+		btonModificar.setBounds(10, 225, 153, 23);
 		getContentPane().add(btonModificar);
 		btonModificar.setVisible(false);
 		
@@ -79,10 +78,10 @@ public class VentanaContratos extends JFrame {
 			
 		});
 		listarContratos.setEnabled(true);
-		listarContratos.setBounds(245, 25, 244, 28);
+		listarContratos.setBounds(225, 27, 244, 28);
 		getContentPane().add(listarContratos);
 		ListarPeticiones = new JComboBox<>();
-		ListarPeticiones.setBounds(245, 25, 244, 28);
+		ListarPeticiones.setBounds(225, 27, 244, 28);
 		getContentPane().add(ListarPeticiones);
 		ListarPeticiones.addItemListener(new ItemListener() {
 
@@ -95,11 +94,11 @@ public class VentanaContratos extends JFrame {
 		
 		JButton botonActualizar = new JButton("Actualizar");
 	
-		botonActualizar.setBounds(750, 30, 100, 23);
+		botonActualizar.setBounds(10, 269, 100, 23);
 		getContentPane().add(botonActualizar);
 		
 		botonsubir = new JButton("Subir Contratos");
-		botonsubir.setBounds(562, 30, 135, 23);
+		botonsubir.setBounds(10, 128, 135, 23);
 		getContentPane().add(botonsubir);
 		botonsubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -223,6 +222,7 @@ public class VentanaContratos extends JFrame {
 		ListarPeticiones.removeAllItems();
 		listarContratos.addItem(new ContratosOnline("",""));
 		listarContratos.addItem(new ContratosOnline("Contrato.pdf","Juan Perez"));
+		listarContratos.addItem(new ContratosOnline("Contrato2.pdf","Juan Pelota"));
 		ListarPeticiones.removeAllItems();
 		ListarPeticiones.addItem(new PetcionesOnline("","","","","","",""));
 		ListarPeticiones.addItem(new PetcionesOnline("Juan","Sanchez","una foto","calle Siempre viva 742 en Springfield","88-8@live.com.mx","55 42995420","Con algo que ver"));

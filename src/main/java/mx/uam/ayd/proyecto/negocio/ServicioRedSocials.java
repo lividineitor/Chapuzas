@@ -20,6 +20,9 @@ public class ServicioRedSocials {
 	@Autowired 
 	private SecurityConfig configuracionAPI;
 	
+	public String usuario;
+	public String password;
+	
 	/**
 	 * Este metodo nos ayuda en el caso en que no hay una cuenta de facebook
 	 * enlazada para llamr al formualrio de fabook e iniciar sesion
@@ -37,6 +40,8 @@ public class ServicioRedSocials {
 		System.out.println("Esto se obtiene de findIdUserAndNombreRed--> "+usuario1);
 		if (usuario1 ==null)
 			return false;
+		this.usuario=usuario1.getUsuario();
+		this.password=usuario1.getContrasena();
 		return true;
 	}
 	/**
@@ -128,7 +133,7 @@ public class ServicioRedSocials {
 			banderaConexion=conectFacebook( usuario, contrasenia);
 		else if(nombreRedSocial.equals("Instagram"))
 			banderaConexion=conectInstagram( usuario, contrasenia);*/
-		return configuracionAPI.ejecucionScripConexion();
+		return configuracionAPI.scripConexionRedSocial(usuario, contrasenia, nombreRedSocial);
 	}
 	
 	/**
@@ -241,7 +246,7 @@ public class ServicioRedSocials {
 	 * @return
 	 */
 	public boolean subePublicacionFacebook(Publicacion publicacion) {
-		return true;	
+		return 	configuracionAPI.scripPublicacionFacebook(publicacion);
 	}
 	
 	/**

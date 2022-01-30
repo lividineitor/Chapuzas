@@ -1,37 +1,41 @@
 package mx.uam.ayd.proyecto.presentacion.Contratos;
-import mx.uam.ayd.proyecto.presentacion.Contratos.ControlContratos;
-import javax.swing.JFrame;
+ import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 
 import org.apache.pdfbox.pdmodel.PDDocument;
 import org.apache.pdfbox.rendering.PDFRenderer;
 import org.springframework.stereotype.Component;
 
-import java.awt.Dimension;
+ 
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 
 import javax.swing.JButton;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
-import javax.swing.border.LineBorder;
-import java.awt.Color;
 import java.awt.FlowLayout;
-import java.awt.ScrollPane;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 
 @SuppressWarnings("serial")
 @Component
 public class VentanaContratos extends JFrame {
 	JPanel panel;
-	JComboBox listarContratos;
+	JComboBox<ContratosOnline> listarContratos;
+	JComboBox<PetcionesOnline> ListarPeticiones;
+	JButton botonVerPeticiones ;
+	JButton btonModificar;
+	JButton botonsubir;
+	JScrollPane panelPane;
 	public static void main(String[] args) {
 		VentanaContratos x = new VentanaContratos();
 		x.setVisible(true);
@@ -42,6 +46,7 @@ public class VentanaContratos extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	public VentanaContratos() {
+		setTitle("Contratos");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 912, 673);
 		getContentPane().setLayout(null);
@@ -49,67 +54,106 @@ public class VentanaContratos extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.setBounds(750, 567, 89, 23);
 		getContentPane().add(btnCancelar);
-		
-		JButton btnNewButton = new JButton("Ver Peticiones");
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				deshabilitaListaContratos();
-			}
-		});
-		btnNewButton.setBounds(27, 30, 135, 23);
-		getContentPane().add(btnNewButton);
-		VentanaContratos a= this;
-		JButton btnNewButton_1 = new JButton("Ver Contratos");
+		botonVerPeticiones = new JButton("Ver Peticiones");
+
+		botonVerPeticiones.setBounds(27, 30, 135, 23);
+		getContentPane().add(botonVerPeticiones);
+		JButton botonverContratos = new JButton("Ver Contratos");
 	
-		btnNewButton_1.setBounds(27, 63, 135, 23);
-		getContentPane().add(btnNewButton_1);
+		botonverContratos.setBounds(27, 225, 135, 23);
+		getContentPane().add(botonverContratos);
 		
-		JButton btnNewButton_2 = new JButton("Subir Contratos");
-		btnNewButton_2.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				deshabilitaListaContratos();
+		btonModificar = new JButton("Modificar contrato");
+	
+		btonModificar.setBounds(544, 30, 153, 23);
+		getContentPane().add(btonModificar);
+		btonModificar.setVisible(false);
+		
+		listarContratos = new JComboBox<ContratosOnline>();
+		listarContratos.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				cambioContrato();
 			}
+			
 		});
-		btnNewButton_2.setBounds(27, 93, 135, 23);
-		getContentPane().add(btnNewButton_2);
-		
-		JButton btnNewButton_3 = new JButton("Editar Contrato");
-		btnNewButton_3.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.habilitaListaContratos();
-			}
-		});
-		btnNewButton_3.setBounds(27, 127, 135, 23);
-		getContentPane().add(btnNewButton_3);
-		
-		JButton btnNewButton_4 = new JButton("Contratos Aceptados");
-		btnNewButton_4.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				a.deshabilitaListaContratos();
-			}
-		});
-		btnNewButton_4.setBounds(27, 160, 135, 23);
-		getContentPane().add(btnNewButton_4);
-		
-		panel =new  JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setVgap(-100);
-		flowLayout.setHgap(-100);
-		panel.setBounds(270, 11, 464, 542);
-		getContentPane().add(panel);
-		
-		ScrollPane scrollPane = new ScrollPane();
-		panel.add(scrollPane);
-		
-		listarContratos = new JComboBox();
-		listarContratos.setEnabled(false);
-		listarContratos.setBounds(27, 274, 116, 28);
+		listarContratos.setEnabled(true);
+		listarContratos.setBounds(245, 25, 244, 28);
 		getContentPane().add(listarContratos);
-		//Listeners
-		btnNewButton_1.addActionListener(new ActionListener() {
+		ListarPeticiones = new JComboBox<>();
+		ListarPeticiones.setBounds(245, 25, 244, 28);
+		getContentPane().add(ListarPeticiones);
+		ListarPeticiones.addItemListener(new ItemListener() {
+
+			@Override
+			public void itemStateChanged(ItemEvent e) {
+				cambioPeticion();
+			}
+			
+		});
+		
+		JButton botonActualizar = new JButton("Actualizar");
+	
+		botonActualizar.setBounds(750, 30, 100, 23);
+		getContentPane().add(botonActualizar);
+		
+		botonsubir = new JButton("Subir Contratos");
+		botonsubir.setBounds(562, 30, 135, 23);
+		getContentPane().add(botonsubir);
+		botonsubir.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				a.MostrarContrato("Contrato.pdf");
-				a.habilitaListaContratos();
+		        JFileChooser fileChooser = new JFileChooser();
+		        fileChooser.showOpenDialog(fileChooser);
+		        try {
+		            String ruta = fileChooser.getSelectedFile().getAbsolutePath();                                        
+		            File f = new File(ruta);
+		            JOptionPane.showMessageDialog(null, "Se Subio Correctamente");
+		        } catch (NullPointerException e1) {
+		            System.out.println("No se ha seleccionado ningún fichero");
+		        } catch (Exception e1) {
+		            System.out.println(e1.getMessage());
+		        } finally {
+		         
+		        }	
+			}
+		});
+		//Listeners
+		botonActualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actualizar();
+			}
+		});
+		botonVerPeticiones.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verPetciones();
+			}
+		});
+		btonModificar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+		        JFileChooser fileChooser = new JFileChooser();
+		        fileChooser.showOpenDialog(fileChooser);
+		        try {
+		            String ruta = fileChooser.getSelectedFile().getAbsolutePath();                                        
+		            File f = new File(ruta);
+		            JOptionPane.showMessageDialog(null, "Se modifico Correctamente");
+		        } catch (NullPointerException e1) {
+		            System.out.println("No se ha seleccionado ningún fichero");
+		        } catch (Exception e1) {
+		            System.out.println(e1.getMessage());
+		        } finally {
+		         
+		        }
+				
+				
+				
+				
+			}
+		});
+		
+		botonverContratos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				verContratos();
 			}
 		});
 		btnCancelar.addActionListener(new ActionListener() {
@@ -119,40 +163,100 @@ public class VentanaContratos extends JFrame {
 			
 		});
 		
-				
+		Invisible_botones();	
 	}
-	public void deshabilitaListaContratos() {
-		listarContratos.setEnabled(false);
+	public void Invisible_botones() {
+		 btonModificar.setVisible(false);
+		 listarContratos.setVisible(false);
+		 botonsubir.setVisible(false);
+	     ListarPeticiones.setVisible(false);
+		 if(panelPane != null) {
+			panelPane.setVisible(false);
+		    panelPane.revalidate();
+		 }
 	}
-	public void habilitaListaContratos() {
-		listarContratos.setEnabled(true);
+	void cambioContrato() {
+		if( panelPane!=null)
+		panelPane.setVisible(false);
+		if(listarContratos == null)
+			return;
+		ContratosOnline s= listarContratos.getItemAt(listarContratos.getSelectedIndex());
+		if(s.nombreDelArchivo!="") {
+			MostrarContrato(s.nombreDelArchivo);
+			btonModificar.setEnabled(true);
+			panelPane.setVisible(true);
+			
+		}
+		
 	}
+	void cambioPeticion(){
+		if( panelPane!=null)
+			panelPane.setVisible(false);
+		if(listarContratos == null)
+			return;
+		PetcionesOnline s= ListarPeticiones.getItemAt(ListarPeticiones.getSelectedIndex());
+		
+		if(s== null)return;
+		if(s.NombreDelCliente!="") {
+			botonsubir.setEnabled(true);
+			panelPane = new JScrollPane(
+					new PanelPeticion(s),
+					JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+					JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
+				); 
+			panelPane.setBounds(270, 80, 464, 542); 
+			getContentPane().add(panelPane); 
+			panelPane.setVisible(true);
+
+		}
+	}
+	public void verPetciones() {
+		Invisible_botones();
+		botonsubir.setVisible(true);
+		botonsubir.setEnabled(false);
+	    ListarPeticiones.setVisible(true);;
+	
+	}
+	public void verContratos(){
+		Invisible_botones();
+		 btonModificar.setVisible(true);
+		 btonModificar.setEnabled(false);
+		 listarContratos.setVisible(true);;
+	}
+	public void actualizar() {
+		ListarPeticiones.removeAllItems();
+		listarContratos.addItem(new ContratosOnline("",""));
+		listarContratos.addItem(new ContratosOnline("Contrato.pdf","Juan Perez"));
+		ListarPeticiones.removeAllItems();
+		ListarPeticiones.addItem(new PetcionesOnline("","","","","","",""));
+		ListarPeticiones.addItem(new PetcionesOnline("Juan","Sanchez","una foto","calle Siempre viva 742 en Springfield","88-8@live.com.mx","55 42995420","Con algo que ver"));
+		ListarPeticiones.addItem(new PetcionesOnline("Juan","Pelota","otra foto","calle donde vieve se la creyo","88-8a@live.com.mx","55 42995420", "Es perfecto"));
+
+	}
+
 	public void termina() {
 		this.setVisible(false);		
 	}
 	public void MostrarContrato(String NombreArch) {
-		panel.setVisible(false);
-		panel = GetPdfPanel(NombreArch);
 		
-		int x =getX(), y =getY();
+		panel = GetPdfPanel(NombreArch);
 		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
 		flowLayout.setVgap(-100);
 		flowLayout.setHgap(-100);
-	
-		panel.setBounds(270, 11, 464, 542);
+		 
+		CreaPanelDeDatos( panel);
 
-		panel.setVisible(true);
-		panel.revalidate();
-		panel.setBorder(new EmptyBorder(100, 100, 100, 100));
-		
-		getContentPane().add(panel);
-		this.pack();
-		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		getContentPane().setLayout(null);
-		setBounds(x, y, 912, 673);
-		panel.setBounds(270, 11, 464, 542);
 		panel.revalidate();
 		
+	}
+	public JScrollPane CreaPanelDeDatos(JPanel panel) {
+		panelPane = new JScrollPane(panel,
+				JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+				JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS
+			); 
+		panelPane.setBounds(270, 80, 464, 542); 
+		getContentPane().add(panelPane); 
+		return panelPane;
 	}
 	public void verListaContratos() {
 		
@@ -164,20 +268,23 @@ public class VentanaContratos extends JFrame {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        final PDFRenderer renderer = new PDFRenderer(doc);
-        JPanel panel = new JPanel() {
         
+        PDFRenderer renderer = new PDFRenderer(doc);
+        JPanel panel = new JPanel() {
 			private static final long serialVersionUID = 1L;
-
 			@Override
             protected void paintComponent(Graphics g) {
                 try {
-                    renderer.renderPageToGraphics(0, (Graphics2D) g, 1f);
+                	 super.paintComponent(g);
+                	 BufferedImage image = renderer.renderImage(0);
+                	 g.drawImage(image, 0, 0, null);
+                    
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
             }
         };
+        
         return panel;
     }
 }

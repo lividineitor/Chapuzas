@@ -30,7 +30,7 @@ public class SecurityConfig {
 	}	
 	public Boolean ejecucionScripPublicacion() {
 		try {
-			String cmd = "python ScripsPython\\DriverConexionRedSocial.py"; //Comando de apagado en linux
+			String cmd = "python ScripsPython\\AlgorimoPublicacion.py"; //Comando de apagado en linux
 			Runtime.getRuntime().exec(cmd); 
 		} catch (IOException ioe) {
 			System.out.println (ioe);
@@ -98,22 +98,23 @@ public class SecurityConfig {
 		ArrayList<File> multimediaSubir = new ArrayList<>();
 		
 		if (!banderaImagenes) {
-			for(File media: imagenes)
-				multimediaSubir.add(media);
+			for(File media1: imagenes)
+				multimediaSubir.add(media1);
 		}else if(!banderaVideos) {
-			for(File media: videos)
-				multimediaSubir.add(media);
+			for(File media2: videos)
+				multimediaSubir.add(media2);
 		}
 			
 		
 		System.out.println("Imagenes: "+imagenes);
 		System.out.println("Videos: "+videos);
+		System.out.println("Multimedia a publicar: "+multimediaSubir);
 		
 		//obteniendo los datos importantes para poder publicar en facebook
 		String usuario=servicioRed.usuario;
 		String contrasenia=servicioRed.password;
 		CrearArchivoConexion archivo = new CrearArchivoConexion();
-		archivo.CrearArchivoDatosPublicacion(publicacion.getNombreRedSocial(), usuario, contrasenia, multimediaSubir);
+		archivo.CrearArchivoDatosPublicacion(publicacion.getNombreRedSocial(),publicacion.getContenido() ,usuario, contrasenia, multimediaSubir);
 		ejecucionScripPublicacion();
 		return true;
 	}

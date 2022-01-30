@@ -32,12 +32,13 @@ public class CrearArchivoConexion {
 		}
 	}
 
-	public void CrearArchivoDatosPublicacion(String nombreRedSocial, String usuarioRedSocial,String contraseniaRedSocial, ArrayList<File> multimediaApublicar) {
+	public void CrearArchivoDatosPublicacion(String nombreRedSocial,String contenido, String usuarioRedSocial,String contraseniaRedSocial, ArrayList<File> multimediaApublicar) {
 		try {
 			FileWriter miArchivo = new FileWriter(nombreArchivo);
 			
 			miArchivo.write("usuario:"+usuarioRedSocial+"\n");
 			miArchivo.write("password:"+contraseniaRedSocial+"\n");
+			miArchivo.write("contenido:"+contenido+"\n");
 			miArchivo.write("redSocial:"+nombreRedSocial+" \n");
 			if (multimediaApublicar.isEmpty())
 				miArchivo.write("multimedia: NONE \n");

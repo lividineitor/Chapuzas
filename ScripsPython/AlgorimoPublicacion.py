@@ -66,6 +66,8 @@ class Publicacion:
         txtContrasenia.send_keys(self.password)
         txtContrasenia.submit()
         ##comprobacion de usuario y contraseña de red social facebook
+        time.sleep(2)
+        
         titulo=""+self.driver.title
         if titulo=="Iniciar sesión en Facebook" or titulo=="Facebook - Inicia sesión o regístrate":
             return False

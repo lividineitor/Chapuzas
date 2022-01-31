@@ -10,6 +10,7 @@ import javax.swing.border.EmptyBorder;
 
 import org.springframework.stereotype.Component;
 
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JLabel;
@@ -35,7 +36,6 @@ public class VentanaFormularioCrearCuenta extends JFrame {
 	private JTextField textTelefono;
 	private JPasswordField passwordField;
 	private JPasswordField passwordConfirmacion;
-	
 	private ControlCrearCuenta controlCrearCuenta;
 
 	/**
@@ -138,9 +138,9 @@ public class VentanaFormularioCrearCuenta extends JFrame {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textNombre.getText().equals("")||textApellidos.getText().equals("")||textCorreo.getText().equals("")||textTelefono.getText().equals("")||passwordField.getText().equals("")||passwordConfirmacion.getText().equals("")) {
-					muestraDialogoConMensaje("No se permiten campos vacios");
+					controlCrearCuenta.MuestraMensajeErrorVacio("No se permiten campos vacios");
 				}else if(!(passwordField.getText().equals(passwordConfirmacion.getText()))) {
-					muestraDialogoConMensaje("Error las contraseñas deben ser iguales");
+					controlCrearCuenta.MuestraMensajeErrorCampo("Las contraseñas deben ser iguales");
 				}else{
 					controlCrearCuenta.dCuenta(textNombre.getText(), textApellidos.getText(), textCorreo.getText(), textTelefono.getText(), passwordField.getText());
 				}
@@ -173,7 +173,5 @@ public class VentanaFormularioCrearCuenta extends JFrame {
 		
 		setVisible(true);
 	}
-	public void muestraDialogoConMensaje(String mensaje ) {
-		JOptionPane.showMessageDialog(this , mensaje);
-	}
+
 }

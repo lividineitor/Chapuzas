@@ -165,12 +165,12 @@ public class VistaCalendario extends JFrame {
 	  * @return
 	  * */
 	
-	public void mostrarMensajeExito (Cita cita) {
+	/*public void mostrarMensajeExito (Cita cita) {
 		JOptionPane.showMessageDialog ( null , "Su cita para el " + cita.getFechaCita().toLocalDate() + " se realizó con éxito." ) ;
 	}
 
 	public void mostrarMensajeError () {
 		JOptionPane.showMessageDialog ( null , "La cita ya está ocupada." ) ;
-	}
+	}*/
 	
 }

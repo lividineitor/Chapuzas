@@ -90,7 +90,7 @@ public class VentanaSesionInstagram extends JFrame {
 		btnContinuar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textUser.getText().equals("") || passwordField.getText().equals("")) {
-					muestraDialogoStatus("No puede enviar campos vacios");
+					controlConectarRedSocial.MuestraMensajeErrorVacio("No se pueden dejar campos vacios.");
 					}else {controlConectarRedSocial.conectarRedSocial("Instagram",textUser.getText(), passwordField.getText());}
 			}
 		});
@@ -110,8 +110,6 @@ public class VentanaSesionInstagram extends JFrame {
 		passwordField.setText("");
 		setVisible(true);
 	}
-	public void muestraDialogoStatus(String mensaje ) {
-		JOptionPane.showMessageDialog(this , mensaje);
-	}
+
 
 }

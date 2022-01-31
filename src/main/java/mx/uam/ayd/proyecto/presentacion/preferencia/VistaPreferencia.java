@@ -531,18 +531,13 @@ public class VistaPreferencia extends JFrame {
 		String mensaje ;
 		
 		if ( estado )
-			mensaje = "Operación realizada con éxito." ;
+			control.MuestraMensajeExito("Operación realizada con éxito.");
 		
 		else
-			mensaje = "Operación fallida." ;
+			control.MuestraMensajeErrorInfraccion("Operación fallida.");
 		
-		JOptionPane.showMessageDialog ( null , mensaje ) ;
 	}
 
-	public void mostrarMensajeError ( String mensaje )
-	{
-		JOptionPane.showMessageDialog ( null , "ERROR: " + mensaje ) ;
-	}
 	
 	private String [] actualizarSemana ()
 	{

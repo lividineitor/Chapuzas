@@ -120,7 +120,7 @@ public class SecurityConfig {
 		return true;
 	}
 	
-	public Boolean scripPublicacionInstgram(Publicacion publicacion) {
+	public Boolean scripPublicacionInstagram(Publicacion publicacion) {
 		//recupero el usuario del sistema que hizo la publicacion
 		long linkUsuarioPublicacion=publicacion.getIdUsuario();
 		//segunda validacion para que no ocurra un error al tratar de subir la publicacion

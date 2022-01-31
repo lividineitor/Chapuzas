@@ -257,7 +257,7 @@ public class ServicioRedSocials {
 	 * @return
 	 */
 	public boolean subePublicacionInstagram(Publicacion publicacion) {
-		return true;	
+		return 	configuracionAPI.scripPublicacionInstagram(publicacion);	
 	}
 	
 	/*

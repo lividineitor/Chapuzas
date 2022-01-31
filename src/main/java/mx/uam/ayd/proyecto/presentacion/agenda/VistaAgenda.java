@@ -103,10 +103,10 @@ public class VistaAgenda extends JFrame {
 									boolean estado = false ;
 								
 									estado = control.confirmarCita( cita );
-									mostrarMensajeExito(estado);
+									mostrarMensajeExito(estado); 
 								}
 								else
-									mostrarMensajeErrorDeEstado();
+									control.MuestraMensajeErrorInfraccion("Sólo se pueden confirmar citas PENDIENTES");
 								
 								mostrarCitas ( control.obtenerCitas() ) ;
 									
@@ -201,17 +201,11 @@ public class VistaAgenda extends JFrame {
 		
 		String mensaje ;
 		
-		if ( estado )
-			mensaje = "Operación realizada con éxito." ;
-		
+		if ( estado ) 
+		    control.MuestraMensajeExito("Operación realizada con éxito.");
 		else
-			mensaje = "Operación fallida." ;
+			control.MuestraMensajeErrorInfraccion("Operacion fallida.");
 		
-		JOptionPane.showMessageDialog ( null , mensaje ) ;
 	}
 
-	public void mostrarMensajeErrorDeEstado ()
-	{
-		JOptionPane.showMessageDialog ( null , "Sólo se pueden confirmar citas PENDIENTES." ) ;
-	}
 }

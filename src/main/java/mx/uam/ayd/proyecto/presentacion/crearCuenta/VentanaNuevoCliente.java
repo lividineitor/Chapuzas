@@ -134,10 +134,10 @@ public class VentanaNuevoCliente extends JFrame {
 		btnCrear.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textNombre.getText().equals("")||textApellidos.getText().equals("")||textCorreo.getText().equals("")||textTelefono.getText().equals("")||passwordField.getText().equals("")||passwordConfirmacion.getText().equals("")) {
-					muestraDialogoConMensaje("No se permiten campos vacios");
+					controlCrearCuenta.MuestraMensajeErrorVacio("No se pueden dejar los campos vacios.");
 				}else if(!(passwordField.getText().equals(passwordConfirmacion.getText()))) {
-					muestraDialogoConMensaje("Error las contraseñas deben ser iguales");
-				}else{
+					controlCrearCuenta.MuestraMensajeErrorCampo("Error las contraseñas deben ser iguales");
+					}else{
 					controlCrearCuenta.setRol("cliente");
 					controlCrearCuenta.dCuenta(textNombre.getText(), textApellidos.getText(), textCorreo.getText(), textTelefono.getText(), passwordField.getText());
 				}
@@ -159,9 +159,6 @@ public class VentanaNuevoCliente extends JFrame {
 		passwordField.setText("");
 		passwordConfirmacion.setText("");
 		setVisible(true);
-	}
-	public void muestraDialogoConMensaje(String mensaje ) {
-		JOptionPane.showMessageDialog(this , mensaje);
 	}
 
 }

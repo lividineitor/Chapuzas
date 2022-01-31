@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.ManejoDeMensajes.ControlManejoDeMensajes;
 //import mx.uam.ayd.proyecto.negocio.ServicioGrupo;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario;
@@ -30,6 +31,9 @@ public class ControlMostrarClientes {
 	
 	@Autowired
 	private VentanaMostrarClientes2 ventana2;
+	
+	@Autowired
+	private ControlManejoDeMensajes mensajes;
 	
 public void inicia() {
 		
@@ -92,6 +96,11 @@ public void inicia() {
 	}
 	public void termina2() {
 		ventana2.setVisible(false);		
+	}
+	
+	public void MuestraMensajeErrorVacio(String mensaje)
+	{
+		mensajes.MuestraMensajeErrorVacio(mensaje);
 	}
 
 }

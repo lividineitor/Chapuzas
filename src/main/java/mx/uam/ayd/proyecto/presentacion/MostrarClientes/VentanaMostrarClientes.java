@@ -146,7 +146,7 @@ public class VentanaMostrarClientes extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if(textFieldEmail.getText().equals(""))
 				{
-					muestraDialogoConMensaje("No ingresaste nada");
+					control.MuestraMensajeErrorVacio("No ingresaste nada.");
 				}
 				else {
 			control.BuscarporEmail(textFieldEmail.getText());
@@ -161,7 +161,4 @@ public class VentanaMostrarClientes extends JFrame {
 		setVisible(true);
      }
      
-     public void muestraDialogoConMensaje(String mensaje ) {
- 		JOptionPane.showMessageDialog(this , mensaje);
- 	}
 }

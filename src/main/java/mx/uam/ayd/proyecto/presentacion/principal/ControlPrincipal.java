@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import mx.uam.ayd.proyecto.ManejoDeMensajes.ControlManejoDeMensajes;
 import mx.uam.ayd.proyecto.ModificarCuenta.ControlModificarCuenta;
 import mx.uam.ayd.proyecto.negocio.ServicioRedSocial;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
@@ -89,6 +90,9 @@ public class ControlPrincipal {
 	
 	@Autowired
 	private VentanaSesionRedSocial ventanaSesionRedSocial;
+	
+	@Autowired
+	private ControlManejoDeMensajes mensajes;
 	
 	private boolean loginConect=false;
 
@@ -192,20 +196,20 @@ public class ControlPrincipal {
 	public void validaDatos(String user,String pass) {
 		int cont=0;
 		if(servicioUsuario.recuperaUsuarios().isEmpty()) {
-			ventanaSesionSistema.muestraDialogoConMensaje("No reconozco la cuenta");
+			mensajes.MuestraMensajeErrorInexistencia("No reconozco la cuenta");
 		}
 		for(Usuario genr: servicioUsuario.recuperaUsuarios()) {
 			if(cont==servicioUsuario.recuperaUsuarios().size()){
-				ventanaSesionSistema.muestraDialogoConMensaje("No existe esta cuenta, puedes crearla haciendo clic en el boton CrearCuenta");
+				mensajes.MuestraMensajeErrorInexistencia(pass);
 			}else if(genr.getEmail().equals(user)&&genr.getContraseña().equals(pass)) {
-				ventanaSesionSistema.muestraDialogoConMensaje("Bienvenido "+genr.getNombre());
+				mensajes.MuestraMensajeInformativo("Bienvenido "+genr.getNombre());
 				usuarioLogueado(genr);
 				loginConect=true;
 				ventanaSesionSistema.setVisible(false);
 				inicia();
 				break;
 			}else if(genr.getEmail().equals(user)&&!genr.getContraseña().equals(pass)) {
-				ventanaSesionSistema.muestraDialogoConMensaje("Verifica tus credenciales");
+				mensajes.MuestraMensajeErrorCampo("Verifica tus credenciales");
 				break;
 			}
 			cont++;
@@ -258,5 +262,10 @@ public class ControlPrincipal {
 			controlConectarRedSocial.inicia(usuario.getIdUsuario(),"Instagram");
 		else
 			System.out.println("Error redSocialInstagram");
+	}
+	
+	public void MuestraMensajeErrorVacio(String mensaje)
+	{
+		mensajes.MuestraMensajeErrorVacio(mensaje);
 	}
 }

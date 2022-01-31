@@ -90,12 +90,13 @@ public class VentanaFormularioFacebook extends JFrame {
 		btnPublicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(campoTitulo.getText().equals("") || CampoContenido.getText().equals(""))
-					muestraDialogoStatus("No pueden enviar los campos de titulo y contenido, vacios");
+					controlPublicacion.MuestraMensajeErrorVacio("No pueden enviar los campos de titulo y contenido, vacios");
 				else if (campoAnio.getText().equals("")|| campoDia.getText().equals("")||campoMes.getText().equals("")) {
-					muestraDialogoStatus("Fecha de publicacion la actual");
+					controlPublicacion.MuestraMensajeInformativo("Fecha de publicacion la actual");
 					controlPublicacion.creaPublicacionNoProgramadaFacebook(campoTitulo.getText(), CampoContenido.getText());
 				}else {
-					muestraDialogoStatus("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
+					//muestraDialogoStatus("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
+					controlPublicacion.MuestraMensajeInformativo("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
 					controlPublicacion.creaPublicacionProgramadaFacebook(campoTitulo.getText(), CampoContenido.getText(),LocalDate.parse(campoAnio.getText()+"-"+campoMes.getText()+"-"+campoDia.getText()));
 				}
 			}

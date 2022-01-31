@@ -11,6 +11,7 @@ import java.util.Locale;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.stereotype.Component ;
 
+import mx.uam.ayd.proyecto.ManejoDeMensajes.ControlManejoDeMensajes;
 import mx.uam.ayd.proyecto.negocio.ServicioCita ;
 import mx.uam.ayd.proyecto.negocio.ServicioPreferencia;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
@@ -46,6 +47,9 @@ public class ControlAgenda {
        
     @Autowired
     private ServicioPreferencia servicioPreferencia ;
+    
+    @Autowired 
+    private ControlManejoDeMensajes mensajes;
     
     private Usuario usuarioLogueado ;
     private Preferencia preferencia ;
@@ -198,4 +202,12 @@ public class ControlAgenda {
         vistaCalendario.setVisible ( false ) ;
     }
     
+    public void MuestraMensajeErrorInfraccion(String mensaje)
+    {
+    	mensajes.MuestraMensajeErrorInfraccion(mensaje);
+    }
+    public void MuestraMensajeExito(String mensaje)
+    {
+    	mensajes.MuestraMensajeExito(mensaje);
+    }
 }

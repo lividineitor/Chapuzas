@@ -3,6 +3,7 @@ package mx.uam.ayd.proyecto.presentacion.preferencia ;
 import org.springframework.beans.factory.annotation.Autowired ;
 import org.springframework.stereotype.Component ;
 
+import mx.uam.ayd.proyecto.ManejoDeMensajes.ControlManejoDeMensajes;
 import mx.uam.ayd.proyecto.negocio.ServicioPreferencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Preferencia;
 import mx.uam.ayd.proyecto.negocio.modelo.Usuario ;
@@ -30,6 +31,9 @@ public class ControlPreferencia {
 
     @Autowired
 	private ControlConectarRedSocial controlConectarRedSocial;
+    
+    @Autowired 
+    private ControlManejoDeMensajes mensajes;
     
     private Usuario usuarioLogueado ;
     private Preferencia preferencia ;
@@ -107,7 +111,15 @@ public class ControlPreferencia {
 	public void redSocialInstagram() {
 		controlConectarRedSocial.inicia(usuarioLogueado.getIdUsuario(),"Instagram");
 	}
-    
+	
+	public void MuestraMensajeExito(String mensaje)
+	{
+		mensajes.MuestraMensajeExito(mensaje);
+	}
+    public void MuestraMensajeErrorInfraccion(String mensaje)
+    {
+    	mensajes.MuestraMensajeErrorInfraccion(mensaje);
+    }
 }
 
 

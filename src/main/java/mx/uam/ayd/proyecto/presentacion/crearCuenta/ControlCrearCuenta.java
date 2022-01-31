@@ -2,7 +2,7 @@ package mx.uam.ayd.proyecto.presentacion.crearCuenta;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
+import mx.uam.ayd.proyecto.ManejoDeMensajes.ControlManejoDeMensajes;
 import mx.uam.ayd.proyecto.negocio.ServicioUsuario;
 import mx.uam.ayd.proyecto.presentacion.principal.ControlPrincipal;
 
@@ -26,6 +26,9 @@ public class ControlCrearCuenta {
 	
 	//variables de ayuda;
 	private String nombres,apellidos,correo,telefono,contrasena,rol;
+	
+	@Autowired
+	private ControlManejoDeMensajes mensajes;
 	
 	//por default el rol sera de administrador
 	public ControlCrearCuenta() {
@@ -60,7 +63,7 @@ public class ControlCrearCuenta {
 			this.contrasena=contrasena;
 			ventanaPrev.sWprevisualizacion(this, nombres, apellidos, rol, correo, telefono);
 		}else {
-			ventanaFormulario.muestraDialogoConMensaje("Correo existente");
+			mensajes.MuestraMensajeErrorRepetido("Correo existente");
 		}
 		
 		
@@ -77,5 +80,14 @@ public class ControlCrearCuenta {
 			ventanaPrev.setVisible(false);
 			controlPrincipal.inicia();
 		}
+	}
+	
+	public void MuestraMensajeErrorVacio(String mensaje)
+	{
+		mensajes.MuestraMensajeErrorVacio(mensaje);
+	}
+	public void MuestraMensajeErrorCampo(String mensaje)
+	{
+		mensajes.MuestraMensajeErrorCampo(mensaje);
 	}
 }

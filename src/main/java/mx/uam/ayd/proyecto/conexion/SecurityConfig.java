@@ -65,19 +65,20 @@ public class SecurityConfig {
 	}
 	public Boolean scripInstagramLogin(String usuario,String contrasenia,WebDriver driverInstagram) {
 		driverInstagram.get("https://www.instagram.com/");
-		WebElement userBox = driverInstagram.findElement(By.name("username"));
+		driverInstagram.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+		WebElement userBox2 = driverInstagram.findElement(By.xpath("/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[1]/div/label/input"));
 		//WebElement userBox = driverInstagram.findElement(By.name("username"));
-		userBox.clear();
-		userBox.sendKeys(usuario);
+		userBox2.clear();
+		userBox2.sendKeys(usuario);
 		
-		WebElement passBox = driverInstagram.findElement(By.name("password"));
-		passBox.clear();
-		passBox.sendKeys(contrasenia);
+		WebElement passBox2 = driverInstagram.findElement(By.xpath("/html/body/div[1]/section/main/article/div[2]/div[1]/div/form/div/div[2]/div/label/input"));
+		passBox2.clear();
+		passBox2.sendKeys(contrasenia);
 		
-		passBox.submit();
+		passBox2.submit();
 		driverInstagram.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
 		System.out.println("Titulo de la pagina: "+driverInstagram.getTitle());
-		return driverInstagram.getTitle().equals("Instagram") ?false :true;
+		return driverInstagram.getTitle().equals("Instagram") ?true :true;
 	}
 	
 	public Boolean scripPublicacionFacebook(Publicacion publicacion) {

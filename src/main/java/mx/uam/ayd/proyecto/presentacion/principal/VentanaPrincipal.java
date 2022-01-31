@@ -28,8 +28,7 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblConectado;
 
 	
-
-	JButton btnPublicacion,btnAgregarUsuario,btnListarUsuarios,btnInicioDeSesion,btnCrearCuenta,btnMostrarClientes,btnModifica,btnAgendarCita,btnAgenda,btnAgendaAdmin;
+	JButton btnPublicacion,btnContratos,btnListarUsuarios,btnInicioDeSesion,btnCrearCuenta,btnMostrarClientes,btnModifica,btnAgendarCita,btnAgenda,btnAgendaAdmin;
 
 	private JButton btnLogOut;
 	private JLabel lblNewLabel;
@@ -61,7 +60,7 @@ public class VentanaPrincipal extends JFrame {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage("C:\\Users\\leonh\\OneDrive\\Imágenes\\Screenshots\\logo.png"));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 800, 497);
+		setBounds(100, 100, 839, 539);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
@@ -78,7 +77,12 @@ public class VentanaPrincipal extends JFrame {
 		panelHeader.add(lblEstudio);
 		
 		JPanel panelNav = new JPanel();
+
+
 		panelNav.setBounds(0, 0, 141, 458);
+
+
+
 		contentPane.add(panelNav);
 		panelNav.setLayout(null);
 		
@@ -95,16 +99,23 @@ public class VentanaPrincipal extends JFrame {
 				control.publicacion();
 			}
 		});
+
 		btnPublicacion.setBounds(10, 195, 121, 23);
 		panelNav.add(btnPublicacion);
 		
-		btnAgregarUsuario = new JButton("Agregar usuario");
-		btnAgregarUsuario.setBackground(new Color(102, 102, 153));
-		btnAgregarUsuario.setBounds(10, 161, 121, 23);
-		panelNav.add(btnAgregarUsuario);
+		
+
+	    btnContratos = new JButton("Contratos");
+		btnContratos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				control.contratos(control.getUsuario ());
+			}
+		});
+		btnContratos.setBounds(10, 161, 121, 23);
+		panelNav.add(btnContratos);
+	
 		
 		btnListarUsuarios = new JButton("Listar usuarios");
-		btnListarUsuarios.setBackground(new Color(102, 102, 153));
 		btnListarUsuarios.setBounds(10, 229, 121, 23);
 		panelNav.add(btnListarUsuarios);
 		
@@ -114,14 +125,19 @@ public class VentanaPrincipal extends JFrame {
 				control.logOut();
 			}
 		});
-		btnLogOut.setBackground(new Color(102, 102, 153));
+ 
+
 		btnLogOut.setBounds(23, 395, 89, 23);
+
+
 		panelNav.add(btnLogOut);
 		
 		lblNewLabel = new JLabel("Chapuzas Company");
 		lblNewLabel.setFont(new Font("Comic Sans MS", Font.PLAIN, 11));
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+
 		lblNewLabel.setBounds(0, 433, 141, 14);
+
 		panelNav.add(lblNewLabel);
 		
 		btnAgendarCita = new JButton("Agendar Cita");
@@ -141,9 +157,11 @@ public class VentanaPrincipal extends JFrame {
 		panelNav.add(btnGestionarClientes);
 		
 		btnPreferencia = new JButton("Preferencias");
-		btnPreferencia.setBounds(10, 365, 121, 23);
-		panelNav.add(btnPreferencia);
 
+		btnPreferencia.setBounds(10, 365, 121, 23);
+
+		panelNav.add(btnPreferencia);
+		
 		btnPreferencia.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				control.preferencias( control.getUsuario () );
@@ -177,14 +195,11 @@ public class VentanaPrincipal extends JFrame {
 				control.listarUsuarios();
 			}
 		});
-		btnAgregarUsuario.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//control.agregarUsuario();
-			}
-		});
-		
+	
 		JPanel panelVista = new JPanel();
+
 		panelVista.setBounds(150, 42, 624, 405);
+
 		contentPane.add(panelVista);
 		panelVista.setLayout(null);
 		
@@ -250,11 +265,10 @@ public class VentanaPrincipal extends JFrame {
 		
 		
 		if(permiso.equals("Administrador")) {
-
+			btnContratos.setVisible(statusConect);
 
 			btnPublicacion.setEnabled(statusConect);
 			btnListarUsuarios.setEnabled(statusConect);
-			btnAgregarUsuario.setEnabled(statusConect);
 			btnNuevoCliente.setVisible(statusConect);
 			btnAgendaAdmin.setVisible(statusConect);
 			btnAgendarCita.setVisible(!statusConect);
@@ -268,11 +282,9 @@ public class VentanaPrincipal extends JFrame {
 			
 			
 		}
-		
+		btnContratos.setVisible(statusConect);		
 		btnPublicacion.setVisible(statusConect);
-		btnAgregarUsuario.setVisible(statusConect);
 		btnListarUsuarios.setVisible(statusConect);
-
 		btnAgendarCita.setVisible(statusConect);
 		btnAgenda.setVisible(statusConect);
 		btnCrearCuenta.setVisible(!statusConect);

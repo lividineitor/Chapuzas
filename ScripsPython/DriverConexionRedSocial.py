@@ -25,6 +25,8 @@ if redSocial=="Facebook":
 
     txtContrasenia = driver.find_element_by_id('pass')
     txtContrasenia.send_keys(passwd)
+
+    
 elif redSocial=="Instagram":
     driver.get('https://www.instagram.com/');
 

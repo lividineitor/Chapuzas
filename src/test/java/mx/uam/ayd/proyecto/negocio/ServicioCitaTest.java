@@ -24,184 +24,184 @@ import org.mockito.stubbing.Answer;
 @ExtendWith(MockitoExtension.class)
 class ServicioCitaTest {
 
- @Mock
-  CitaRepository citaRepository ;
+	@Mock
+	CitaRepository citaRepository ;
 
-    @InjectMocks
-     ServicioCita servicioCita ;
+	@InjectMocks
+	ServicioCita servicioCita ;
 
-       /*
-         * Regresa todas las citas en la base de datos
-           * @param void
-             * @return Lista <Cita>, con 0 o más citas
-               * */
+/*
+ * Regresa todas las citas en la base de datos
+ * @param void
+ * @return Lista <Cita>, con 0 o más citas
+ * */
 
-                 @Test
-                  void testObtenerCitas() {
-                    // Caso de prueba 1: Regresa todas las citas cuando la base de datos está vacía
+	@Test
+	void testObtenerCitas() {
+		// Caso de prueba 1: Regresa todas las citas cuando la base de datos está vacía
 
-                        List <Cita> citas ;
+		List <Cita> citas ;
 
-                            List <Cita> lista = new ArrayList <> () ;
+		List <Cita> lista = new ArrayList <> () ;
 
-                                when(citaRepository.findAll()).thenReturn(lista);
+		when(citaRepository.findAll()).thenReturn(lista);
 
-                                    citas = servicioCita.obtenerCitas () ;
+		citas = servicioCita.obtenerCitas () ;
 
-                                        assertEquals (0 , citas.size () , "No hay citas." ) ;
+		assertEquals (0 , citas.size () , "No hay citas." ) ;
 
-                                            // Caso de prueba 2: Regresa todas las citas cuando la base de datos tiene citas
+		// Caso de prueba 2: Regresa todas las citas cuando la base de datos tiene citas
 
-                                              Cita citaDePrueba1 = new Cita () ;
+		Cita citaDePrueba1 = new Cita () ;
 
-                                                  citaDePrueba1.setIdUsuario ( 20 ) ;
-                                                    citaDePrueba1.setNotas ( "Primer cita" ) ;
-                                                      citaDePrueba1.setEstado ( "Pendiente" ) ;
-                                                        citaDePrueba1.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                          citaDePrueba1.setFechaCita ( LocalDateTime.now ()) ;
+		citaDePrueba1.setIdUsuario ( 20 ) ;
+		citaDePrueba1.setNotas ( "Primer cita" ) ;
+		citaDePrueba1.setEstado ( "Pendiente" ) ;
+		citaDePrueba1.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba1.setFechaCita ( LocalDateTime.now ()) ;
 
-                                                            Cita citaDePrueba2 = new Cita () ;
+		Cita citaDePrueba2 = new Cita () ;
 
-                                                                citaDePrueba2.setIdUsuario ( 20 ) ;
-                                                                  citaDePrueba2.setNotas ( "Segunda cita" ) ;
-                                                                    citaDePrueba2.setEstado ( "Pendiente" ) ;
-                                                                      citaDePrueba2.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                                        citaDePrueba2.setFechaCita ( LocalDateTime.now () ) ;
+		citaDePrueba2.setIdUsuario ( 20 ) ;
+		citaDePrueba2.setNotas ( "Segunda cita" ) ;
+		citaDePrueba2.setEstado ( "Pendiente" ) ;
+		citaDePrueba2.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba2.setFechaCita ( LocalDateTime.now () ) ;
 
-                                                                            lista.add(citaDePrueba1);
-                                                                              lista.add(citaDePrueba2);
+		lista.add(citaDePrueba1);
+		lista.add(citaDePrueba2);
 
-                                                                                when(citaRepository.findAll()).thenReturn(lista);
+		when(citaRepository.findAll()).thenReturn(lista);
 
-                                                                                    citas = servicioCita.obtenerCitas () ;
+		citas = servicioCita.obtenerCitas () ;
 
-                                                                                        assertEquals ( 2 , citas.size () , "Si hay citas." ) ;
+		assertEquals ( 2 , citas.size () , "Si hay citas." ) ;
 
-                                                                                           }
+	}
 
-                                                                                            /*
-                                                                                              * Regresa todas las citas que coincidan con el usuario y hora en la cita dada.
-                                                                                                * @param Cita
-                                                                                                  * @return Lista <Cita>
-                                                                                                    * */
+	/*
+	* Regresa todas las citas que coincidan con el usuario y hora en la cita dada.
+	* @param Cita
+	* @return Lista <Cita>
+	* */
 
-                                                                                                      @Test
-                                                                                                       void testObtenerHorasDisponibles() {
+	@Test
+	void testObtenerHorasDisponibles() {
 
-                                                                                                           List <Cita> citas ;
+		List <Cita> citas ;
 
-                                                                                                               Cita citaDePrueba1 = new Cita () ;
+		Cita citaDePrueba1 = new Cita () ;
 
-                                                                                                                   citaDePrueba1.setIdUsuario ( 20 ) ;
-                                                                                                                     citaDePrueba1.setNotas ( "Primer cita" ) ;
-                                                                                                                       citaDePrueba1.setEstado ( "Pendiente" ) ;
-                                                                                                                         citaDePrueba1.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                                                                                           citaDePrueba1.setFechaCita ( LocalDateTime.now ().minusDays(2) ) ;
+		citaDePrueba1.setIdUsuario ( 20 ) ;
+		citaDePrueba1.setNotas ( "Primer cita" ) ;
+		citaDePrueba1.setEstado ( "Pendiente" ) ;
+		citaDePrueba1.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba1.setFechaCita ( LocalDateTime.now ().minusDays(2) ) ;
 
-                                                                                                                             Cita citaDePrueba2 = new Cita () ;
+		Cita citaDePrueba2 = new Cita () ;
 
-                                                                                                                                 citaDePrueba2.setIdUsuario ( 20 ) ;
-                                                                                                                                   citaDePrueba2.setNotas ( "Segunda cita" ) ;
-                                                                                                                                     citaDePrueba2.setEstado ( "Pendiente" ) ;
-                                                                                                                                       citaDePrueba2.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                                                                                                         citaDePrueba2.setFechaCita ( LocalDateTime.now ().minusDays(2) ) ;
+		citaDePrueba2.setIdUsuario ( 20 ) ;
+		citaDePrueba2.setNotas ( "Segunda cita" ) ;
+		citaDePrueba2.setEstado ( "Pendiente" ) ;
+		citaDePrueba2.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba2.setFechaCita ( LocalDateTime.now ().minusDays(2) ) ;
 
-                                                                                                                                             Cita citaDePrueba3 = new Cita () ;
+		Cita citaDePrueba3 = new Cita () ;
 
-                                                                                                                                                 citaDePrueba3.setIdUsuario(30);
-                                                                                                                                                   citaDePrueba3.setNotas ( "Tercera cita" ) ;
-                                                                                                                                                     citaDePrueba3.setEstado ( "Pendiente" ) ;
-                                                                                                                                                       citaDePrueba3.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                                                                                                                         citaDePrueba3.setFechaCita ( LocalDateTime.now () ) ;
+		citaDePrueba3.setIdUsuario(30);
+		citaDePrueba3.setNotas ( "Tercera cita" ) ;
+		citaDePrueba3.setEstado ( "Pendiente" ) ;
+		citaDePrueba3.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba3.setFechaCita ( LocalDateTime.now () ) ;
 
-                                                                                                                                                             Cita citaDePrueba4 = new Cita () ;
+		Cita citaDePrueba4 = new Cita () ;
 
-                                                                                                                                                                 citaDePrueba4.setIdUsuario(20);
-                                                                                                                                                                   citaDePrueba4.setNotas ( "citaPruebaHoras" ) ;
-                                                                                                                                                                     citaDePrueba4.setEstado ( "Pendiente" ) ;
-                                                                                                                                                                       citaDePrueba4.setFechaCreacion ( LocalDateTime.now () ) ; //.minusDays ( 2 ) ) ;
-                                                                                                                                                                         citaDePrueba4.setFechaCita ( LocalDateTime.now ().minusDays ( 2 ) ) ;
-
-
-                                                                                                                                                                               List <Cita> lista = new ArrayList <> () ;
-
-                                                                                                                                                                                   lista.add(citaDePrueba1);
-                                                                                                                                                                                     lista.add(citaDePrueba2);
-                                                                                                                                                                                       lista.add(citaDePrueba3);
-                                                                                                                                                                                         lista.add(citaDePrueba4);
-
-                                                                                                                                                                                             // Caso de prueba 1: Regresa una lista de usuarios que coinciden con el IdUsuario y la fecha dada.
-
-                                                                                                                                                                                                 when(citaRepository.findAllByIdUsuario(any(Long.class))).thenReturn(lista);
-
-                                                                                                                                                                                                     citas = servicioCita.obtenerHorasDisponibles ( citaDePrueba4 ) ;
-
-                                                                                                                                                                                                         assertEquals ( 3 , citas.size () , "Si hay citas." ) ;
-
-                                                                                                                                                                                                             // Caso de prueba 2: Regresa una lista de usuarios en donde la única coincidencia es su propia cita.
+		citaDePrueba4.setIdUsuario(20);
+		citaDePrueba4.setNotas ( "citaPruebaHoras" ) ;
+		citaDePrueba4.setEstado ( "Pendiente" ) ;
+		citaDePrueba4.setFechaCreacion ( LocalDateTime.now () ) ; //.minusDays ( 2 ) ) ;
+		citaDePrueba4.setFechaCita ( LocalDateTime.now ().minusDays ( 2 ) ) ;
 
 
-                                                                                                                                                                                                                   when(citaRepository.findAllByIdUsuario(any(Long.class))).thenReturn(lista);
+		List <Cita> lista = new ArrayList <> () ;
 
-                                                                                                                                                                                                                       citas = servicioCita.obtenerHorasDisponibles ( citaDePrueba3 ) ;
+		lista.add(citaDePrueba1);
+		lista.add(citaDePrueba2);
+		lista.add(citaDePrueba3);
+		lista.add(citaDePrueba4);
 
-                                                                                                                                                                                                                           assertEquals ( 1 , citas.size () , "Si hay citas." ) ;
+		// Caso de prueba 1: Regresa una lista de usuarios que coinciden con el IdUsuario y la fecha dada.
 
-                                                                                                                                                                                                                              }
+		when(citaRepository.findAllByIdUsuario(any(Long.class))).thenReturn(lista);
+
+		citas = servicioCita.obtenerHorasDisponibles ( citaDePrueba4 ) ;
+
+		assertEquals ( 3 , citas.size () , "Si hay citas." ) ;
+
+		// Caso de prueba 2: Regresa una lista de usuarios en donde la única coincidencia es su propia cita.
 
 
-                                                                                                                                                                                                                               /*
-                                                                                                                                                                                                                                @Test
-                                                                                                                                                                                                                                 void testConfirmarCitaUsuarioCita() {
+		when(citaRepository.findAllByIdUsuario(any(Long.class))).thenReturn(lista);
+
+		citas = servicioCita.obtenerHorasDisponibles ( citaDePrueba3 ) ;
+
+		assertEquals ( 1 , citas.size () , "Si hay citas." ) ;
+
+	}
+
+
+	/*
+	@Test
+ 	void testConfirmarCitaUsuarioCita() {
 
 
 
 
-                                                                                                                                                                                                                                          }
-                                                                                                                                                                                                                                          */
-                                                                                                                                                                                                                                            /*
-                                                                                                                                                                                                                                              * Actualiza el estado de un usuario ya dado. El valor que evalúa el éxito es el campo estado, cuando tanto en el argumento como el recuperado son iguales.
-                                                                                                                                                                                                                                                * @param Cita
-                                                                                                                                                                                                                                                  * @Return boolean
-                                                                                                                                                                                                                                                    * */
+	}
+	 */
+	/*
+	 * Actualiza el estado de un usuario ya dado. El valor que evalúa el éxito es el campo estado, cuando tanto en el argumento como el recuperado son iguales.
+	 * @param Cita
+	 * @Return boolean
+	 * */
 
-                                                                                                                                                                                                                                                     @Test
-                                                                                                                                                                                                                                                      void testConfirmarCitaCita() {
-                                                                                                                                                                                                                                                        // Caso de prueba 1: Cuando se realiza el cambio de forma exitosa.
+	@Test
+	void testConfirmarCitaCita() {
+		// Caso de prueba 1: Cuando se realiza el cambio de forma exitosa.
 
-                                                                                                                                                                                                                                                              Cita citaDePrueba2 = new Cita () ;
+		Cita citaDePrueba2 = new Cita () ;
 
-                                                                                                                                                                                                                                                                      citaDePrueba2.setIdUsuario ( 20 ) ;
-                                                                                                                                                                                                                                                                          citaDePrueba2.setNotas ( "Segunda cita" ) ;
-                                                                                                                                                                                                                                                                              citaDePrueba2.setEstado ( "Pendiente" ) ;
-                                                                                                                                                                                                                                                                                  citaDePrueba2.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                                                                                                                                                                                                                                                      citaDePrueba2.setFechaCita ( LocalDateTime.now () ) ;
+		citaDePrueba2.setIdUsuario ( 20 ) ;
+		citaDePrueba2.setNotas ( "Segunda cita" ) ;
+		citaDePrueba2.setEstado ( "Pendiente" ) ;
+		citaDePrueba2.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba2.setFechaCita ( LocalDateTime.now () ) ;
 
-                                                                                                                                                                                                                                                                                              Cita citaDePrueba3 = new Cita () ;
+		Cita citaDePrueba3 = new Cita () ;
 
-                                                                                                                                                                                                                                                                                                      citaDePrueba3.setIdUsuario ( 20 ) ;
-                                                                                                                                                                                                                                                                                                          citaDePrueba3.setNotas ( "Segunda cita" ) ;
-                                                                                                                                                                                                                                                                                                              citaDePrueba3.setEstado ( "Confirmado" ) ;
-                                                                                                                                                                                                                                                                                                                  citaDePrueba3.setFechaCreacion ( LocalDateTime.now () ) ;
-                                                                                                                                                                                                                                                                                                                      citaDePrueba3.setFechaCita ( LocalDateTime.now () ) ;
+		citaDePrueba3.setIdUsuario ( 20 ) ;
+		citaDePrueba3.setNotas ( "Segunda cita" ) ;
+		citaDePrueba3.setEstado ( "Confirmado" ) ;
+		citaDePrueba3.setFechaCreacion ( LocalDateTime.now () ) ;
+		citaDePrueba3.setFechaCita ( LocalDateTime.now () ) ;
 
-                                                                                                                                                                                                                                                                                                                              boolean resultado ;
+		boolean resultado ;
 
-                                                                                                                                                                                                                                                                                                                                      when (citaRepository.save(any(Cita.class))).then(new Answer <Cita> ()
-                                                                                                                                                                                                                                                                                                                                            {
-                                                                                                                                                                                                                                                                                                                                                   @Override
-                                                                                                                                                                                                                                                                                                                                                          public Cita answer(InvocationOnMock invocation) throws Throwable
-                                                                                                                                                                                                                                                                                                                                                                 {
-                                                                                                                                                                                                                                                                                                                                                                         Cita citaRecibida = (Cita) invocation.getArgument ( 0 ) ;
-                                                                                                                                                                                                                                                                                                                                                                                 assertEquals ( citaRecibida.getEstado() , citaDePrueba2.getEstado () ) ;
-                                                                                                                                                                                                                                                                                                                                                                                         return citaRecibida ;
-                                                                                                                                                                                                                                                                                                                                                                                                }
-                                                                                                                                                                                                                                                                                                                                                                                                      }) ;
+		when (citaRepository.save(any(Cita.class))).then(new Answer <Cita> ()
+		{
+			@Override
+			public Cita answer(InvocationOnMock invocation) throws Throwable
+			{
+				Cita citaRecibida = (Cita) invocation.getArgument ( 0 ) ;
+				assertEquals ( citaRecibida.getEstado() , citaDePrueba2.getEstado () ) ;
+				return citaRecibida ;
+			}
+		}) ;
 
-                                                                                                                                                                                                                                                                                                                                                                                                              resultado = servicioCita.confirmarCita ( citaDePrueba2 ) ;
+		resultado = servicioCita.confirmarCita ( citaDePrueba2 ) ;
 
-                                                                                                                                                                                                                                                                                                                                                                                                                      assertTrue ( resultado , "Se actualizó la cita.") ;    
+		assertTrue ( resultado , "Se actualizó la cita.") ;
 
-                                                                                                                                                                                                                                                                                                                                                                                                                           }
+	}
 
-                                                                                                                                                                                                                                                                                                                                                                                                                           }                                                                                                                                                                                                                                                                                                                                                                                                    
+}

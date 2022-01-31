@@ -91,7 +91,7 @@ public class VentanaPublicaciones extends JFrame {
 		ImageIcon imgLogo=new ImageIcon("imagenes/sisgief.png");
 		
 		panelVista = new JPanel();
-		panelVista.setBackground(Color.WHITE);
+ 
 		panelVista.setBounds(10, 11, 611, 352);
 		contentPane.add(panelVista);
 		panelVista.setLayout(null);
@@ -102,8 +102,8 @@ public class VentanaPublicaciones extends JFrame {
 				controlPublicacion.nuevaPublicacion();
 			}
 		});
-		btnNuevaPub.setForeground(Color.WHITE);
-		btnNuevaPub.setBackground(new Color(0, 102, 102));
+ 
+ 
 		btnNuevaPub.setBounds(507, 318, 89, 23);
 		panelVista.add(btnNuevaPub);
 		
@@ -123,8 +123,9 @@ public class VentanaPublicaciones extends JFrame {
 		panelVista.add(textPanelPubs);
 		
 		JButton btnCancelar = new JButton("Cancelar una publicacion programada");
-		btnCancelar.setForeground(Color.WHITE);
+  
 		btnCancelar.addActionListener(new ActionListener() {
+ 
 			public void actionPerformed(ActionEvent e) {
 				controlPublicacion.iniciacancelar();
 				setVisible(false);

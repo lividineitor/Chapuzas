@@ -92,10 +92,10 @@ public class VentanaFormularioInstagram extends JFrame {
 					controlPublicacion.MuestraMensajeErrorVacio("No pueden enviar los campos de titulo y contenido, vacios");
 				else if (campoAnio.getText().equals("")|| campoDia.getText().equals("")||campoMes.getText().equals("")) {
 					controlPublicacion.MuestraMensajeInformativo("Fecha de publicacion la actual");
-					controlPublicacion.creaPublicacionNoProgramadaFacebook(campoTitulo.getText(), CampoContenido.getText());
+					controlPublicacion.creaPublicacionNoProgramadaInstagram(campoTitulo.getText(), CampoContenido.getText());
 				}else {
 					muestraDialogoStatus("Fecha de publicacion: "+campoDia.getText()+"/"+campoMes.getText()+"/"+campoAnio.getText());
-					controlPublicacion.creaPublicacionProgramadaFacebook(campoTitulo.getText(), CampoContenido.getText(),LocalDate.parse(campoAnio.getText()+"-"+campoMes.getText()+"-"+campoDia.getText()));
+					controlPublicacion.creaPublicacionProgramadaInstagram(campoTitulo.getText(), CampoContenido.getText(),LocalDate.parse(campoAnio.getText()+"-"+campoMes.getText()+"-"+campoDia.getText()));
 				}
 			}
 		});
@@ -105,7 +105,7 @@ public class VentanaFormularioInstagram extends JFrame {
 		JButton btnCancelar = new JButton("Cancelar");
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				controlPublicacion.cerrarFormulario("Facebook");
+				controlPublicacion.cerrarFormulario("Instagram");
 			}
 		});
 		btnCancelar.setForeground(Color.WHITE);
@@ -120,9 +120,9 @@ public class VentanaFormularioInstagram extends JFrame {
 				
 				File imagen = muestraVentanaFiles();
 				if(controlPublicacion.nuevaImagen(imagen))
-					muestraDialogoStatus("Imagen "+imagen+"aceptada");
+					muestraDialogoStatus("Imagen "+imagen+" aceptada");
 				else
-					muestraDialogoStatus("img "+imagen+" no aceptada");
+					muestraDialogoStatus("Imagen "+imagen+" no aceptada");
 			}
 		});
 		btnImg.setBounds(10, 270, 49, 28);
@@ -137,7 +137,7 @@ public class VentanaFormularioInstagram extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				File video = muestraVentanaFiles();
 				if(controlPublicacion.nuevoVideo(video))
-					muestraDialogoStatus("Video "+video+"aceptado");
+					muestraDialogoStatus("Video "+video+" aceptado");
 				else
 					muestraDialogoStatus("Video "+video+" no aceptado");
 			}

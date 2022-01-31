@@ -144,7 +144,7 @@ public class ControlCrearPublicacion {
 		}
 	}
 
-	// metodo para crear la publicacion y subirla a la platafroma de Facebook
+	// metodo para crear la publicacion y subirla a la platafroma de Instagram
 	public void creaPublicacionNoProgramadaInstagram(String titulo, String contenido) {
 		Publicacion publicacion = servicioPublicacion.creaPublicacionInstagram(id_usuario, titulo, contenido,
 				"Instagram", imagenes, videos, LocalDate.now());

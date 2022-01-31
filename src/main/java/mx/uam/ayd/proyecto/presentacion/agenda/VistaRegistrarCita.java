@@ -176,12 +176,11 @@ public class VistaRegistrarCita extends JFrame {
 		String mensaje ;
 		
 		if ( estado )
-			mensaje = "Operación realizada con éxito." ;
+			control.MuestraMensajeExito("Operación realizada con éxito.");
 		
 		else
-			mensaje = "Operación fallida." ;
-		
-		JOptionPane.showMessageDialog ( null , mensaje ) ;
+			control.MuestraMensajeErrorInfraccion("Operación fallida.");
+
 	}
 
 }

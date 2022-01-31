@@ -97,7 +97,7 @@ public class VentanaSesionSistema extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(textUsuario.getText().equals("")||passwordField.getText().equals("")) {
-					muestraDialogoConMensaje("No puede enviar campos vacios");
+					control.MuestraMensajeErrorVacio("No puede enviar campos vacios");
 				}else {
 					control.validaDatos(textUsuario.getText(), passwordField.getText());
 				}
@@ -121,7 +121,4 @@ public class VentanaSesionSistema extends JFrame {
 		setVisible(true);
 	}
 	
-	public void muestraDialogoConMensaje(String mensaje ) {
-		JOptionPane.showMessageDialog(this , mensaje);
-	}
 }

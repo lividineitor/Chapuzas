@@ -39,7 +39,7 @@ public class SecurityConfig {
 	}
 	
 	public Boolean scripConexionRedSocial(String usuario,String contrasenia,String nombreRedSocial) {
-		System.setProperty("webdriver.chrome.driver", "C:\\chromedriver\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", ".\\src\\main\\resources\\chromedriver\\chromedriver.exe");
 		WebDriver driver = new ChromeDriver();
 		if (nombreRedSocial=="Facebook") 
 			return scripFacebookLogin(usuario, contrasenia, driver);
@@ -111,6 +111,45 @@ public class SecurityConfig {
 		System.out.println("Multimedia a publicar: "+multimediaSubir);
 		
 		//obteniendo los datos importantes para poder publicar en facebook
+		String usuario=servicioRed.usuario;
+		String contrasenia=servicioRed.password;
+		CrearArchivoConexion archivo = new CrearArchivoConexion();
+		archivo.CrearArchivoDatosPublicacion(publicacion.getNombreRedSocial(),publicacion.getContenido() ,usuario, contrasenia, multimediaSubir);
+		ejecucionScripPublicacion();
+		return true;
+	}
+	
+	public Boolean scripPublicacionInstgram(Publicacion publicacion) {
+		//recupero el usuario del sistema que hizo la publicacion
+		long linkUsuarioPublicacion=publicacion.getIdUsuario();
+		//segunda validacion para que no ocurra un error al tratar de subir la publicacion
+		//esto nos ayuda en las publicaciones programadas
+		if(!servicioRed.buscarInicioSesionInstagram(linkUsuarioPublicacion))
+			return false;
+		//obteniendo las imagenes para la publicacion
+		ArrayList<File> imagenes=publicacion.getImagenes();
+		//obteniendo los videos para la publicacion
+		ArrayList<File> videos=publicacion.getVideos();
+		//banderas para saber que se subira en el caso en que no hayan imagenes
+		Boolean banderaImagenes = (imagenes.isEmpty() || imagenes==null) ?true: false;
+		Boolean banderaVideos = (videos.isEmpty() || videos==null) ?true: false;
+		//array para concentrar todos los files a publicar
+		ArrayList<File> multimediaSubir = new ArrayList<>();
+		
+		if (!banderaImagenes) {
+			for(File media1: imagenes)
+				multimediaSubir.add(media1);
+		}else if(!banderaVideos) {
+			for(File media2: videos)
+				multimediaSubir.add(media2);
+		}
+			
+		
+		System.out.println("Imagenes: "+imagenes);
+		System.out.println("Videos: "+videos);
+		System.out.println("Multimedia a publicar: "+multimediaSubir);
+		
+		//obteniendo los datos importantes para poder publicar en instagram
 		String usuario=servicioRed.usuario;
 		String contrasenia=servicioRed.password;
 		CrearArchivoConexion archivo = new CrearArchivoConexion();

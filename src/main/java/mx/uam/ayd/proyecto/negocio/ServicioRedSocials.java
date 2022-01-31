@@ -57,6 +57,8 @@ public class ServicioRedSocials {
 		RedSocial  usuario1 = redSocialRepository.findByIdUsuarioAndNombreRed(idUsuario, "Instagram");
 		if (usuario1 ==null)
 			return false;
+		this.usuario=usuario1.getUsuario();
+		this.password=usuario1.getContrasena();
 		return true;
 	}
 	/**

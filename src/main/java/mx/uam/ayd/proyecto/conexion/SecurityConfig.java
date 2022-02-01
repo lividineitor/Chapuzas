@@ -101,7 +101,8 @@ public class SecurityConfig {
 		if (!banderaImagenes) {
 			for(File media1: imagenes)
 				multimediaSubir.add(media1);
-		}else if(!banderaVideos) {
+		}
+		if(!banderaVideos) {
 			for(File media2: videos)
 				multimediaSubir.add(media2);
 		}

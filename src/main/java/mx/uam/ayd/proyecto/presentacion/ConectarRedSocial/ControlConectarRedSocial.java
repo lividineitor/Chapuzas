@@ -1,5 +1,7 @@
 package mx.uam.ayd.proyecto.presentacion.ConectarRedSocial;
 
+import java.time.LocalDate;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -105,16 +107,26 @@ public class ControlConectarRedSocial {
 	}
 	
 	public void subePublicacionFacebook(Publicacion publicacion) {
-		if (servicioRedSocial.subePublicacionFacebook(publicacion)) 
-			mensajes.MuestraMensajeInformativo("Publicado");
-		else
-			mensajes.MuestraMensajeErrorInfraccion("Error en la publicación");
+		if(publicacion.getFechaProgramada().equals(LocalDate.now())) {
+			if (servicioRedSocial.subePublicacionFacebook(publicacion)) 
+				mensajes.MuestraMensajeInformativo("Publicado");
+			else
+				mensajes.MuestraMensajeErrorInfraccion("Error en la publicación");
+		}else {
+			mensajes.MuestraMensajeInformativo("Pronto sera publicada");
+		}
+		
 	}
 	public void subePublicacionInstagram(Publicacion publicacion) {
-		if (servicioRedSocial.subePublicacionInstagram(publicacion)) 
-			mensajes.MuestraMensajeInformativo("Publicado");
-		else
-			mensajes.MuestraMensajeErrorInfraccion("Error en la publicación");
+		if(publicacion.getFechaProgramada().equals(LocalDate.now())) {
+			if (servicioRedSocial.subePublicacionInstagram(publicacion)) 
+				mensajes.MuestraMensajeInformativo("Publicado");
+			else
+				mensajes.MuestraMensajeErrorInfraccion("Error en la publicación");
+		}else {
+			mensajes.MuestraMensajeInformativo("Pronto sera publicada");
+		}
+		
 	}
 	
 	public void MuestraMensajeErrorVacio(String mensaje)

@@ -205,7 +205,7 @@ public class ServicioRedSocials {
 		extension= imagen.getName().substring(i+1).toLowerCase();
 		tamanio=imagen.length()/1048576;
 		
-		if(miRed.getFormatoPesoImagen().containsKey(extension) && tamanio<miRed.getFormatoPesoImagen().get(extension))
+		if(miRed.getFormatoPesoImagen().containsKey(extension) &&  tamanio<miRed.getFormatoPesoImagen().get(extension) )
 			return true;
 		
 		return false;

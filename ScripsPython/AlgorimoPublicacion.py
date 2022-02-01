@@ -1,3 +1,4 @@
+
 import time
 import os
 from selenium import webdriver
@@ -18,8 +19,11 @@ class Publicacion:
 
     #metodo para la apertura del archivo generado por java
     def obtenFileObjeto(self,ubicacion):
+        if ubicacion is None:
+            return False
         f = open(ubicacion, "r")
         self.Contenido_File_Objeto = f.read()
+        return True
 
     #metdodo que nos permite recurperar del archivo generado por java su contenido y separarlos para 
     #trabajar de manera mas sencilla
@@ -51,12 +55,12 @@ class Publicacion:
         elif self.redSocial=="Instagram":
             self.publicaInstagram()
         else:
-            print("Error al intentar publicar")
+            return False
 
     #metodo para publicar con facebook
     def publicaFacebook(self):
         self.driver.get('https://www.facebook.com/');
-
+        self.driver.maximize_window()
         time.sleep(2) # un sleep para encontrar errores de conexion
 
         txtUsuario= self.driver.find_element_by_id('email')
@@ -108,6 +112,7 @@ class Publicacion:
     #metodod para publicar con instagram
     def publicaInstagram(self):
         self.driver.get('https://www.instagram.com/');
+        self.driver.maximize_window()
         time.sleep(2)
         
         txtUsuario= self.driver.find_element_by_name('username')
@@ -175,7 +180,7 @@ class Publicacion:
         if self.prePublica():
             print("Publicado\n")
         else:
-            print("credenciales invalidas\n")
+            print("credenciales invalidas o redsocial invalida\n")
 
 def main():
     controlador=webdriver.Chrome('C:\chromedriver\chromedriver') 

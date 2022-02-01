@@ -20,9 +20,11 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-
+import java.util.Arrays;
 import java.awt.FlowLayout;
 import javax.swing.JComboBox;
 import javax.swing.JFileChooser;
@@ -255,13 +257,83 @@ public class VentanaContratos extends JFrame {
 	public void verListaContratos() {
 		
 	}
-	private void httpsRequest(String string) {
+	  
+	  
+	
+	public void leerarch() {
+		
+   
+		String SEPARATOR=","; 
+		BufferedReader br;
+		try {
+	         
+	         br =new BufferedReader(new FileReader(""));
+	         String line = br.readLine();
+	         while (null!=line) {
+	            String [] fields = line.split(SEPARATOR);
+	            System.out.println(Arrays.toString(fields));
+	            
+	            fields = removeTrailingQuotes(fields);
+	            System.out.println(Arrays.toString(fields));
+	            
+	            line = br.readLine();
+	         }
+	         if (null!=br) {
+		            br.close();
+		         }
+	      } catch (Exception e) {
+	         System.err.println("No se puede conectar para descargar el archivo");
+	      } finally {
+	        
+	      }
+	}
+	String[] removeTrailingQuotes(String[] fields) {
+	     
+			 
+			String QUOTE="\"";     
+			        
+	      String result[] = new String[fields.length];
+
+	      for (int i=0;i<result.length;i++){
+	         result[i] = fields[i].replaceAll("^"+QUOTE, "").replaceAll(QUOTE+"$", "");
+	      }
+	      return result;
+	   }
+	
+	void httpsRequest(String string) {
+	
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		ListarPeticiones.addItem(new PetcionesOnline("","","","","","",""));
 		ListarPeticiones.addItem(new PetcionesOnline("Juan","Sanchez","una foto","calle Siempre viva 742 en Springfield","88-8@live.com.mx","55 42995420","Con algo que ver"));
 		ListarPeticiones.addItem(new PetcionesOnline("Juan","Pelota","otra foto","calle donde vieve se la creyo","88-8a@live.com.mx","55 42995420", "Es perfecto"));
+		
+		
 		listarContratos.addItem(new ContratosOnline("",""));
 		listarContratos.addItem(new ContratosOnline("Contrato.pdf","Juan Perez"));
 		listarContratos.addItem(new ContratosOnline("Contrato2.pdf","Juan Pelota"));
+	
+	
+	
+	
+	
+	
+	
+	
 	}
     private static JPanel GetPdfPanel(String NombreArch) {
         PDDocument doc = null;

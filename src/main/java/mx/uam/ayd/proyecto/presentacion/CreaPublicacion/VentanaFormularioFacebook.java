@@ -18,6 +18,8 @@ import javax.swing.JButton;
 import javax.swing.JFileChooser;
 
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.time.LocalDate;
 import java.awt.event.ActionEvent;
@@ -27,6 +29,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import java.awt.Color;
 import java.awt.Dialog.ModalExclusionType;
+import java.awt.Font;
+import java.awt.Toolkit;
 
 @SuppressWarnings("serial")
 @Component
@@ -42,6 +46,7 @@ public class VentanaFormularioFacebook extends JFrame {
 	private JButton btnVid;
 	private JFileChooser archivo;	
 	private JLabel label_usr;
+	private JLabel lblCalendario;
 
 	/**
 	 * Launch the application.
@@ -63,6 +68,7 @@ public class VentanaFormularioFacebook extends JFrame {
 	 * Create the frame.
 	 */
 	public VentanaFormularioFacebook() {
+		setTitle("Formuario Publicacion Facebook");
 		setResizable(false);
 		setModalExclusionType(ModalExclusionType.TOOLKIT_EXCLUDE);
 		setType(Type.POPUP);
@@ -75,16 +81,18 @@ public class VentanaFormularioFacebook extends JFrame {
 		
 		campoTitulo = new JTextField();
 		campoTitulo.setToolTipText("Titulo Publicacion");
-		campoTitulo.setBounds(10, 38, 195, 20);
+		campoTitulo.setBounds(52, 11, 195, 20);
 		contentPane.add(campoTitulo);
 		campoTitulo.setColumns(10);
 		
 		CampoContenido = new JTextArea();
+		CampoContenido.setColumns(1);
 		CampoContenido.setToolTipText("Contenido publicacion");
-		CampoContenido.setBounds(10, 69, 465, 176);
+		CampoContenido.setBounds(10, 64, 465, 177);
 		contentPane.add(CampoContenido);
 		
 		JButton btnPublicar = new JButton("Publicar");
+		btnPublicar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnPublicar.setBackground(new Color(51, 102, 204));
 		btnPublicar.setForeground(Color.WHITE);
 		btnPublicar.addActionListener(new ActionListener() {
@@ -101,18 +109,19 @@ public class VentanaFormularioFacebook extends JFrame {
 				}
 			}
 		});
-		btnPublicar.setBounds(116, 309, 89, 23);
+		btnPublicar.setBounds(396, 309, 79, 23);
 		contentPane.add(btnPublicar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
+		btnCancelar.setForeground(Color.WHITE);
+		btnCancelar.setBackground(new Color(153, 0, 102));
+		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controlPublicacion.cerrarFormulario("Facebook");
 			}
 		});
-		btnCancelar.setForeground(Color.WHITE);
-		btnCancelar.setBackground(new Color(153, 0, 102));
-		btnCancelar.setBounds(266, 309, 89, 23);
+		btnCancelar.setBounds(21, 309, 89, 23);
 		contentPane.add(btnCancelar);
 		
 		JButton btnImg = new JButton("");
@@ -122,13 +131,13 @@ public class VentanaFormularioFacebook extends JFrame {
 				
 				File imagen = muestraVentanaFiles();
 				if(controlPublicacion.nuevaImagen(imagen))
-					muestraDialogoStatus("Imagen "+imagen+"aceptada");
+					muestraDialogoStatus("Imagen "+imagen+" aceptada");
 				else
-					muestraDialogoStatus("img "+imagen+" no aceptada");
+					muestraDialogoStatus("Imagen "+imagen+" no aceptada");
 			}
 		});
-		btnImg.setBounds(10, 270, 49, 28);
-		ImageIcon imgCamara=new ImageIcon("imagenes/camara.png");
+		btnImg.setBounds(20, 270, 31, 28);
+		ImageIcon imgCamara=new ImageIcon("imagenes/ImagenIconoFolder.png");
 		Icon iconoCam = new ImageIcon(imgCamara.getImage().getScaledInstance( btnImg.getWidth(),btnImg.getHeight(),Image.SCALE_DEFAULT));
 		btnImg.setIcon(iconoCam);
 		contentPane.add(btnImg);
@@ -139,13 +148,13 @@ public class VentanaFormularioFacebook extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				File video = muestraVentanaFiles();
 				if(controlPublicacion.nuevoVideo(video))
-					muestraDialogoStatus("Imagen "+video+"aceptada");
+					muestraDialogoStatus("Video "+video+" aceptado");
 				else
-					muestraDialogoStatus("img "+video+" no aceptada");
+					muestraDialogoStatus("Video "+video+" no aceptado");
 			}
 		});
-		btnVid.setBounds(69, 270, 49, 28);
-		ImageIcon imgVideo=new ImageIcon("imagenes/video.png");
+		btnVid.setBounds(69, 270, 31, 28);
+		ImageIcon imgVideo=new ImageIcon("imagenes/VideoIconoFolder.png");
 		Icon iconoVi = new ImageIcon(imgVideo.getImage().getScaledInstance( btnVid.getWidth(),btnVid.getHeight(),Image.SCALE_DEFAULT));
 		btnVid.setIcon(iconoVi);
 		contentPane.add(btnVid);
@@ -159,44 +168,74 @@ public class VentanaFormularioFacebook extends JFrame {
 				campoAnio.setEnabled(true);
 			}
 		});
-		btnProgramar.setBounds(306, 270, 49, 28);
-		ImageIcon imgCalendario=new ImageIcon("imagenes/calendario.png");
+		btnProgramar.setBounds(309, 270, 31, 28);
+		ImageIcon imgCalendario=new ImageIcon("imagenes/calendarioIcono.png");
 		Icon iconoCal = new ImageIcon(imgCalendario.getImage().getScaledInstance( btnProgramar.getWidth(),btnProgramar.getHeight(),Image.SCALE_DEFAULT));
 		btnProgramar.setIcon(iconoCal);
 		contentPane.add(btnProgramar);
 		
 		campoDia = new JTextField();
 		campoDia.setEnabled(false);
-		campoDia.setBounds(369, 271, 20, 20);
+		campoDia.setBounds(350, 270, 20, 28);
 		contentPane.add(campoDia);
+		campoDia.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(campoDia.getText().length()>=2) {
+					e.consume();
+				}
+			}
+		});
 		campoDia.setColumns(10);
 		
 		campoMes = new JTextField();
 		campoMes.setEnabled(false);
-		campoMes.setBounds(399, 271, 25, 20);
+		campoMes.setBounds(380, 270, 25, 28);
 		contentPane.add(campoMes);
+		campoMes.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(campoMes.getText().length()>=2) {
+					e.consume();
+				}
+			}
+		});
 		campoMes.setColumns(10);
 		
 		campoAnio = new JTextField();
 		campoAnio.setEnabled(false);
-		campoAnio.setBounds(435, 271, 40, 20);
+		campoAnio.setBounds(415, 270, 40, 28);
 		contentPane.add(campoAnio);
+		campoAnio.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyTyped(KeyEvent e) {
+				if(campoAnio.getText().length()>=4) {
+					e.consume();
+				}
+			}
+		});
 		campoAnio.setColumns(10);
 		
 		JLabel label_redSocial = new JLabel("");
-		label_redSocial.setBounds(435, 0, 40, 39);
+		label_redSocial.setBounds(444, 11, 31, 33);
 		ImageIcon imgLogo=new ImageIcon("imagenes/facebook.png");
 		Icon icono = new ImageIcon(imgLogo.getImage().getScaledInstance( label_redSocial.getWidth(),label_redSocial.getHeight(),Image.SCALE_DEFAULT));
 		label_redSocial.setIcon(icono);
 		
 		contentPane.add(label_redSocial);
 		
-		label_usr = new JLabel("");
-		label_usr.setBounds(0, 0, 31, 27);
-		ImageIcon imgusr=new ImageIcon("imagenes/userN.png");
-		Icon iconoUsr = new ImageIcon(imgusr.getImage().getScaledInstance( label_usr.getWidth(),label_usr.getHeight(),Image.SCALE_DEFAULT));
-		label_usr.setIcon(iconoUsr);
-		contentPane.add(label_usr);
+		
+		JLabel lbl_titulo = new JLabel("Titulo:");
+		lbl_titulo.setBounds(10, 11, 46, 14);
+		contentPane.add(lbl_titulo);
+		
+		JLabel lblContenido = new JLabel("Contenido:");
+		lblContenido.setBounds(10, 42, 79, 14);
+		contentPane.add(lblContenido);
+		
+		lblCalendario = new JLabel("Dia/Mes/Anio");
+		lblCalendario.setBounds(359, 252, 96, 14);
+		contentPane.add(lblCalendario);
 	}
 
 	

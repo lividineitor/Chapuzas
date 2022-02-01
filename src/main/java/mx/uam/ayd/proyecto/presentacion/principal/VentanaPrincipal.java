@@ -229,16 +229,16 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		btnNuevoCliente.setBounds(10, 371, 133, 23);
-		panelVista.add(btnNuevoCliente);
+		//panelVista.add(btnNuevoCliente);
 		
 		
 		btnModifica = new JButton("Modifica Cuenta");
 		btnModifica.setBounds(153, 11, 109, 23);
-		panelVista.add(btnModifica);
+		//panelVista.add(btnModifica);
 		
 		btnMostrarClientes = new JButton("Muestra Clientes");
 		btnMostrarClientes.setBounds(10, 11, 133, 23);
-		panelVista.add(btnMostrarClientes);
+		//panelVista.add(btnMostrarClientes);
 		
 		btnMostrarClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e)

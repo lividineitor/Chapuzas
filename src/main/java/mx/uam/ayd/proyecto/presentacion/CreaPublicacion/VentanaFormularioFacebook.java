@@ -93,8 +93,7 @@ public class VentanaFormularioFacebook extends JFrame {
 		
 		JButton btnPublicar = new JButton("Publicar");
 		btnPublicar.setFont(new Font("Tahoma", Font.PLAIN, 10));
-		btnPublicar.setBackground(new Color(51, 102, 204));
-		btnPublicar.setForeground(Color.WHITE);
+		
 		btnPublicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(campoTitulo.getText().equals("") || CampoContenido.getText().equals(""))
@@ -113,8 +112,7 @@ public class VentanaFormularioFacebook extends JFrame {
 		contentPane.add(btnPublicar);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setForeground(Color.WHITE);
-		btnCancelar.setBackground(new Color(153, 0, 102));
+		
 		btnCancelar.setFont(new Font("Tahoma", Font.PLAIN, 10));
 		btnCancelar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

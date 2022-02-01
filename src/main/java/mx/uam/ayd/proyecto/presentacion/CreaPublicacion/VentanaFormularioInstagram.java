@@ -90,8 +90,7 @@ public class VentanaFormularioInstagram extends JFrame {
 		contentPane.add(CampoContenido);
 		
 		JButton btnPublicar = new JButton("Publicar");
-		btnPublicar.setBackground(new Color(51, 102, 204));
-		btnPublicar.setForeground(Color.WHITE);
+		
 		btnPublicar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(campoTitulo.getText().equals("") || CampoContenido.getText().equals(""))
@@ -114,8 +113,7 @@ public class VentanaFormularioInstagram extends JFrame {
 				controlPublicacion.cerrarFormulario("Instagram");
 			}
 		});
-		btnCancelar.setForeground(Color.WHITE);
-		btnCancelar.setBackground(new Color(153, 0, 102));
+		
 		btnCancelar.setBounds(10, 309, 89, 23);
 		contentPane.add(btnCancelar);
 		

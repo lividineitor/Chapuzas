@@ -52,7 +52,7 @@ public class VentanaContratos extends JFrame {
 		getContentPane().setLayout(null);
 		
 		JButton btnCancelar = new JButton("Cancelar");
-		btnCancelar.setBounds(750, 567, 89, 23);
+		btnCancelar.setBounds(73, 571, 89, 23);
 		getContentPane().add(btnCancelar);
 		botonVerPeticiones = new JButton("Ver Peticiones");
 
@@ -219,15 +219,16 @@ public class VentanaContratos extends JFrame {
 		 btonModificar.setEnabled(false);
 		 listarContratos.setVisible(true);;
 	}
+	
 	public void actualizar() {
 		ListarPeticiones.removeAllItems();
 		listarContratos.addItem(new ContratosOnline("",""));
 		listarContratos.addItem(new ContratosOnline("Contrato.pdf","Juan Perez"));
+		listarContratos.addItem(new ContratosOnline("Contrato2.pdf","Bruno Axel"));
 		ListarPeticiones.removeAllItems();
 		ListarPeticiones.addItem(new PetcionesOnline("","","","","","",""));
 		ListarPeticiones.addItem(new PetcionesOnline("Juan","Sanchez","una foto","calle Siempre viva 742 en Springfield","88-8@live.com.mx","55 42995420","Con algo que ver"));
 		ListarPeticiones.addItem(new PetcionesOnline("Juan","Pelota","otra foto","calle donde vieve se la creyo","88-8a@live.com.mx","55 42995420", "Es perfecto"));
-
 	}
 
 	public void termina() {

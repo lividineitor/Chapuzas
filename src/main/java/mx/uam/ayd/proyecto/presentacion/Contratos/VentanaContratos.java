@@ -222,14 +222,10 @@ public class VentanaContratos extends JFrame {
 	}
 	public void actualizar() {
 		ListarPeticiones.removeAllItems();
-		listarContratos.addItem(new ContratosOnline("",""));
-		listarContratos.addItem(new ContratosOnline("Contrato.pdf","Juan Perez"));
-		listarContratos.addItem(new ContratosOnline("Contrato2.pdf","Juan Pelota"));
 		ListarPeticiones.removeAllItems();
-		ListarPeticiones.addItem(new PetcionesOnline("","","","","","",""));
-		ListarPeticiones.addItem(new PetcionesOnline("Juan","Sanchez","una foto","calle Siempre viva 742 en Springfield","88-8@live.com.mx","55 42995420","Con algo que ver"));
-		ListarPeticiones.addItem(new PetcionesOnline("Juan","Pelota","otra foto","calle donde vieve se la creyo","88-8a@live.com.mx","55 42995420", "Es perfecto"));
-
+		httpsRequest("Peticiones");
+		
+		
 	}
 
 	public void termina() {
@@ -258,6 +254,14 @@ public class VentanaContratos extends JFrame {
 	}
 	public void verListaContratos() {
 		
+	}
+	private void httpsRequest(String string) {
+		ListarPeticiones.addItem(new PetcionesOnline("","","","","","",""));
+		ListarPeticiones.addItem(new PetcionesOnline("Juan","Sanchez","una foto","calle Siempre viva 742 en Springfield","88-8@live.com.mx","55 42995420","Con algo que ver"));
+		ListarPeticiones.addItem(new PetcionesOnline("Juan","Pelota","otra foto","calle donde vieve se la creyo","88-8a@live.com.mx","55 42995420", "Es perfecto"));
+		listarContratos.addItem(new ContratosOnline("",""));
+		listarContratos.addItem(new ContratosOnline("Contrato.pdf","Juan Perez"));
+		listarContratos.addItem(new ContratosOnline("Contrato2.pdf","Juan Pelota"));
 	}
     private static JPanel GetPdfPanel(String NombreArch) {
         PDDocument doc = null;
